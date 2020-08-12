@@ -19,7 +19,7 @@
           font-size: 100%;
       }
     .override {
-      background-color: rgb(181,194,93);
+      background-color: rgb(45,110,104);
       font-color: black;
     }
     .rowform > div > div {
@@ -42,6 +42,11 @@
       padding-top: 2em;
       padding-bottom: 2em;
 
+    }
+    .btns {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      background-color: rgb(45,110,104);
     }
   </style>
 </head>
@@ -89,13 +94,36 @@
       <p class="lead"></p>
     </div>
   </div>
+ <div>
+    <form>
+    <div class="form-group" class="btns">
+      <label> Enter who this is for:
+        <input type="text"
+               class="form-control"
+               placeholder="who for">
+      </label>
 
+      <label>Enter the year or month and year or similar timeframe this is for:
+        <input type="text"
+               class="form-control"
+               placeholder="timeframe">
+      </label>
+
+      <label>Choose the checklist you need to find:
+        <input type="text"
+               class="form-control"
+               placeholder="checklist name">
+      </label>
+  </form>
+    <button type="submit" class="btn btn-primary btns">Find Checklist</button>
+  </div>
   <table class="table table-hover table-striped">
     <thead>
     <tr><b>
       <th>Question</th>
       <th>Preparer Status</th>
       <th>Driver</th>
+      <th>Category</th>
       <th>Preparer Comments</th>
       <th>Preparer Time</th>
       <th>Help</th>
@@ -110,6 +138,7 @@
       <td><i class="far fa-question-circle"></i></td>
       <td><i class="fas fa-traffic-light"></i></td>
       <td><i class="fas fa-key"></i></td>
+      <td><i class="fas fa-link"></i></td>
       <td><i class="far fa-comment"></i></td>
       <td><i class="far fa-clock"></i></td>
       <td><i class="far fa-life-ring"></i></td>
@@ -127,8 +156,27 @@
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td>      
+        <label>
+        <input type="text"
+               class="form-control"
+               placeholder="status">
+        </label>
+      </td>
+      <td>
+        <label>
+        <input type="text"
+               class="form-control"
+               placeholder="comments">
+        </label>
+      </td>
+      <td>
+        <label>
+        <input type="num"
+               class="form-control"
+               placeholder="minutes">
+        </label>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -141,8 +189,10 @@
       <td></td>
       <td></td>
       <td></td>
+      <td></td>
     </tr>
     <tr>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -155,7 +205,28 @@
       <td></td>
     </tr>
   </table>
+    
 
+    <!-- SEND IT ON -->
+  <div>
+    <form>
+      <button type="submit" class="btn btn-primary btns">Return for Corrections</button>
+    <div class="form-group">
+      <label> Enter your recipient's full name as it appears in your e-mail system:
+        <input type="text"
+               class="form-control"
+               placeholder="recipient full name">
+      </label>
+      <label>Enter your recipient's e-mail address:
+        <input type="email"
+               class="form-control"
+               placeholder="recipient email">
+      </label>
+
+  </form>
+   <button type="submit" class="btn btn-primary btns">Send to Recipient</button>
+  </div>
+   
 <table class="table table-hover table-striped">
   <thead>
     <tr>

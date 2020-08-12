@@ -18,7 +18,7 @@
           font-size: 100%;
       }
     .override {
-      background-color: rgb(181,194,93);
+      background-color: rgb(45,110,104);
       font-color: black;
     }
     a:link {
@@ -38,6 +38,11 @@
       padding-bottom: 2em;
 
     }
+    .btns {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      background-color: rgb(45,110,104);
+    }
   </style>
 </head>
 
@@ -55,28 +60,47 @@
 
   <div class="row">
 <!-- FORM CODE -->
-    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3" >
        <div><img src="pexels-snapwire-109001.jpg" class=img>
        <div><b>Let's Prepare!</div></b>
        <div>Please enter a status below for each question and enter minutes spent.</div>
        <div>You may check for information and video training to assist in completing the task. </div>
        <div>Submit for review when done. </div>
      </div>
-    <div></div>
-  </div>
 
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
+  </div>
 
 
 
      <div class="col-1">
+
     </div>
 <!-- DISPLAY & ENTER CODE -->
-<div class="container">
 
+<div class="container" >
+  <div>
+    <form>
+    <div class="form-group" class="btns">
+      <label> Enter who this is for:
+        <input type="text"
+               class="form-control"
+               placeholder="who for">
+      </label>
+
+      <label>Enter the year or month and year or similar timeframe this is for:
+        <input type="text"
+               class="form-control"
+               placeholder="timeframe">
+      </label>
+
+      <label>Choose the checklist you need to clone:
+        <input type="text"
+               class="form-control"
+               placeholder="checklist name">
+      </label>
+  </form>
+    <button type="submit" class="btn btn-primary btns">Clone Checklist</button>
+  </div>
   <div class="pb-2 mt-3 mb-2">
     <div class="col">
       <h1></h1>
@@ -88,22 +112,54 @@
     <thead>
     <tr><b>
       <th>Question</th>
-      <th>Preparer Status</th>
-      <th>Driver</th>
-      <th>Preparer Comments</th>
-      <th>Preparer Time</th>
       <th>Help</th>
       <th>Training</th>
+      <th>Driver</th>
+      <th>Category</th>
+      <th>Preparer Status</th>
+      <th>Preparer Comments</th>
+      <th>Preparer Time</th>
+
     </tr></b>
     </thead>
     <tr>
       <td><i class="far fa-question-circle"></i></td>
-      <td><i class="fas fa-traffic-light"></i></td>
-      <td><i class="fas fa-key"></i></td>
-      <td><i class="far fa-comment"></i></td>
-      <td><i class="far fa-clock"></i></td>
       <td><i class="far fa-life-ring"></i></td>
       <td><i class="fas fa-video"></i></td>
+      <td><i class="fas fa-key"></i></td>
+      <td><i class="fas fa-link"></i></td>
+      <td><i class="fas fa-traffic-light"></i></td>
+      <td><i class="far fa-comment"></i></td>
+      <td><i class="far fa-clock"></i></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+      </td>
+        <td>
+          <label>
+        <input type="text"
+               class="form-control"
+               placeholder="status">
+        </label>
+      </td>
+      <td>
+        <label>
+        <input type="text"
+               class="form-control"
+               placeholder="comments">
+        </label>
+      </td>
+      <td>
+        <label>
+        <input type="num"
+               class="form-control"
+               placeholder="minutes">
+        </label>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -113,17 +169,10 @@
       <td></td>
       <td></td>
       <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
       <td></td>
     </tr>
     <tr>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -133,6 +182,25 @@
       <td></td>
     </tr>
   </table>
+
+<!-- SEND IT ON -->
+  <div>
+    <form>
+    <div class="form-group">
+      <label> Enter your reviewer's full name as it appears in your e-mail system:
+        <input type="text"
+               class="form-control"
+               placeholder="reviewer full name">
+      </label>
+      <label>Enter your reviewer's e-mail address:
+        <input type="email"
+               class="form-control"
+               placeholder="reviewer email">
+      </label>
+
+  </form>
+    <button type="submit" class="btn btn-primary btns">Submit to Review</button>
+  </div>
 <!-- CHEER CODE -->
 <table class="table table-hover table-striped">
   <thead>
