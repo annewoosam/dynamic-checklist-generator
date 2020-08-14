@@ -198,9 +198,22 @@
                placeholder="reviewer email">
       </label>
 
+
   </form>
-    <button type="submit" class="btn btn-primary btns">Submit to Review</button>
-  </div>
+  <!--   <button type="submit" class="btn btn-primary btns">Submit to Review</button> -->
+ <p> <button type="submit" class="btn btn-primary btns" onclick="sendMail()">Notify Reviewer</button></p>
+ <button type="button" class="btn btn-primary btns"
+onclick="document.getElementById('date_time_button').innerHTML = Date()">
+Record Review Date.</button>
+<p id="date_time_button"></p></div>
+
+<!-- for javascript
+    var name = $('#revewerName').val();
+    var email = $('#reviewerEmail').val();
+    window.location.href = 'mailto' email?subject=Ready for Review - ' + '&body=' + message;
+}; -->
+
+
 <!-- CHEER CODE -->
 <table class="table table-hover table-striped">
   <thead>

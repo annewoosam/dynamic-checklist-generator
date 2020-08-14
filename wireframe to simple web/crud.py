@@ -77,7 +77,7 @@ def create_question(question, yes_text, no_text, not_applicable_text, category, 
                   no_text=no_text,
                   not_applicable_text=not_applicable_text,
                   category=category,
-                  primary_driver=primary-driver,
+                  primary_driver=primary_driver,
                   video_url=video_url,
                   help_text=help_text)
 
