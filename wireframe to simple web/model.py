@@ -51,39 +51,89 @@ class User(db.Model):
         return f'<User user_id={self.user_id} email={self.user_email}>'
 
 # create models class
-class Checklist(db.Model):
-    """A checklist."""
-    # master checklist start
-    __tablename__ = 'checklist'
 
-    checklist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    creator_id = db.Column(db.String)
-    updated_at = db.Column(db.DateTime)
-    checklist_name = db.Column(db.String)
-
-    # see also checklistItems for questions associated with Checklist
+class Template(db.Model):
+    """A template."""
     
-    # spin-off checklist elements
+    # Master templates established by creators that can be cloned to be checklists for individual clients, employees or personal use.
+    __tablename__ = 'template'
 
-    # provided when preparer clones checklist
-    who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
-    checklist_time_frame = db.Column(db.String) # such as 01/2020, 2020, Spring 2020, Q1 2020
-   
-    preparer_name = db.Column(db.String) # must ADD. Will know e-mail and should populate user_name/update. Each checklist has a preparer whose name must
+    creator_id = db.Column(db.Integer)
+    template_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    template_name = db.Column(db.String)
+    updated_at = db.Column(db.DateTime)
+    
+    # After a creator establishes a template they add the questions and help text so that a preparer can spin off a checklist for whomever they need for whatever time frame.
+    def __repr__(self):
+        return f'<Template template_id={self.template_id} template_name={self.template_name}>'
+
+class TemplateQuestions(db.Model):
+ 
+    """A template question and its features are added one by one by teh creator until finished. Sample templates are in the templates.json file that can be used to seed a demo database."""
+ 
+    __tablename__ = 'template_questions'
+    # Text rather than String is for textarea inputs
+    template_question_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    template_name varchar = db.Column(db.String)
+    question_number = db.Column(db.Integer)
+    question = db.Column(db.Text)
+    yes_text = db.Column(db.Text)
+    no_text = db.Column(db.Text)
+    not_applicable_text = db.Column(db.Text)
+    # when an answer is skipped the question will be reprinted for the preparer
+    help_text = db.Column(db.Text)
+    resource_url = db.Column(db.String) # input category will be URL. Name resource allows linking of video or any web-resource.
+    category = db.Column(db.String)
+    primary_driver = db. Column(db.Boolean) # when a preparer enters NA for this any item with the same category will be switched to NA
+    # we still want to print these sub-questions so other viewers understand that the items wewre not dropped in error.
+
+    def __repr__(self):
+        return f'<TemplateQuestions template_question_id={self.template_question_id} question={self.question}>'
+
+class Checklist(db.Model):
+    
+    """Once a template is created it may have many questions."""
+    
+    __tablename__ = 'checklist'
+    checklist_id=db.Column(db.Integer, autoincrement=True, primary_key=True) 
+    preparer_id = db.Column(db.Integer) # from login on save via create checklist fromn template click
+    preparer_full_name = db.Column(db.String) # from login on save via create checklist fromn template click or if not in system added to user on save
+    # Will know e-mail and should populate user_name/update. Each checklist has a preparer whose name must
     # appear on reports and must be able to receive notifications.
+    template_name varchar = db.Column(db.String) # chosen by clicking on appropriate template link
+    # provided when preparer clones checklist
+    checklist_who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
+    
+    checklist_time_frame = db.Column(db.String) # such as 01/2020, 2020, Spring 2020, Q1 2020
 
-    # populated by preparer click event
-    date_sent_to_review = db.Column(db.DateTime) # preparer/ populated by on-click event
+   # once above provided, question data populated by preparer click event
 
-    reviewer_name = db.Column(db.String) # must ADD. May know e-mail and should populate user_name/update. Each checklist has a reviewer whose name must
+    question_number = db.Column(db.Integer)
+    question = db.Column(db.Text)
+    help_text = db.Column(db.Text)
+    resource_url = db.Column(db.String) # input category will be URL. Name resource allows linking of video or any web-resource.
+    category = db.Column(db.String)
+    primary_driver = db. Column(db.Boolean) 
+  
+  # preparer responsible for
+    preparer_answer = db.Column(db.String) #//yes/no/na/skipped default
+    preparer_time_spent = db.Column(db.Integer)
+    preparer_comment = db.Column(db.Text)
+    reviewer_full_name = db.Column(db.String) # must ADD. May know e-mail and should populate user_name/update. Each checklist has a reviewer whose name must
+    reviewer_email = db.Column(db.String)
+    reviewer_id = db.Column(db.Integer)
+    date_sent_to_review = db.Column(db.DateTime) # populated by on-click event
+    reviewer_comment varchar = db.Column(db.Text)
     # appear on reports and must be able to receive notifications. If does not exist, need to create with a default password.
-
+    
+    # reviewer responsible for
+    reviewer_answer = db.Column(db.String) #//yes/no/na/skipped default
+    reviewer_time_spent = db.Column(db.Integer)
     # populated by reviewer click events
     date_review_completed = db.Column(db.DateTime) # reviewer/populated by on-cick event
-    
-    recipient_name= db.Column(db.String) # must ADD. May know e-mail. Does not need to add password. Each checklist has a recipient whose name must
+    recipient_full_name= db.Column(db.String) # May know e-mail. Does not need to add password. Each checklist has a recipient whose name must
     # appear on reports and must be able to receive notifications. However, the recipient does not need to access the checklist site.
-
+    recipient_email = db.Column(db.String)
     date_sent_to_recipient = db.Column(db.DateTime) # reviewer/ populated by on-click event
 
     # in sum, added slots for preparer_name, reviewer_name and recipient_name which will feed back to Users.
@@ -93,106 +143,20 @@ class Checklist(db.Model):
     def __repr__(self):
         return f'<Checklist checklist_id={self.checklist_id} checklist_name={self.checklist_name}>'
 
-class ChecklistItems(db.Model):
- 
-    """A checklist item and its features."""
- 
-    __tablename__ = 'checklist_item'
-
-    item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    # Text rather than String is for textarea inputs
-    question = db.Column(db.Text)
-    question_number = db.Column(db.Integer)
-    yes_text = db.Column(db.Text)
-    no_text = db.Column(db.Text)
-    not_applicable_text = db.Column(db.Text)
-    # when an answer is skipped the question will be reprinted for the preparer
-    primary.driver = db. Column(db.Boolean) # when a preparer enters NA for this any item with the same category will be switched to NA
-    # we still want to print these sub-questions so other viewers understand that the items wewre not dropped in error.
-    category = db.Column(db.String)
-
-    def __repr__(self):
-        return f'<ChecklistItems item_id={self.item_id} question={self.question}>'
-
-class VideoURL(db.Model):
-
-    """A checklist item's associated video, if any. Many will not have"""
- 
-    __tablename__ = 'video_url'
-
-    video_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    checklist_id = db.Column(db.Integer)
-    question_number = db.Column(db.Integer)
-    video_url=db.column(db.String)
-
-
-    def __repr__(self):
-        return f'<VideoURLs video_id={self.video_id} video_url={self.video_url}>'
-
-class HelpText(db.Model):
-
-    """A checklist item's associated help text, if any. Many will not have"""
- 
-    __tablename__ = 'help_text'
-
-    help_text_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    checklist_id = db.Column(db.Integer)
-    question_number = db.Column(db.Integer)
-    help_text=db.column(db.Text)
-    
-    def __repr__(self):
-        return f'<HelpText help_text={self.help_text_id} help_text={self.help_text}>'
-
-class UserAnswer(db.Model):
+class CorrectionsRequiredAtAnyPoint(db.Model):
 
     """A checklist item's preparer responses. Comments only not required"""
  
     __tablename__ = 'preparer_answer'
 
-    user_answer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer)
-    question_number = db.Column(db.Integer)
-    answer = db.column(db.String) # dropdown restricted to y, n, na, blank
-    time_spent = db.column(db.Integer)
-    user_type = db.column(db.String)  #preparer or user
+    corrections_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    checklist_id = db.Column(db.Integer)
+    question_id = db.Column(db.Integer)
+    reviewer_answer = db.column(db.String) # dropdown restricted to y, n, na, blank
+    last_saved_at = db.column(db.DateTime)
     
     def __repr__(self):
-        return f'PreparerAnswer user_answer_id={self.user_answer_id} question_number={self.question_number} answer={self.answer} time_spent={self.time_spent} user_type={self.user_type}>'
-
-class Answer(db.Model):
-    
-    """A checklist item's answer options"""
-    __tablename__ = 'answer'
-
-    answer_id = db.column(db.String)
-    option_preparer = db.column(db.String) # dropdown restricted to y, n, na, blank for yes, no, not applicable
-    option_reviewer = db.column(db.String) # dropdown restricted to c, r, na, blank for corrections required, ready and not applicable
-
-def __repr__(self):
-        return f'Answer answer_id={self.answer_id} option_preparer={self.option_preparer} option_reviewer={self.option_reviewer}>'
-
-class Comments(db.Model): 
-	    """A checklist item's comments. Not all answers will have comments and comments can be made by either preparer or reviewer"""
-    __tablename__ = 'comments'
-
-    comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    comment = db.column(db.Text) # think preparer comment field should be here
-    user_type =db.column(db.String) #preparer or reviewer only
-
-def __repr__(self):
-        return f'Comments comment_id={self.comment_id} comment={self.comment} user_type={self.user_type}>'
-
-class ReviewerAnswer(db.Model):
-    reviewer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    preparer_answer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    preparer_id = db.Column(db.Integer)
-    question_number = db.Column(db.Integer)
-    answer = db.column(db.String) # dropdown restricted to y, n, na, blank
-    time_spent = db.column(db.Integer)
-
-    def __repr__(self):
-        return f'<ReviewerAnswer reviewer_answer_id={self.reviewer_answer_id} video_url={self.video_url}>'
-
+        return f'CorrectionsRequiredAtAnyPoint checklist_id={self.checklist_id} question_id={self.question_id}>'
 
 if __name__ == '__main__':
     from server import app

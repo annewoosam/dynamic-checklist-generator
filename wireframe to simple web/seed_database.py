@@ -18,18 +18,18 @@ model.db.create_all()
 with open('data/checklists.json') as f:
     checklist_data = json.loads(f.read())
 
-# Create movies, store them in list so we can use them
-# to create fake ratings
+# Create templates,questions, store them in list so we can use them
+
 checklists_in_db = []
 for checklist in checklist_data:
-    question, yes_text, no_text, not_applicable_text, category, primary_driver, video_URL, help_text = (
+    question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_URL, help_text = (
                                    checklist['question'],
                                    checklist['yes_text'],
                                    checklist['no_text']),
                                    checklist['not_applicable_text'],
                                    checklist['category'],
                                    checklist['primary_driver'],
-                                   checklist['video_url'],
+                                   checklist['resource_url'],
                                    checklist['help_text'])
 
     db_checklist = crud.create_checklist(question,
@@ -38,7 +38,7 @@ for checklist in checklist_data:
                                  not_applicable_text,
                                  category,
                                  primary_driver,
-                                 video_url,
+                                 resource_url,
                                  help_text)
     checklist_in_db.append(db_checklist)
 

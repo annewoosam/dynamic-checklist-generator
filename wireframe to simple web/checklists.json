@@ -1,4 +1,4 @@
-# initial seed file - test checklist one
+# initial seed file - test checklists one and two
 [
 {
 "checklist_name":"compliance testing",
@@ -8,7 +8,7 @@
 "not_applicable_text":"A census must be provided. Not applicable is not an appropriate response.",
 "category":"CENSUS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If the census is missing, e-mail the relationship manager immediately prepare the folders and pull any reporting such as trust statements and start the trust reconciliation. Once you have gotten as far as possible, place the plan on hold.",
 }
 {
@@ -19,7 +19,7 @@
 "not_applicable_text":"A Questionnaire should be provided. If the client appears to answer the same way each year move forward and ask the client to send a Questionnaire, confirm results.",
 "category":"QUESTIONNAIRE",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If the questionnaire is missing, prepare as much of the testing as possible based on assumptions inherited from the prior year, using either the system. E-mail the relationship manager: I am proceeding based on last year's questionnaire. That said I cannot release the results until I have received the questionnaire for the current year."
 },
 {
@@ -30,7 +30,7 @@
 "not_applicable_text":"An invalid response for whether the census was formatted correctly was entered. Choose either Y or N.",
 "category":"CENSUS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If the census has critical errors that prevent you from loading it into the system, let the relationship manager know. Some sample language: The census does not have social security numbers. The census is missing compensation for some employees. The census is missing compensation for all employees. The census is missing hours for some employees and the plan requires hours to calculate eligibility/allocate a contribution.":},
 {
 "checklist_name":"compliance testing",
@@ -40,7 +40,7 @@
 "not_applicable_text":"An invalid response for whether the census was loaded was entered.  Choose either Y or N.",
 "category":"CENSUS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Make sure to load the census into the system and perform all necessary data checks within the system and forward all questions to the relationship manager. Review against the Eligibility Proof."
 },
 {
@@ -51,7 +51,7 @@
 "not_applicable_text":"An invalid response for the Eligibility Proof employee classification step was entered. Choose either Y or N.",
 "category":"ELIGIBILITYPROOF",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Use the template for the eligibility proof to estimate the test results. Formulas are included in the proof."
 },
 {
@@ -62,7 +62,7 @@
 "not_applicable_text":"No valid response entered Enter Y, N or NA to indicate whether all owner percentages, relationships for those with the same last name as the owners and other relatives, and persons making over $120,000 in the last year have been marked in the file.",
 "category":"HCE",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Enter the HCE percentages, relationships and attribution on the Eligibility proof. If you had to use prior year note that and add a request for confirmation to your questions."
 },
 {
@@ -73,7 +73,7 @@
 "not_applicable_text":"This plan does not have deferrals or match. ADP ACP testing does not apply.",
 "category":"ADP",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"The Eligibility Proof contains instructions on how to determine the HCEs using ownership and attribution, as well as compensation and to apply the Top Paid Group election as needed. Make sure you sort employees into their eligibility classifications such as HCE versus NHCE, ineligible and excluded. Also, make sure you apply the compensation and deferral limits and factor-out any catch-up contributions in calculating the parentage of compensation each person deferred and the average deferral percentage for the HCE and NHCE groups."
 },
 {
@@ -84,7 +84,7 @@
 "not_applicable_text":"The plan does not use prior year testing.",
 "category":"PRIORYEAR",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"The plan document will tell you whether the plan uses Prior Year testing or not. Obtain the percentages you use from the prior year’s ADP and ACP testing. If the plan is using the prior year testing method for the first time, use 3%. Note that a plan could use prior year testing for one source and not the other and rarely, some groups may be using prior and others could be using current so a ‘location’ based testing method may need to be used to track the prior year percentages appropriately."
 },
 {
@@ -95,7 +95,7 @@
 "not_applicable_text":"The plan does not have a match source or is not funding the match this year.",
 "category":"MATCH",
 "primary_driver":true,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"The match formula will be stated in the plan document. You should also notate this formula on the Eligibility proof and perform a manual check and do a common sense comparison to last year’s funding amount, especially if the plan is new to your testing system."
 },
 {
@@ -106,7 +106,7 @@
 "not_applicable_text":" No valid response entered. Please enter a Y,N or NA as to whether the plan uses a Safe Harbor match and you have entered the formula into the system and checked the calculation.",
 "category":"SAFEHARBORMATCH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"The Safe Harbor match formula will be stated in the plan document. You should also notate this formula on the Eligibility proof and perform a manual check and do a common sense comparison to last year’s funding amount, especially if the plan is new to your testing system. The most common formula is 100% to 3% and 50% to 5% of compensation and the Eligibility proof will explain how to confirm this. Note that sometimes there are "maybe":provisions for Safe Harbors. If a plan has a maybe provision noted in the plan document, you will need to have the annual amendment stating that the Safe Harbor will be funded to use this method to pass testing."
 },
 {
@@ -117,7 +117,7 @@
 "not_applicable_text":"There is no Match source or the match is not being funded this year.",
 "category":"MATCH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Verify the match by downloading the trust statement to csv format and using vlookup in a spreadsheet to find any differences in what was funded and what is being calculated when a plan’s adoption agreement states that the funding is on an annual basis. If the funding is not on an annual basis, simply verify that the funding did not exceed the formula. If there is a variance, check to confirm that the information is not funding that is from a prior year due to timing differences before checking with the client/creating a true-up file."
 },
 {
@@ -128,7 +128,7 @@
 "not_applicable_text":"Participation agreements do not apply to this plan.",
 "category":"K1",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"The plan document and questionnaire will indicate of a plan is a sole proprietorship or partnership. Be aware that some sole proprietorships/partnerships use pass their income through as W-2 wages, in which case, it is not necessary to make adjustments for schedule C or K income. If a sole proprietor or partner is participating make sure they have signed any necessary participation agreements."
 },
 {
@@ -139,7 +139,7 @@
 "not_applicable_text":"The plan is not a sole proprietorship or a partnership. Therefore Schedule C or K income does not have to be provided.",
 "category":"K1",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If income is not available, the plan should be placed on hold until it become available."
 },
 {
@@ -150,7 +150,7 @@
 "not_applicable_text":"The plan does not have deferrals/match.",
 "category":"ADPACP",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"ADP tests would not be required if no deferrals were made or under most circumstances where a plan is a 403(b) plan. ACP tests would not be required if there was no match. Note that if a plan has a Safe Harbor match and a regular match and contributes to both, the regular match is subject to an ACP test."
 },
 {
@@ -161,7 +161,7 @@
 "not_applicable_text":"The plan does not have deferrals/match.",
 "category":"ADPACP",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"When the ADP and ACP tests do not match expectations, identify the amount off and see if one person matches that amount; if not export the test data including name and contribution with a unique identifier such as social security number that can be vlooked up against or join the names to create a unique identifier and perform a vlookup in both directions, if needed. Then, after the persons identified as dropped from the report or with numbers in error show up. Some possible tactics to determine why there is an issue: confirm eligibility, any classifications such as exclusions that may be inherited from the prior year but may have changed the current testing year, or the possibility that the person was rehired and came in immediately to the plan as a start. "
 },
 {
@@ -172,7 +172,7 @@
 "not_applicable_text":"Not a valid response. Enter Y or N as to whether all employee income is accounted for.",
 "category":"INCOME",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"All income should be accounted for. If income has dropped, confirm that the income is not too high for the system to register it and that the system is properly handling Schedule C and K1 reductions. Generally a report can be printed to show how the system is reducing for Schedule C and K1 reductions."
 },
 {
@@ -183,7 +183,7 @@
 "not_applicable_text":"There is no excluded compensation for the match or the match is not being funded or the plan does not have a match source.",
 "category":"MATCH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If the client failed to provide excluded Match compensation add to your questions to client: Please provide the compensation which should be excluded from the match calculation according to your plan document. List the type of compensation."
 },
 {
@@ -194,7 +194,7 @@
 "not_applicable_text":"Match excesses do not need to be checked because there is no match or the plan match is now being calculated and has not been funded yet.",
 "category":"MATCH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Only register cases in which the client overfunded the match unless there is a significant variance. If there is a significant variance, check first whether the prior year’s match data may be being used for some or all of the people."
 },
 {
@@ -205,7 +205,7 @@
 "not_applicable_text":"Not applicable. No match is being funded or the match funded is the same as that confirmed by the system.",
 "category":"MATCH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Prepare the Match Contribution file, indicating funded amounts and the difference to fund, if some funding has already been received."
 },
 {
@@ -216,7 +216,7 @@
 "not_applicable_text":"The Profit Sharing/nonelective formula is not needed because the source does not apply to this plan or the source will not be funded this year.",
 "category":"PROFITSHARING",
 "primary_driver":true,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If the client failed to provide the formula and classes, add to your questions to the client: I understand that you intend to fund a cross-tested Profit Sharing contribution to your employees this year. In order to create the allocation, I need you to update the file to include the classes(group) for each employee and a formula to apply, as well as any budget caps you want to use. You may submit additional scenario requests in the same file."
 },
 {
@@ -227,7 +227,7 @@
 "not_applicable_text":"Excluded compensation is not allowed in this plan.",
 "category":"PROFITSHARING",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If the client failed to provide excluded compensation, add to your questions to client: I understand that you intend to fund a Profit Sharing or Nonelective contribution this year. Your document states that certain compensation (list the types here) should be excluded from this calculation, as long as the tests determine that its exclusion is nondiscriminatory. Please update your census to show this excluded compensation."
 },
 {
@@ -238,7 +238,7 @@
 "not_applicable_text":"Profit Sharing/Nonelective Calculations do not apply because the source is not permitted or because no funding will be made this year.",
 "category":"PROFITSHARING",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Confirm the formula calculations within the Eligibility Proof. Account for any K-1/Schedule C adjustments to income and for contributions as a percent of ownership and show any classes used in the calculation. Show that the formula matches the reports or adjust either the system or spreadsheet as appropriate."
 },
 {
@@ -249,7 +249,7 @@
 "not_applicable_text":"No Profit Sharing/Nonelective file is required as the source does not exist or there will be no funding this year.",
 "category":"PROFITSHARING",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Prepare the file showing either the entire contribution due, as well as the percentage of compensation being contributed and the relevant data needed by operations to load the file (social security number, dates, name and source and contribution amount)."
 },
 {"checklist_name":"compliance testing",
@@ -259,7 +259,7 @@
 "not_applicable_text":"No owners in the plan.",
 "category":"ATTRIBUTION",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If the attribution was not confirmed by the current questionnaire then state that in the Assumptions used. Sample text: I used last year’s information to determine owners by attribution because no updated information was provided for this year. If any owners by attribution are no longer owners by attribution, please let me know so that I can recalculate and reprint the reports."
 },
 {
@@ -270,7 +270,7 @@
 "not_applicable_text":"There is no participant contribution activity to load.",
 "category":"ACTIVITYLOAD",
 "primary_driver": false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Obtain the participant source activity and format it as needed from the recordkeeping system reports portal/interface."
 },
 {
@@ -281,7 +281,7 @@
 "not_applicable_text":"Top Heavy Allocation & Test do not apply.",
 "category":"TOPHEAVYTEST",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"To properly perform a Top Heavy Test make sure that the plan’s owners are correctly identified including percent of ownership in all cases. For the Top Heavy test you must also confirm that the officers are correctly coded in the system. If no officers are listed AND there are individuals making over $150,000 as indexed AND these individuals are not already classified as owners, add a question to client: Please confirm the following persons are not officers:"
 },
 {
@@ -292,7 +292,7 @@
 "not_applicable_text":"Vesting load does not apply.",
 "category":"VESTINGLOAD",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Obtain the vesting report from the recordkeeping system reports portal/interface, format it as needed and load it."
 },
 {
@@ -303,7 +303,7 @@
 "not_applicable_text":"Trust accounting does not apply.",
 "category":"TRUEUP",
 "primary_driver": false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -314,7 +314,7 @@
 "not_applicable_text":"Client questions do not apply.",
 "category":"CLIENTRESPONSES",
 "primary_driver":true,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -325,7 +325,7 @@
 "not_applicable_text":"Client responses not applicable.",
 "category":"CLIENTRESPONSES",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -336,7 +336,7 @@
 "not_applicable_text":"Reprinting reports and re-reconciling not applicable.",
 "category":"REGENERATE",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -347,7 +347,7 @@
 "not_applicable_text":"Title page is not applicable.",
 "category":"TITLEPAGE",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -358,7 +358,7 @@
 "not_applicable_text":"Table of contents not applicable.",
 "category":"TABLEOFCONTENTS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -369,7 +369,7 @@
 "not_applicable_text":"Results summary not applicable.",
 "category":"RESULTS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -380,7 +380,7 @@
 "not_applicable_text":"ADP/ACP report not applicable.",
 "category":"ADPACP",
 "primary_driver": false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -391,8 +391,8 @@
 "not_applicable_text":"Catch-up contribution report does not apply.",
 "category":"ADPACP",
 "primary_driver":false,
-"video_url":"",
-"help_text":"",
+"resource_url":"https://www.youtube.com",
+"help_text":"https://www.youtube.com",
 }
 {
 "checklist_name":"compliance testing",
@@ -402,7 +402,7 @@
 "not_applicable_text":"Annual Additions report not applicable.",
 "category":"ANNUALADDITIONS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -413,7 +413,7 @@
 "not_applicable_text":"General test does not apply.",
 "category":"PROFITSHARING",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -424,7 +424,7 @@
 "not_applicable_text":"Budget does not apply.",
 "category":"K1",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -435,7 +435,7 @@
 "not_applicable_text":"414(s) does not apply.",
 "category":"414S",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -446,7 +446,7 @@
 "not_applicable_text":"Saving files to folders does not apply.",
 "category":"FILES",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -457,7 +457,7 @@
 "not_applicable_text":"402(g) numbers do not apply.",
 "category":"OFFCALENDAR",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -468,7 +468,7 @@
 "not_applicable_text":"Plan is not terminating - vesting update to 100% not applicable.",
 "category":"PLANTERMINATION",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -479,7 +479,7 @@
 "not_applicable_text":"Short plan year adjustments not applicable.",
 "category":"SHORTPLANYEAR",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -490,7 +490,7 @@
 "not_applicable_text":"Tracking database update not applicable.",
 "category":"TRACKING",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -501,7 +501,7 @@
 "not_applicable_text":"A late deferrals tracking record is not needed.",
 "category":"LATEDEFERRALS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
 {
@@ -512,10 +512,10 @@
 "not_applicable_text":"Government Forms tracking is not needed for this plan",
 "category":"GOVERNMENTFORMS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":""
 },
-// second checklist
+// second test checklist
 {
 "checklist_name":"client compliance guide",
 "question":"Is your file organized with the same top row as the initial file downloaded?",
@@ -524,7 +524,7 @@
 "not_applicable_text":"We assumed headers don't apply to your file. It is a custom file. This will likely slow down processing because the file will need to be manually formatted instead fo automatically processed.",
 "category":"HEADERS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Not providing a file which is correctly arranged can result in delays and errors in your testing."
 }
 {
@@ -535,7 +535,7 @@
 "not_applicable_text":"You answered N/A. We can use employee ID numbers to load a file when social security numbers are not available. All employees must have employee IDs in order to link their information from year to year and avoid confusion when employees have similar names.",
 "category":"SSN",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Social security numbers or another unique identifier such as an employee id are needed to match data for employees from year to year. You can transmit your files securely."
 }
 {
@@ -546,7 +546,7 @@
 "not_applicable_text":"Warning! All files should have dates of birth.",
 "category":"BIRTH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Dates of birth are used to determine eligibility and entry for a plan. Unless the plan has no age requirement and is a Safe Harbor or has no HCE contributions it is expected that these will be provided so that test results can be accurately calculated."
 }
 {
@@ -557,7 +557,7 @@
 "not_applicable_text":"No employees are under 18.",
 "category":"BIRTH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Sometimes persons under 18, expecially owners children may be hired as teenagers and flagged in the system for extra scrutiny. Other times they may be indicators of a typing error."
 }
 {
@@ -568,7 +568,7 @@
 "not_applicable_text":"There are no retiree age hires.",
 "category":"BIRTH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Some testing systems will flag anyone over retirement age for review. Please ensure these persons birthdates are correct."
 }
 {
@@ -579,7 +579,7 @@
 "not_applicable_text":"All employees must have a valid date of hire. Correct the file and change your answer to Y.",
 "category":"HIRE",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"All employees must have a valid date of hire so that we can accurately calculate their eligibility for the plan and entry date, as well as the vesting of their contributions. After testing is complete, the next step in annual administration is government forms filing, which includes the tracking and reporting of the numbers of persons with balances not 100% vested using the Form 8955-A." }
 {
 "checklist_name":"client compliance guide",
@@ -589,7 +589,7 @@
 "not_applicable_text":"Dates of rehire did not apply.",
 "category":"REHIRE",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Inaccurate dates of rehire can make someone drop from the tests, causing results to be inaccurate. When the ADP test is inaccurate and discovered after the refund deadline, penalties may apply."
 }
 {
@@ -600,7 +600,7 @@
 "not_applicable_text":"There are no dates of rehire to correct.",
 "category":"REHIRETERM",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Termination dates after rehire dates may cause someone to drop from the tests in error."
 }
 {
@@ -611,7 +611,7 @@
 "not_applicable_text":"If there are no owners, note on tab 2.",
 "category":"OWNERSHIP",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"All ownership nmust be accounted for or teh tests may be inaccurate and a plan may fail the ADP test but the discovery may be too late to correct the test without causing penalties for late compliance. There are some circumstances where a plan may truly have outside non-employee ownership, which causes the ownership percentages to be less than 100%, but this tends to be rare."
 }
 {
@@ -622,7 +622,7 @@
 "not_applicable_text":"No officers are employees.",
 "category":"OFFICERS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Officers must be identified so that the top heavy test and allocation can be performed accurately. If a plan has no persons earning over $150,000 as indexed there will be no officers of concern for the test. Of, however, the plan does have officers earning over $150,000, not flagging them could cause a test's failure to be discovered later, with consequences for the plan."
 }
 {
@@ -633,7 +633,7 @@
 "not_applicable_text":"There is no ownership in this plan or persons with the same last name as the owners.",
 "category":"ATTRIBUTION",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If family attribution is not correctly identified, the HCEs may be improperly determined and a plan might pass a test it should be shown as failing with penalties if the correction is late. One of the most common attribution errors is attributing ownership to siblings (borthers or sisters). While there is no attribution between siblings it is good to notate these relationships to prevent delays in processing while waiting for clarification of these relationships."
 }
 {
@@ -644,7 +644,7 @@
 "not_applicable_text": "Match does not apply.",
 "category":"MATCH",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Your plan document will indicate whether or not the plan has a match source. If it does and the match is fixed, you are good to go. If it does not mark n/a. If it does have a match but the formula is discretionary, generally in the absence of guidance, you will be provided a match with the prior year's formula if you did not specify the formula, given the volume of plans processed."
 }
 {
@@ -655,7 +655,7 @@
 "not_applicable_text":"Profit Sharing or nonelective contributions will not be made for this testing year.",
 "category":"PROFITSHARING",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Your plan document will indicate whether or not the plan has a profit sharing or nonelective source. If it does and the profit sharing is fixed, you are good to go. If it does not mark n/a. If it does have a profit sharing/nonelective source but the formula is discretionary, generally in the absence of guidance, you will be provided with a contribution calculation with the prior year's formula(s) if you did not specify the formula(s), given the volume of plans processed."
 }
 {
@@ -666,7 +666,7 @@
 "not_applicable_text":"No excluded compensation is permitted in the plan document(adoption agreement) or the plan can use excluded compensation but chooses not to and is passing all tests and not funding any employer contributions such as a match or profit sharing or nonelective contribution, whether regular or Safe Harbor.",
 "category":"EXCLUDEDCOMPENSATION",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"A plan may be tested without excluding compensation that is listed in the plan document as excluded from a source or sources. If it passes, all is well. If, however, it fails, the plan may be tested with excluded compensation to see if it passes. So providing excluded compensation can be useful. Note that a plan's contributions may also have to be calculated using excluded compensation. Depending on the type of excluded compensation, (compensation that is not date of participation compensation or cafeteria plan contributions, for example) an additional test, the 414(s) compensation test may have to be run to confirm that the compensation can be excluded from calculating the contribution per IRS non-discrimination guidelines."
 }
 {
@@ -677,7 +677,7 @@
 "not_applicable_text":"There were no excluded employees.",
 "category":"EXCLUDEDEMPLOYEES",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Employees may be excluded by class, which may help plans pass testing. Note that special rules apply to part-time and union employee exclusions, among others."
 }
 {
@@ -688,7 +688,7 @@
 "not_applicable_text":"Prior testing results do not need to be provided because the plan was tested at the current provider last year or the plan's first testing year is this year.",
 "category":"TAKEOVERPLAN",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Providing prior year testing helps quickly establish if ineligible employees are actually eligible, helps fill in data missing from the census without back and forth, and provides a cross-check aganst the current testing year's results and contribution funding. These results should always be provided as soon as possible."
 }
 {
@@ -699,7 +699,7 @@
 "not_applicable_text":"All activity for the testing year was conducted at the same provider. There were no conversions from another provider or outside accounts.",
 "category":"TAKEOVERPLAN",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Providing prior provider contribution data quickly allows us to identify any contribution errors as soon as possible, minimizing the cost of late funding penalties."
 }
 {
@@ -710,7 +710,7 @@
 "not_applicable_text":"The plan is not a sole proprietorship or a partnership. Therefore Schedule C or K income does not have to be provided.",
 "category":"K1",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Sole proprietorships and parnerships that are not receiving pass-through W-2 income must have their income reduced for FICA and contributions to employees in calculating contributions."
 }
 {
@@ -721,7 +721,7 @@
 "not_applicable_text":"Schedule K passing through as W-2 income not applicable.",
 "category":"K1",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Occasionally sole proprietorships and partnerships or individual members thereof receive their income as pass-through W-2 income. Specifiying if this applies to the plan, who to and ensuring that the appropriate participation agreements or amendments are in place up front will reduce the need to re-calculate tests and contributions."
 }
 {
@@ -732,7 +732,7 @@
 "not_applicable_text":"Participation Agreements not applicable.",
 "category":"PARTICIPATIONAGREEMENTS",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"Having all participation agreements in place or amendents drafted and adopted timely will reduce time and effort re-calculating tests and contributions. Partnerships and certain industries such as medical and investment companies, as well as law offices should ensure that they have correctly provided these documents."
 }
 {
@@ -743,7 +743,7 @@
 "not_applicable_text":"Please anwer yes or no as to whether all income was provided. The answer cannot be not applicable.",
 "category":"ALLINCOME",
 "primary_driver":false,
-"video_url":"",
+"resource_url":"https://www.youtube.com",
 "help_text":"If there is missing income, it may affect the testing results and contribution calculations. Using a cross-check against the W-3 also ensures that no potentially eligible participants have been dropped, decreasing the chance of having persons with missed deferral opportunities that need to be funded by the plan sponsor."
 }
 ]
