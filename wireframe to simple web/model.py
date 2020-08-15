@@ -74,7 +74,7 @@ class TemplateQuestions(db.Model):
     __tablename__ = 'template_questions'
     # Text rather than String is for textarea inputs
     template_question_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    template_name varchar = db.Column(db.String)
+    template_name = db.Column(db.String)
     question_number = db.Column(db.Integer)
     question = db.Column(db.Text)
     yes_text = db.Column(db.Text)
@@ -100,7 +100,7 @@ class Checklist(db.Model):
     preparer_full_name = db.Column(db.String) # from login on save via create checklist fromn template click or if not in system added to user on save
     # Will know e-mail and should populate user_name/update. Each checklist has a preparer whose name must
     # appear on reports and must be able to receive notifications.
-    template_name varchar = db.Column(db.String) # chosen by clicking on appropriate template link
+    template_name = db.Column(db.String) # chosen by clicking on appropriate template link
     # provided when preparer clones checklist
     checklist_who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
     
@@ -123,7 +123,7 @@ class Checklist(db.Model):
     reviewer_email = db.Column(db.String)
     reviewer_id = db.Column(db.Integer)
     date_sent_to_review = db.Column(db.DateTime) # populated by on-click event
-    reviewer_comment varchar = db.Column(db.Text)
+    reviewer_comment = db.Column(db.Text)
     # appear on reports and must be able to receive notifications. If does not exist, need to create with a default password.
     
     # reviewer responsible for

@@ -65,26 +65,23 @@ def user_details(user_id):
 
     return render_template('user_details.html', user=user)
 
-# # app route for all movies
-# @app.route('/movies')
-# def all_movies():
-#     """View all movies."""
+# app route for all templates
+@app.route('/templates')
+def all_templates():
+    """View all templates."""
 
-#     movies = crud.get_movies()
+    templates = crud.get_templates()
 
-#     return render_template('all_movies.html', movies=movies)
+    return render_template('all_templates.html', templates=templates)
 
-# # app route for movie details
-# @app.route('/movies/<movie_id>')
-# def show_movie(movie_id):
-#   #Show details on a particular movie.
+# app route for template questions(details)
+@app.route('/templates/<template_id>')
+def show_template_questions(template_id):
+  #Show question details for a particular template.
 
-#     movie = crud.get_movie_by_id(movie_id)
+    template = crud.get_template_by_id(template_id)
 
-#     return render_template('movie_details.html', movie=movie)
-
-# # app route for all movies
-
+    return render_template('template_questions_details.html', template=template)
 
 
 if __name__ == '__main__':
