@@ -41,8 +41,8 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_email = db.Column(db.String, unique=True)
-    user_password = db.Column(db.String)
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String)
     user_name = db.Column(db.String)
     user_type = db.Column(db.String)
  # ratings = a list of Rating objects

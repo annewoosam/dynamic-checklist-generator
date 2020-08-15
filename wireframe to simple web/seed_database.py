@@ -2,6 +2,7 @@
 
 import os
 import json
+from random import choice, randint
 from datetime import datetime
 
 import crud
@@ -25,7 +26,7 @@ for checklist in checklist_data:
     question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_URL, help_text = (
                                    checklist['question'],
                                    checklist['yes_text'],
-                                   checklist['no_text']),
+                                   checklist['no_text'],
                                    checklist['not_applicable_text'],
                                    checklist['category'],
                                    checklist['primary_driver'],
