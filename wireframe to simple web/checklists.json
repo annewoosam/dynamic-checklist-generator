@@ -514,5 +514,236 @@
 "primary_driver":false,
 "video_url":"",
 "help_text":""
+},
+// second checklist
+{
+"checklist_name":"client compliance guide",
+"question":"Is your file organized with the same top row as the initial file downloaded?",
+"yes_text":"Headers fine.",
+"no_text":"Fix headers.",
+"not_applicable_text":"We assumed headers don't apply to your file. It is a custom file. This will likely slow down processing because the file will need to be manually formatted instead fo automatically processed.",
+"category":"HEADERS",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Not providing a file which is correctly arranged can result in delays and errors in your testing."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Apply a filter across the rows in the original template. When you filter social security numbers are there any blanks?",
+"yes_text":"Social Security Numbers fine.",
+"no_text":"Fix social security numbers.",
+"not_applicable_text":"You answered N/A. We can use employee ID numbers to load a file when social security numbers are not available. All employees must have employee IDs in order to link their information from year to year and avoid confusion when employees have similar names.",
+"category":"SSN",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Social security numbers or another unique identifier such as an employee id are needed to match data for employees from year to year. You can transmit your files securely."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"When you filter dates of birth are there any blanks?",
+"yes_text":"Dates of Birth Fine.",
+"no_text":"Fix Dates of Birth.",
+"not_applicable_text":"Warning! All files should have dates of birth.",
+"category":"BIRTH",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Dates of birth are used to determine eligibility and entry for a plan. Unless the plan has no age requirement and is a Safe Harbor or has no HCE contributions it is expected that these will be provided so that test results can be accurately calculated."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"When you filter dates of birth are there any for persons under 18?",
+"yes_text":"Dates of birth for young employees are correct.",
+"no_text":"Fix dates of birth for employees that make them younger than they are.",
+"not_applicable_text":"No employees are under 18.",
+"category":"BIRTH",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Sometimes persons under 18, expecially owners children may be hired as teenagers and flagged in the system for extra scrutiny. Other times they may be indicators of a typing error."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"When you filter dates of birth are there any for persons over 80 who should not be?",
+"yes_text":"Retiree dates of hire fine.",
+"no_text":"Fix dates of birth for retiree hires.",
+"not_applicable_text":"There are no retiree age hires.",
+"category":"BIRTH",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Some testing systems will flag anyone over retirement age for review. Please ensure these persons birthdates are correct."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"When you filter dates of hire are there any blanks?",
+"yes_text":"Dates of Hire fine.",
+"no_text":"Fix dates of hire.",
+"not_applicable_text":"All employees must have a valid date of hire. Correct the file and change your answer to Y.",
+"category":"HIRE",
+"primary_driver":false,
+"video_url":"",
+"help_text":"All employees must have a valid date of hire so that we can accurately calculate their eligibility for the plan and entry date, as well as the vesting of their contributions. After testing is complete, the next step in annual administration is government forms filing, which includes the tracking and reporting of the numbers of persons with balances not 100% vested using the Form 8955-A." }
+{
+"checklist_name":"client compliance guide",
+"question":"Are there any blank dates of rehire for persons who have a termination date prior to this year and received compensation.",
+"yes_text":"Dates of Rehire fine.",
+"no_text":"Fix dates of rehire.",
+"not_applicable_text":"Dates of rehire did not apply.",
+"category":"REHIRE",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Inaccurate dates of rehire can make someone drop from the tests, causing results to be inaccurate. When the ADP test is inaccurate and discovered after the refund deadline, penalties may apply."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Are there any termination dates for people before rehire dates?",
+"yes_text":"Dates of rehire after termination fine.",
+"no_text":"Fix dates of rehire.",
+"not_applicable_text":"There are no dates of rehire to correct.",
+"category":"REHIRETERM",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Termination dates after rehire dates may cause someone to drop from the tests in error."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"When you apply a filter do you have percentages in the ownership column that add up to 100% or is not have you explained on tab 2?",
+"yes_text":"Owners identified.",
+"no_text":"Enter owner percentages onto the file.",
+"not_applicable_text":"If there are no owners, note on tab 2.",
+"category":"OWNERSHIP",
+"primary_driver":false,
+"video_url":"",
+"help_text":"All ownership nmust be accounted for or teh tests may be inaccurate and a plan may fail the ADP test but the discovery may be too late to correct the test without causing penalties for late compliance. There are some circumstances where a plan may truly have outside non-employee ownership, which causes the ownership percentages to be less than 100%, but this tends to be rare."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Have you placed a Y in the officer column for each officer or explained on tab 2 that there are no officers?",
+"yes_text":"Officers have been marked in the file.",
+"no_text":"Mark officers.",
+"not_applicable_text":"No officers are employees.",
+"category":"OFFICERS",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Officers must be identified so that the top heavy test and allocation can be performed accurately. If a plan has no persons earning over $150,000 as indexed there will be no officers of concern for the test. Of, however, the plan does have officers earning over $150,000, not flagging them could cause a test's failure to be discovered later, with consequences for the plan."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Have you indicated the relationship of all family members for anyone who has a relationship to the owner(s)?",
+"yes_text":"Family attribution has been noted in the file, including for persons with the same last names as the owners.",
+"no_text":"Fix family attribution including noting relationship of persons with the same last name as the owners.",
+"not_applicable_text":"There is no ownership in this plan or persons with the same last name as the owners.",
+"category":"ATTRIBUTION",
+"primary_driver":false,
+"video_url":"",
+"help_text":"If family attribution is not correctly identified, the HCEs may be improperly determined and a plan might pass a test it should be shown as failing with penalties if the correction is late. One of the most common attribution errors is attributing ownership to siblings (borthers or sisters). While there is no attribution between siblings it is good to notate these relationships to prevent delays in processing while waiting for clarification of these relationships."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Have you entered a formula for the Match or entered no match on tab 2?",
+"yes_text":"Match contributions clarified - either none or for yes, formula and principal class numbers and budget provided.",
+"no_text":"Provide match answer and formula if funding.",
+"not_applicable_text": "Match does not apply.",
+"category":"MATCH",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Your plan document will indicate whether or not the plan has a match source. If it does and the match is fixed, you are good to go. If it does not mark n/a. If it does have a match but the formula is discretionary, generally in the absence of guidance, you will be provided a match with the prior year's formula if you did not specify the formula, given the volume of plans processed."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Have you entered a formula for Profit Sharing including the class of each person based on how much Profit Sharing they should receive if eligible in the Principal column?",
+"yes_text":"Profit sharing/nonelective contributions clarified - either none or for yes, formula and principal class numbers and budget provided.",
+"no_text":"Provide Profit Sharing formula, and if, each class is its own separate group in the plan document(adoption agreement), add a principal code column to your spreadsheet and enter the group number to use for each eligible individual. On tab 2 identify the target percentage or dollar amount for each group or the plan as a whole.",
+"not_applicable_text":"Profit Sharing or nonelective contributions will not be made for this testing year.",
+"category":"PROFITSHARING",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Your plan document will indicate whether or not the plan has a profit sharing or nonelective source. If it does and the profit sharing is fixed, you are good to go. If it does not mark n/a. If it does have a profit sharing/nonelective source but the formula is discretionary, generally in the absence of guidance, you will be provided with a contribution calculation with the prior year's formula(s) if you did not specify the formula(s), given the volume of plans processed."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Excluded Compensation must be excluded in the plan document to be disregarded in calculating the Match/Profit Sharing. Have you confirmed that you did not enter the same amount as the compensation for participants not yet eligible to participate in the plan?",
+"yes_text":"Excluded compensation provided.",
+"no_text":"Provide excluded compensation.",
+"not_applicable_text":"No excluded compensation is permitted in the plan document(adoption agreement) or the plan can use excluded compensation but chooses not to and is passing all tests and not funding any employer contributions such as a match or profit sharing or nonelective contribution, whether regular or Safe Harbor.",
+"category":"EXCLUDEDCOMPENSATION",
+"primary_driver":false,
+"video_url":"",
+"help_text":"A plan may be tested without excluding compensation that is listed in the plan document as excluded from a source or sources. If it passes, all is well. If, however, it fails, the plan may be tested with excluded compensation to see if it passes. So providing excluded compensation can be useful. Note that a plan's contributions may also have to be calculated using excluded compensation. Depending on the type of excluded compensation, (compensation that is not date of participation compensation or cafeteria plan contributions, for example) an additional test, the 414(s) compensation test may have to be run to confirm that the compensation can be excluded from calculating the contribution per IRS non-discrimination guidelines."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Excluded Employees must be excluded in the plan document to be disregarded in testing. Have you marked all these employees with a Y?",
+"yes_text":"Excluded employees marked - fine.",
+"no_text":"Mark excluded employees.",
+"not_applicable_text":"There were no excluded employees.",
+"category":"EXCLUDEDEMPLOYEES",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Employees may be excluded by class, which may help plans pass testing. Note that special rules apply to part-time and union employee exclusions, among others."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"If your plan transferred to us in the middle of the plan year, did you provide the prior testing results?",
+"yes_text":"Prior testing results provided.",
+"no_text":"Prior testing results need to be provided.",
+"not_applicable_text":"Prior testing results do not need to be provided because the plan was tested at the current provider last year or the plan's first testing year is this year.",
+"category":"TAKEOVERPLAN",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Providing prior year testing helps quickly establish if ineligible employees are actually eligible, helps fill in data missing from the census without back and forth, and provides a cross-check aganst the current testing year's results and contribution funding. These results should always be provided as soon as possible."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"If your plan transferred to us in the middle of the plan year, did you provide the prior custodians statement of contributions by participant by money type(source)?",
+"yes_text":"Prior contribution data was provided.",
+"no_text":"Provide prior contribution information.",
+"not_applicable_text":"All activity for the testing year was conducted at the same provider. There were no conversions from another provider or outside accounts.",
+"category":"TAKEOVERPLAN",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Providing prior provider contribution data quickly allows us to identify any contribution errors as soon as possible, minimizing the cost of late funding penalties."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"If your entity is a Sole Proprietorship or Partnership have you entered Schedule C or Schedule K income on the spreadsheet and provided draft or actual Schedules?",
+"yes_text":"Schedule C or K income entered comepletely on file and draft or final schedules provided.",
+"no_text":"Provide Schedule C or K income and draft or final schedules.",
+"not_applicable_text":"The plan is not a sole proprietorship or a partnership. Therefore Schedule C or K income does not have to be provided.",
+"category":"K1",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Sole proprietorships and parnerships that are not receiving pass-through W-2 income must have their income reduced for FICA and contributions to employees in calculating contributions."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Have you identified any Schedule K recipients who are actually receiving income as W-2 income?",
+"yes_text":"Schedule K participants receiving such income as W-2 income identified.",
+"no_text":"Identify Schedule K participants receiving income as W-2 and place W-2 amount on census.",
+"not_applicable_text":"Schedule K passing through as W-2 income not applicable.",
+"category":"K1",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Occasionally sole proprietorships and partnerships or individual members thereof receive their income as pass-through W-2 income. Specifiying if this applies to the plan, who to and ensuring that the appropriate participation agreements or amendments are in place up front will reduce the need to re-calculate tests and contributions."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Are all participation agreements in place for all participating employers, especially if the sponsor is a partnership or sole proprietorship?",
+"yes_text":"Participation agreements in place for all participating employers.",
+"no_text":"Provide participating agreements or remove money contributed by non-participating employers. Seek advice of consulting.",
+"not_applicable_text":"Participation Agreements not applicable.",
+"category":"PARTICIPATIONAGREEMENTS",
+"primary_driver":false,
+"video_url":"",
+"help_text":"Having all participation agreements in place or amendents drafted and adopted timely will reduce time and effort re-calculating tests and contributions. Partnerships and certain industries such as medical and investment companies, as well as law offices should ensure that they have correctly provided these documents."
+}
+{
+"checklist_name":"client compliance guide",
+"question":"Has all the income for employees been accounted for or have you explained who has not on tab 2?",
+"yes_text":"All income provided. Matches W-3.",
+"no_text":"Add all employees' information so that gross compensation matches W-3.",
+"not_applicable_text":"Please anwer yes or no as to whether all income was provided. The answer cannot be not applicable.",
+"category":"ALLINCOME",
+"primary_driver":false,
+"video_url":"",
+"help_text":"If there is missing income, it may affect the testing results and contribution calculations. Using a cross-check against the W-3 also ensures that no potentially eligible participants have been dropped, decreasing the chance of having persons with missed deferral opportunities that need to be funded by the plan sponsor."
 }
 ]
