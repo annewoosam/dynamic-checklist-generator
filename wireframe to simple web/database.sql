@@ -28,20 +28,30 @@ CREATE TABLE template_questions (
                      resource_url VARCHAR NOT NULL,
                      category VARCHAR NOT NULL,
                      primary_driver BOOLEAN NOT NULL,
+                     );
+
+CREATE TABLE checklist (
+                     checklist_id SERIAL PRIMARY KEY,
+                     template_name VARCHAR NOT NULL,
+                     timeframe DATE NOT NULL,
+                     who_for VARCHAR NOT NULL,
+
+                     date_sent_to_review DATE,  
+                     reviewer_full_name VARCHAR,
+                     reviewer_email VARCHAR,
+ 
+                     date_review_completed DATE,   
+                     recipient_full_name VARCHAR,
+                     recipient_email VARCHAR, 
+                     date_sent_to_recipient DATE
+
                      preparer_answer VARCHAR,
                      preparer_time_spent INTEGER,
                      preparer_comment VARCHAR,
-                     reviewer_full_name VARCHAR,
-                     reviewer_email VARCHAR,
-                     reviewer_id INTEGER,
-                     date_sent_to_review DATE,
-                     reviewer_comment VARCHAR,
-                     reviewer_answer VARCHAR,
+
+                     reviewer_answer VARCHAR,                     
                      reviewer_time_spent INTEGER,
-                     date_review_completed DATE,
-                     recipient_full_name VARCHAR,
-                     recipient_email VARCHAR,
-                     date_sent_to_recipient DATE
+                     reviewer_comment VARCHAR,
                      );
 
 -- Insert Users
@@ -127,6 +137,35 @@ VALUES
 ('client compliance guide', 67,'Are all participation agreements in place for all participating employers, especially if the sponsor is a partnership or sole proprietorship?', 'Participation agreements in place for all participating employers.','Provide participating agreements or remove money contributed by non-participating employers. Seek advice of consulting.','Participation Agreements not applicable.','help_text','https://www.youtube.com','category',false),
 ('client compliance guide', 68,'Has all the income for employees been accounted for or have you explained who has not on tab 2?', 'All income provided. Matches W-3.','Add all employee information so that gross compensation matches W-3.','Please anwer yes or no as to whether all income was provided. The answer cannot be not applicable.','help_text','https://www.youtube.com','category',false);
 
+# Create some dummy checklists for the two templates for the preparer - let's say 3 each for a total of 6 - not started, in progress and complete
 
+# have preparer answer with a mix showing incomplete which will produce Kanban
 
+#2.0 
+# query for returning Kanban lists, counts, percents
 
+# have preparer answer with a mix that will show all complete
+
+# query for returning Kanban lists, counts, percents - ready for review look
+
+# 1.0
+# have preparer enter send to reviewer the 2 complete and mark one for return and one ready.
+
+# have reviewer answer with a mix showing incomplete which will produce Kanbans
+
+# have reviewer enter returned for corrections
+
+# have reviewer answer with a mix that will show all complete - ready for recipient look
+
+# have reviewer enter sent to recipient
+
+# 2.0
+# reviewer Kanbans
+
+# 3.0
+
+# sql queries that will illustrate stats
+
+# sql queries specifically on questions marked for review at any time
+
+# once complete move on to convert to SQLAlchemy for web page display/ receipt of web input
