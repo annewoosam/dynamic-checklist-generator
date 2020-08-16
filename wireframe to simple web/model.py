@@ -56,16 +56,19 @@ class Template(db.Model):
     """A template."""
     
     # Master templates established by creators that can be cloned to be checklists for individual clients, employees or personal use.
-    __tablename__ = 'template'
+    __tablename__ = 'templates'
 
-    creator_id = db.Column(db.Integer)
     template_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     template_name = db.Column(db.String)
     updated_at = db.Column(db.DateTime)
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id')) #creator
+
     # After a creator establishes a template they add the questions and help text so that a preparer can spin off a checklist for whomever they need for whatever time frame.
+    
+    user = db.relationship('User', backref='templates')
+
     def __repr__(self):
-        return f'<Template template_id={self.template_id} template_name={self.template_name}>'
+        return f'<Template template_id={self.templates_id} template_name={self.templates_name}>'
 
 class TemplateQuestions(db.Model):
  
@@ -74,6 +77,7 @@ class TemplateQuestions(db.Model):
     __tablename__ = 'template_questions'
     # Text rather than String is for textarea inputs
     template_question_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    template_id = db.Column(db.Integer,  db.ForeignKey('templates.template_id'))
     template_name = db.Column(db.String)
     question_number = db.Column(db.Integer)
     question = db.Column(db.Text)
@@ -87,20 +91,21 @@ class TemplateQuestions(db.Model):
     primary_driver = db. Column(db.Boolean) # when a preparer enters NA for this any item with the same category will be switched to NA
     # we still want to print these sub-questions so other viewers understand that the items wewre not dropped in error.
 
+    templates = db.relationship('Templates', backref='template_questions')
     def __repr__(self):
-        return f'<TemplateQuestions template_question_id={self.template_question_id} question={self.question}>'
+        return f'<TemplateQuestions template_questions_id={self.template_question_id} template_questions={self.question}>'
 
 class Checklist(db.Model):
     
     """Once a template is created it may have many questions."""
     
     __tablename__ = 'checklist'
-    checklist_id=db.Column(db.Integer, autoincrement=True, primary_key=True) 
+    checklist_id=db.Column(db.Integer, db.ForeignKey('corrections_required'), autoincrement=True, primary_key=True) 
     preparer_id = db.Column(db.Integer) # from login on save via create checklist fromn template click
     preparer_full_name = db.Column(db.String) # from login on save via create checklist fromn template click or if not in system added to user on save
     # Will know e-mail and should populate user_name/update. Each checklist has a preparer whose name must
     # appear on reports and must be able to receive notifications.
-    template_name = db.Column(db.String) # chosen by clicking on appropriate template link
+    template_name = db.Column(db.String, db.ForeignKey('template_questions.template_name')) # chosen by clicking on appropriate template link
     # provided when preparer clones checklist
     checklist_who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
     
@@ -139,7 +144,8 @@ class Checklist(db.Model):
     # in sum, added slots for preparer_name, reviewer_name and recipient_name which will feed back to Users.
 
     # checklists = a list of checklist objects
-
+    templates_questions = db.relationship('TemplatesQuestions', backref='template_name')
+    checklist = db.relationship('CorrectionsRequiredAtAnyPoint', backref='checklist_id')
     def __repr__(self):
         return f'<Checklist checklist_id={self.checklist_id} checklist_name={self.checklist_name}>'
 
@@ -147,14 +153,15 @@ class CorrectionsRequiredAtAnyPoint(db.Model):
 
     """A checklist item's preparer responses. Comments only not required"""
  
-    __tablename__ = 'preparer_answer'
+    __tablename__ = 'corrections_required'
 
     corrections_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     checklist_id = db.Column(db.Integer)
     question_id = db.Column(db.Integer)
     reviewer_answer = db.column(db.String) # dropdown restricted to y, n, na, blank
     last_saved_at = db.column(db.DateTime)
-    
+       
+    checklist = db.relationship('Checklists', backref='checklist_id')
     def __repr__(self):
         return f'CorrectionsRequiredAtAnyPoint checklist_id={self.checklist_id} question_id={self.question_id}>'
 

@@ -496,7 +496,7 @@
 {
 "template_name":"compliance testing",
 "question":"46. If the plan had late deferrals, have you logged a request to prepare a submission in the relevant tracking database?",
-"yes_text":"Late deferrals tracking record created",
+"yes_text":"Late deferrals tracking record created.",
 "no_text":"Log a late deferrals tracking record.",
 "not_applicable_text":"A late deferrals tracking record is not needed.",
 "category":"LATEDEFERRALS",
@@ -507,9 +507,9 @@
 {
 "template_name":"compliance testing",
 "question":"47. Have you logged a request to begin preparation of the 5500, Summary Annual Report and 8955-SSA in the relevant tracking database?",
-"yes_text":"Government Forms Tracking created",
-"no_text":"Add Government Forms tracking",
-"not_applicable_text":"Government Forms tracking is not needed for this plan",
+"yes_text":"Government Forms Tracking created.",
+"no_text":"Add Government Forms tracking.",
+"not_applicable_text":"Government Forms tracking is not needed for this plan.",
 "category":"GOVERNMENTFORMS",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
@@ -583,7 +583,7 @@
 "help_text":"All employees must have a valid date of hire so that we can accurately calculate their eligibility for the plan and entry date, as well as the vesting of their contributions. After testing is complete, the next step in annual administration is government forms filing, which includes the tracking and reporting of the numbers of persons with balances not 100% vested using the Form 8955-A." }
 {
 "template_name":"client compliance guide",
-"question":"Are there any blank dates of rehire for persons who have a termination date prior to this year and received compensation.",
+"question":"Are there any blank dates of rehire for persons who have a termination date prior to this year and received compensation?",
 "yes_text":"Dates of Rehire fine.",
 "no_text":"Fix dates of rehire.",
 "not_applicable_text":"Dates of rehire did not apply.",

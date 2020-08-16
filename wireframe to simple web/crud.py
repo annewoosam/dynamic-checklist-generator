@@ -43,19 +43,19 @@ def get_user_by_id(user_id):
 # Functions for creating checklist templates, returning a list of all available checklists and
 # returning a specific checklist by id.
 
-# def create_checklist(user_email, user_name, user_type="creator", checklist_name):
-#     """Create and return a new movie."""
+def create_template(user_id, template_id, template_name, updated_at):
+    """Create and return a new template."""
 
-#     checklist = Checklist(user_email=user_email, #passed by session
-#                   user_name=user_name,
-#                   user_type=user_type,
-#                   checklist_name=checklist_name)
+    template = Template(user_id=user_id, #passed by session
+                  template_id=template_id,
+                  template_name=template_name,
+                  updated_at=updated_at)
 
-#     db.session.add(checklist)
-#     db.session.commit()
+    db.session.add(template)
+    db.session.commit()
 
-#     return checklist
-#     # add  user_name and user_type to User as creator
+    return template
+    
 
 # def get_checklists():
 #     """Return all checklists."""
