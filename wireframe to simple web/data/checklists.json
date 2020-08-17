@@ -107,7 +107,7 @@
 "category":"SAFEHARBORMATCH",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"The Safe Harbor match formula will be stated in the plan document. You should also notate this formula on the Eligibility proof and perform a manual check and do a common sense comparison to last year’s funding amount, especially if the plan is new to your testing system. The most common formula is 100% to 3% and 50% to 5% of compensation and the Eligibility proof will explain how to confirm this. Note that sometimes there are "maybe":provisions for Safe Harbors. If a plan has a maybe provision noted in the plan document, you will need to have the annual amendment stating that the Safe Harbor will be funded to use this method to pass testing."
+"help_text":"The Safe Harbor match formula will be stated in the plan document. You should also notate this formula on the Eligibility proof and perform a manual check and do a common sense comparison to last year’s funding amount, especially if the plan is new to your testing system. The most common formula is 100% to 3% and 50% to 5% of compensation and the Eligibility proof will explain how to confirm this. Note that sometimes there are 'maybe' provisions for Safe Harbors. If a plan has a maybe provision noted in the plan document, you will need to have the annual amendment stating that the Safe Harbor will be funded to use this method to pass testing."
 },
 {
 "template_name":"compliance testing",
@@ -133,7 +133,7 @@
 },
 {
 "template_name":"compliance testing",
-"question":"13. Has the income for sole proprietors/partners been entered correctly based on either Draft or final Schedule C or K-1 documents? Search for Entity Type in the plan document/adoption agreement to identify if the plan is a sole proprietorship/partnership not taxed as a corporation." ),
+"question":"13. Has the income for sole proprietors/partners been entered correctly based on either Draft or final Schedule C or K-1 documents? Search for Entity Type in the plan document/adoption agreement to identify if the plan is a sole proprietorship/partnership not taxed as a corporation.",
 "yes_text":"Schedule C or K income entered completely on file and draft or final schedules provided.",
 "no_text":"Provide Schedule C or K income and draft or final schedules.",
 "not_applicable_text":"The plan is not a sole proprietorship or a partnership. Therefore Schedule C or K income does not have to be provided.",
@@ -392,7 +392,7 @@
 "category":"ADPACP",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"https://www.youtube.com",
+"help_text":"",
 }
 {
 "template_name":"compliance testing",
@@ -623,7 +623,7 @@
 "category":"OFFICERS",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"Officers must be identified so that the top heavy test and allocation can be performed accurately. If a plan has no persons earning over $150,000 as indexed there will be no officers of concern for the test. Of, however, the plan does have officers earning over $150,000, not flagging them could cause a test's failure to be discovered later, with consequences for the plan."
+"help_text":"Officers must be identified so that the top heavy test and allocation can be performed accurately. If a plan has no persons earning over $150,000 as indexed there will be no officers of concern for the test. Of, however, the plan does have officers earning over $150,000, not flagging them could cause a test failure to be discovered later, with consequences for the plan."
 }
 {
 "template_name":"client compliance guide",
@@ -645,7 +645,7 @@
 "category":"MATCH",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"Your plan document will indicate whether or not the plan has a match source. If it does and the match is fixed, you are good to go. If it does not mark n/a. If it does have a match but the formula is discretionary, generally in the absence of guidance, you will be provided a match with the prior year's formula if you did not specify the formula, given the volume of plans processed."
+"help_text":"Your plan document will indicate whether or not the plan has a match source. If it does and the match is fixed, you are good to go. If it does not mark n/a. If it does have a match but the formula is discretionary, generally in the absence of guidance, you will be provided a match with the prior year formula if you did not specify the formula, given the volume of plans processed."
 }
 {
 "template_name":"client compliance guide",
@@ -656,7 +656,7 @@
 "category":"PROFITSHARING",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"Your plan document will indicate whether or not the plan has a profit sharing or nonelective source. If it does and the profit sharing is fixed, you are good to go. If it does not mark n/a. If it does have a profit sharing/nonelective source but the formula is discretionary, generally in the absence of guidance, you will be provided with a contribution calculation with the prior year's formula(s) if you did not specify the formula(s), given the volume of plans processed."
+"help_text":"Your plan document will indicate whether or not the plan has a profit sharing or nonelective source. If it does and the profit sharing is fixed, you are good to go. If it does not mark n/a. If it does have a profit sharing/nonelective source but the formula is discretionary, generally in the absence of guidance, you will be provided with a contribution calculation with the prior year formula(s) if you did not specify the formula(s), given the volume of plans processed."
 }
 {
 "template_name":"client compliance guide",
@@ -667,7 +667,7 @@
 "category":"EXCLUDEDCOMPENSATION",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"A plan may be tested without excluding compensation that is listed in the plan document as excluded from a source or sources. If it passes, all is well. If, however, it fails, the plan may be tested with excluded compensation to see if it passes. So providing excluded compensation can be useful. Note that a plan's contributions may also have to be calculated using excluded compensation. Depending on the type of excluded compensation, (compensation that is not date of participation compensation or cafeteria plan contributions, for example) an additional test, the 414(s) compensation test may have to be run to confirm that the compensation can be excluded from calculating the contribution per IRS non-discrimination guidelines."
+"help_text":"A plan may be tested without excluding compensation that is listed in the plan document as excluded from a source or sources. If it passes, all is well. If, however, it fails, the plan may be tested with excluded compensation to see if it passes. So providing excluded compensation can be useful. Note that a plan contributions may also have to be calculated using excluded compensation. Depending on the type of excluded compensation, (compensation that is not date of participation compensation or cafeteria plan contributions, for example) an additional test, the 414(s) compensation test may have to be run to confirm that the compensation can be excluded from calculating the contribution per IRS non-discrimination guidelines."
 }
 {
 "template_name":"client compliance guide",
@@ -689,7 +689,7 @@
 "category":"TAKEOVERPLAN",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"Providing prior year testing helps quickly establish if ineligible employees are actually eligible, helps fill in data missing from the census without back and forth, and provides a cross-check aganst the current testing year's results and contribution funding. These results should always be provided as soon as possible."
+"help_text":"Providing prior year testing helps quickly establish if ineligible employees are actually eligible, helps fill in data missing from the census without back and forth, and provides a cross-check aganst the current testing year results and contribution funding. These results should always be provided as soon as possible."
 }
 {
 "template_name":"client compliance guide",
