@@ -431,6 +431,7 @@ VALUES
 (6,204,21,true,'');
 
 -- for Preparer
+
 -- across all checklists
 -- remember you can get out from END in terminal using \q
 
@@ -441,32 +442,44 @@ VALUES
 
 
 -- and by checklist 1-6
+
 --Checklist 1
+
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=1;  # link to template_questions yes_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=1;  # link to template_questions no_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=1; # link to template_questions not_applicable_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=1; # link to template_questions question
+
 --Checklist 2
+
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=2;  # link to template_questions yes_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=2;  # link to template_questions no_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=2; # link to template_questions not_applicable_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=2; # link to template_questions question
+
 --Checklist 3
+
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=3;  # link to template_questions yes_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=3;  # link to template_questions no_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=3; # link to template_questions not_applicable_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=3; # link to template_questions question
+
 --Checklist 4
+
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=4;  # link to template_questions yes_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=4;  # link to template_questions no_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=4; # link to template_questions not_applicable_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=4; # link to template_questions question
+
 --Checklist 5
+
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=5;  # link to template_questions yes_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=5;  # link to template_questions no_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=5; # link to template_questions not_applicable_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=5; # link to template_questions question
+
 --Checklist 6
+
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=6;  # link to template_questions yes_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=6;  # link to template_questions no_text
 -- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=6; # link to template_questions not_applicable_text
@@ -680,7 +693,62 @@ VALUES
 (6,406,19,false,''),
 (6,407,20,false,''),
 (6,408,21,false,'');
+
 -- for reviewer
+
+-- across all checklists
+-- remember you can get out from END in terminal using \q
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=false;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=false;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=false; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=false; # link to template_questions question
+
+
+-- and by checklist 1-6
+
+--Checklist 1
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=false AND checklist_id=1;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=false AND checklist_id=1;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=false AND checklist_id=1; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=false AND checklist_id=1; # link to template_questions question
+
+--Checklist 2
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=false AND checklist_id=2;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=false AND checklist_id=2;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=false AND checklist_id=2; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=false AND checklist_id=2; # link to template_questions question
+
+--Checklist 3
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=false AND checklist_id=3;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=false AND checklist_id=3;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=false AND checklist_id=3; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=false AND checklist_id=3; # link to template_questions question
+
+--Checklist 4
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=false AND checklist_id=4;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=false AND checklist_id=4;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=false AND checklist_id=4; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=false AND checklist_id=4; # link to template_questions question
+
+--Checklist 5
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=false AND checklist_id=5;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=false AND checklist_id=5;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=false AND checklist_id=5; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=false AND checklist_id=5; # link to template_questions question
+
+--Checklist 6
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=false AND checklist_id=6;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=false AND checklist_id=6;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=false AND checklist_id=6; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=false AND checklist_id=6; # link to template_questions question
+
 
 -- #SELECT answer FROM answers WHERE answer="y" # link to template_questions yes_text
 -- #SELECT answer FROM answers WHERE answer="n" # link to template_questions no_text
