@@ -1,4 +1,4 @@
--- NOTE that sqlalchemy/database.sql is a symbolic link to sql/database.sql. ALL changes will be reflected in the sqlalchemy assessment.
+-- NOTE that sqlalchemy/database.sql is a symbolic link to sql/database.sql. 
 
 CREATE TABLE users (
     user_id VARCHAR(5) PRIMARY KEY,
@@ -14,8 +14,6 @@ CREATE TABLE templates (
     user_id VARCHAR(5),
     updated_at DATE
 );
-
--- Create an Awards Table
 
 CREATE TABLE template_questions (
                      template_question_id SERIAL PRIMARY KEY,
@@ -70,16 +68,12 @@ INSERT INTO users (user_id, email, password, user_name, user_type) VALUES
 (2, 'retiringwiser@gmail.com', 'testrw', 'Hoot Owl','preparer'),
 (3, 'strategicartscollaborative@gmail.com', 'testsa', 'Strategic Arts','reviewer');
 
---SELECT * FROM users;
-
 -- Insert a Template Name
 INSERT INTO templates (template_id, template_name, user_id, updated_at) VALUES
 (1, 'compliance testing', 1, '2020-08-11'),
 (2, 'client compliance guide', 1, '2020-08-11');
 
--- return the user-name for the chosen checklist:
--- SELECT users.user_name FROM users JOIN templates ON templates.user_id = users.user_id WHERE template_name = 'compliance testing';
---SELECT template_questions.yes_text FROM template_questions JOIN answers ON WHERE answer='y' AND role=true AND checklist_id=1;
+-- Insert Questions and Helper Information
 
 INSERT INTO template_questions (template_name, template_question_id, question, yes_text, no_text, not_applicable_text,help_text,resource_url,
                                 category, primary_driver)
@@ -153,87 +147,7 @@ VALUES
 ('client compliance guide', 67,'20. Are all participation agreements in place for all participating employers, especially if the sponsor is a partnership or sole proprietorship?', 'Participation agreements in place for all participating employers.','Provide participating agreements or remove money contributed by non-participating employers. Seek advice of consulting.','Participation Agreements not applicable.','Having all participation agreements in place or amendents drafted and adopted timely will reduce time and effort re-calculating tests and contributions. Partnerships and certain industries such as medical and investment companies, as well as law offices should ensure that they have correctly provided these documents.','https://www.youtube.com','PARTICIPATIONAGREEMENTS',false),
 ('client compliance guide', 68,'21. Has all the income for employees been accounted for or have you explained who has not on tab 2?', 'All income provided. Matches W-3.','Add all employee information so that gross compensation matches W-3.','Please anwer yes or no as to whether all income was provided. The answer cannot be not applicable.','If there is missing income, it may affect the testing results and contribution calculations. Using a cross-check against the W-3 also ensures that no potentially eligible participants have been dropped, decreasing the chance of having persons with missed deferral opportunities that need to be funded by the plan sponsor.','https://www.youtube.com','ALLINCOME',false);
 
--- # Create some dummy checklists for the two templates for the preparer - let's say 3 each for a total of 6 - not started, in progress and complete
-
--- # have preparer answer with a mix showing incomplete which will produce Kanban
--- check with
--- dropdb checklists
--- createdb checklists
--- psql checklists < database.sql
--- psql checklists
--- can use \dt or \d and also \q for quit before rerunning queries
-
--- retrieve all questions regardless of template name
-
--- # SELECT question, help_text, resource_url, primary_driver, category FROM template_questions
-
---retrieve questions by template/cross-check against number expected. Any updates made should also be made in parallel json file. Also avoid possessiveness :) ' versus ""
-
--- # SELECT question FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
---retrieve question and text of different categories for review by template
-
--- HELP TEXT
-
--- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
--- VIDEO-TEXT AKA RESOURCE_URL
--- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
--- CATEGORIES
--- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
--- DRIVERS
--- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
-
-
--- #2.0 
-
--- # query for returning Kanban lists, counts, percents
-
--- FOR KANBAN
-
---First check all your text
-
--- YES-TEXT
-
--- # SELECT question, yes_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question, yes_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
--- NO-TEXT
-
--- # SELECT question, no_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question, no_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
--- NOT_APPLICABLE TEXT
-
---some items around 34 need to be fixed
--- # SELECT question, not_applicable_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
--- # SELECT question, not_applicable_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
-
--- # have preparer answer with a mix that will show all complete
-
---then link and check links working by spreading y,n,na and blank in rotation for each template for the first checklist instance of each
-
---47 mixed answers for template 1; 21 for template 2
---checklist id shall be 1 or 2 and increment for each new checklist, so the next checlist will be 3 for as many rows as there are questions in the template
---answer_id will increment and not reset
---question_number will be 1 to 47 or 1 to 21 and will reset for each new checklist id based on the number of questions in teh template created
---role will be true for preparer, false for reviewer
---answer will be a string and either y,n,na or blank
---in our first block of two samples each checklist will cycle through response options and we will have an in progress set of checklists.
---in our second block of two samples (checklists 3 and 4) answers will all be y or na so the checklists can show as complete.
---in our third block we'll show a block of two checklists with no answers at all which will be a not started example set.
-
--- reviewer will be 1-6 cont autoincrement of answer_id but role will be false  after the 1-6 for preparer. Pretend the preparer's work is being reviewed in chunks.
--- # have reviewer answer with a mix showing incomplete which will produce Kanbans
--- # have reviewer answer with a mix that will show all complete - ready for recipient look
+-- CREATE ENOUGH SAMPLE CHECKLISTS INCLUDING PREPARER & REVIEWER DATA TO DEMONSTRATE MOST COMMON SCENARIOS
 
 INSERT INTO checklist(checklist_id, template_name, timeframe, who_for)
 VALUES
@@ -244,8 +158,8 @@ VALUES
 (5,'compliance testing','2020-12-31','GHI'),
 (6,'client compliance guide','2020-12-31','GHI');
 
--- SELECT * FROM checklist;
--- SELECT checklist.template_name FROM checklist JOIN answers ON answers.checklist_id=checklist.checklist_id WHERE answers.checklist_id=1 AND answers.answer='y';
+-- PREPARER DATA
+
 INSERT INTO answers (checklist_id, answer_id, question_number, role, answer)
 VALUES
 (1,1,1,true,'y'),
@@ -452,66 +366,6 @@ VALUES
 (6,202,19,true,''),
 (6,203,20,true,''),
 (6,204,21,true,'');
-
--- for Preparer
-
--- across all checklists
--- remember you can get out from END in terminal using \q
-
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true;  # link to template_questions yes_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true;  # link to template_questions no_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true; # link to template_questions not_applicable_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true; # link to template_questions question
--- Return the actual question trigering the answer
--- SELECT template_questions.question FROM template_questions JOIN answers ON template_questions.question_number = answers.question_number WHERE answer='y' AND role=true;
-
--- and by checklist 1-6
-
---Checklist 1
-
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=1;  # link to template_questions yes_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=1;  # link to template_questions no_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=1; # link to template_questions not_applicable_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=1; # link to template_questions question
-
---Checklist 2
-
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=2;  # link to template_questions yes_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=2;  # link to template_questions no_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=2; # link to template_questions not_applicable_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=2; # link to template_questions question
-
---Checklist 3
-
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=3;  # link to template_questions yes_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=3;  # link to template_questions no_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=3; # link to template_questions not_applicable_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=3; # link to template_questions question
-
---Checklist 4
-
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=4;  # link to template_questions yes_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=4;  # link to template_questions no_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=4; # link to template_questions not_applicable_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=4; # link to template_questions question
-
---Checklist 5
-
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=5;  # link to template_questions yes_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=5;  # link to template_questions no_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=5; # link to template_questions not_applicable_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=5; # link to template_questions question
-
---Checklist 6
-
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=6;  # link to template_questions yes_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=6;  # link to template_questions no_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=6; # link to template_questions not_applicable_text
--- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=6; # link to template_questions question
-
--- SELECT answer FROM answers WHERE answer='y' AND role=true AND checklist_id=1;  # link to template_questions yes_text
-
--- SELECT checklist.template_name FROM checklist JOIN notifications ON notifications.checklist_id=checklist.checklist_id WHERE checklist.checklist_id=1;
 
 --REVIEWER DATA
 
@@ -722,7 +576,168 @@ VALUES
 (6,407,20,false,''),
 (6,408,21,false,'');
 
--- for reviewer
+-- # have preparer enter send to reviewer the 2 complete and mark one for return and one ready.
+INSERT INTO notifications (checklist_id,notifications_id,date_sent_to_review,reviewer_full_name,reviewer_email)
+VALUES
+(3,1,'2020-08-08','Strategic Arts','strategicartscollaborative@gmail.com'),
+(6,2,'2020-08-08','Strategic Arts','strategicartscollaborative@gmail.com');
+-- # have reviewer enter returned for corrections
+
+-- # have reviewer enter sent to recipient
+INSERT INTO notifications (checklist_id,notifications_id,date_review_completed,date_sent_to_recipient,recipient_full_name,recipient_email)
+VALUES
+(6,3,'2020-08-08','2020-08-09','Relationship Manager','strategicartscollaborative@gmail.com');
+
+-- Tests
+
+--SELECT * FROM users;
+-- return the user-name for the chosen checklist:
+-- SELECT users.user_name FROM users JOIN templates ON templates.user_id = users.user_id WHERE template_name = 'compliance testing';
+--SELECT template_questions.yes_text FROM template_questions JOIN answers ON WHERE answer='y' AND role=true AND checklist_id=1;
+
+-- # Create some dummy checklists for the two templates for the preparer - let's say 3 each for a total of 6 - not started, in progress and complete
+-- SELECT * FROM checklist;
+-- SELECT checklist.template_name FROM checklist JOIN answers ON answers.checklist_id=checklist.checklist_id WHERE answers.checklist_id=1 AND answers.answer='y';
+
+
+-- # have preparer answer with a mix showing incomplete which will produce Kanban
+-- check with
+-- dropdb checklists
+-- createdb checklists
+-- psql checklists < database.sql
+-- psql checklists
+-- can use \dt or \d and also \q for quit before rerunning queries
+
+-- retrieve all questions regardless of template name
+
+-- # SELECT question, help_text, resource_url, primary_driver, category FROM template_questions
+
+--retrieve questions by template/cross-check against number expected. Any updates made should also be made in parallel json file. Also avoid possessiveness :) ' versus ""
+
+-- # SELECT question FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+--retrieve question and text of different categories for review by template
+
+-- HELP TEXT
+
+-- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- VIDEO-TEXT AKA RESOURCE_URL
+-- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- CATEGORIES
+-- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- DRIVERS
+-- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+
+
+-- #2.0 
+
+-- # query for returning Kanban lists, counts, percents
+
+-- FOR KANBAN
+
+--First check all your text
+
+-- YES-TEXT
+
+-- # SELECT question, yes_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, yes_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- NO-TEXT
+
+-- # SELECT question, no_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, no_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- NOT_APPLICABLE TEXT
+
+--some items around 34 need to be fixed
+-- # SELECT question, not_applicable_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, not_applicable_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- # have preparer answer with a mix that will show all complete
+
+--then link and check links working by spreading y,n,na and blank in rotation for each template for the first checklist instance of each
+
+--47 mixed answers for template 1; 21 for template 2
+--checklist id shall be 1 or 2 and increment for each new checklist, so the next checlist will be 3 for as many rows as there are questions in the template
+--answer_id will increment and not reset
+--question_number will be 1 to 47 or 1 to 21 and will reset for each new checklist id based on the number of questions in teh template created
+--role will be true for preparer, false for reviewer
+--answer will be a string and either y,n,na or blank
+--in our first block of two samples each checklist will cycle through response options and we will have an in progress set of checklists.
+--in our second block of two samples (checklists 3 and 4) answers will all be y or na so the checklists can show as complete.
+--in our third block we'll show a block of two checklists with no answers at all which will be a not started example set.
+
+-- reviewer will be 1-6 cont autoincrement of answer_id but role will be false  after the 1-6 for preparer. Pretend the preparer's work is being reviewed in chunks.
+-- # have reviewer answer with a mix showing incomplete which will produce Kanbans
+-- # have reviewer answer with a mix that will show all complete - ready for recipient look
+-- for Preparer
+
+-- across all checklists
+-- remember you can get out from END in terminal using \q
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true; # link to template_questions question
+-- Return the actual question trigering the answer
+-- SELECT template_questions.question FROM template_questions JOIN answers ON template_questions.question_number = answers.question_number WHERE answer='y' AND role=true;
+
+-- and by checklist 1-6
+
+--Checklist 1
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=1;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=1;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=1; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=1; # link to template_questions question
+
+--Checklist 2
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=2;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=2;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=2; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=2; # link to template_questions question
+
+--Checklist 3
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=3;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=3;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=3; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=3; # link to template_questions question
+
+--Checklist 4
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=4;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=4;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=4; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=4; # link to template_questions question
+
+--Checklist 5
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=5;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=5;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=5; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=5; # link to template_questions question
+
+--Checklist 6
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=6;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=6;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=6; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=6; # link to template_questions question
+
+-- SELECT answer FROM answers WHERE answer='y' AND role=true AND checklist_id=1;  # link to template_questions yes_text
+
+-- SELECT checklist.template_name FROM checklist JOIN notifications ON notifications.checklist_id=checklist.checklist_id WHERE checklist.checklist_id=1;
 
 -- across all checklists
 -- remember you can get out from END in terminal using \q
@@ -784,18 +799,6 @@ VALUES
 -- #SELECT answer FROM answers WHERE answer=""# link to template_questions question
 
 -- # 1.0 cont - button actions
-
--- # have preparer enter send to reviewer the 2 complete and mark one for return and one ready.
-INSERT INTO notifications (checklist_id,notifications_id,date_sent_to_review,reviewer_full_name,reviewer_email)
-VALUES
-(3,1,'2020-08-08','Strategic Arts','strategicartscollaborative@gmail.com'),
-(6,2,'2020-08-08','Strategic Arts','strategicartscollaborative@gmail.com');
--- # have reviewer enter returned for corrections
-
--- # have reviewer enter sent to recipient
-INSERT INTO notifications (checklist_id,notifications_id,date_review_completed,date_sent_to_recipient,recipient_full_name,recipient_email)
-VALUES
-(6,3,'2020-08-08','2020-08-09','Relationship Manager','strategicartscollaborative@gmail.com');
 
 -- # 2.0
 
