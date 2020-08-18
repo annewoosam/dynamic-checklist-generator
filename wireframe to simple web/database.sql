@@ -37,7 +37,8 @@ CREATE TABLE checklist (
                      who_for VARCHAR NOT NULL
                      );
 CREATE TABLE answers (
-                     canswer_id SERIAL PRIMARY KEY,
+                     checklist_id INTEGER,
+                     answer_id SERIAL PRIMARY KEY,
                      question_number INTEGER,
                      role BOOLEAN,
                      answer VARCHAR,
@@ -170,40 +171,533 @@ VALUES
 -- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
 -- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
 
+-- VIDEO-TEXT AKA RESOURCE_URL
+-- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
 -- CATEGORIES
+-- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
 
 -- DRIVERS
+-- # SELECT question, help_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, help_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
 
--- YES-TEXT
--- NO-TEXT
--- NOT_APPLICABLE TEXT
--- VIDEO-TEXT
+
 
 -- #2.0 
 
 -- # query for returning Kanban lists, counts, percents
+
+-- FOR KANBAN
+--First check all your text
+-- YES-TEXT
+-- # SELECT question, yes_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, yes_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- NO-TEXT
+-- # SELECT question, no_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, no_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- NOT_APPLICABLE TEXT
+--some items around 34 need to be fixed
+-- # SELECT question, not_applicable_text FROM template_questions WHERE template_name='compliance testing';      --47 rows return
+-- # SELECT question, not_applicable_text FROM template_questions WHERE template_name='client compliance guide'; --21 rows return
+
+-- # have preparer answer with a mix that will show all complete
+
+--then link and check links working by spreading y,n,na and blank in rotation for each template for the first checklist instance of each
+
+--47 mixed answers for template 1; 21 for template 2
+--checklist id shall be 1 or 2 and increment for each new checklist, so the next checlist will be 3 for as many rows as there are questions in the template
+--answer_id will increment and not reset
+--question_number will be 1 to 47 or 1 to 21 and will reset for each new checklist id based on the number of questions in teh template created
+--role will be true for preparer, false for reviewer
+--answer will be a string and either y,n,na or blank
+--in our first block of two samples each checklist will cycle through response options and we will have an in progress set of checklists.
+--in our second block of two samples (checklists 3 and 4) answers will all be y or na so the checklists can show as complete.
+--in our third block we'll show a block of two checklists with no answers at all which will be a not started example set.
+
+-- reviewer will be 1-6 cont autoincrement of answer_id but role will be false  after the 1-6 for preparer. Pretend the preparer's work is being reviewed in chunks.
+-- # have reviewer answer with a mix showing incomplete which will produce Kanbans
+-- # have reviewer answer with a mix that will show all complete - ready for recipient look
+
+
+INSERT INTO answers (checklist_id, answer_id, question_number, role, answer)
+VALUES
+(1,1,1,true,'y'),
+(1,2,2,true,'n'),
+(1,3,3,true,'na'),
+(1,4,4,true,''),
+(1,5,5,true,'y'),
+(1,6,6,true,'n'),
+(1,7,7,true,'na'),
+(1,8,8,true,''),
+(1,9,9,true,'y'),
+(1,10,10,true,'n'),
+(1,11,11,true,'na'),
+(1,12,12,true,''),
+(1,13,13,true,'y'),
+(1,14,14,true,'n'),
+(1,15,15,true,'na'),
+(1,16,16,true,''),
+(1,17,17,true,'y'),
+(1,18,18,true,'n'),
+(1,19,19,true,'na'),
+(1,20,20,true,''),
+(1,21,21,true,'y'),
+(1,22,22,true,'n'),
+(1,23,23,true,'na'),
+(1,24,24,true,''),
+(1,25,25,true,'y'),
+(1,26,26,true,'n'),
+(1,27,27,true,'na'),
+(1,28,28,true,''),
+(1,29,29,true,'y'),
+(1,30,30,true,'n'),
+(1,31,31,true,'na'),
+(1,32,32,true,''),
+(1,33,33,true,'y'),
+(1,34,34,true,'n'),
+(1,35,35,true,'na'),
+(1,36,36,true,''),
+(1,37,37,true,'y'),
+(1,38,38,true,'n'),
+(1,39,39,true,'na'),
+(1,40,40,true,''),
+(1,41,41,true,'y'),
+(1,42,42,true,'n'),
+(1,43,43,true,'na'),
+(1,44,44,true,''),
+(1,45,45,true,'y'),
+(1,46,46,true,'n'),
+(1,47,47,true,'na'),
+(2,48,1,true,''),
+(2,49,2,true,'y'),
+(2,50,3,true,'n'),
+(2,51,4,true,'na'),
+(2,52,5,true,''),
+(2,53,6,true,'y'),
+(2,54,7,true,'n'),
+(2,55,8,true,'na'),
+(2,56,9,true,''),
+(2,57,10,true,'y'),
+(2,58,11,true,'n'),
+(2,59,12,true,'na'),
+(2,60,13,true,''),
+(2,61,14,true,'y'),
+(2,62,15,true,'n'),
+(2,63,16,true,'na'),
+(2,64,17,true,'y'),
+(2,65,18,true,'n'),
+(2,66,19,true,'na'),
+(2,67,20,true,''),
+(2,68,21,true,'y'),
+(3,69,1,true,'y'),
+(3,70,2,true,'y'),
+(3,71,3,true,'y'),
+(3,72,4,true,'y'),
+(3,73,5,true,'y'),
+(3,74,6,true,'y'),
+(3,75,7,true,'y'),
+(3,76,8,true,'y'),
+(3,77,9,true,'y'),
+(3,78,10,true,'y'),
+(3,79,11,true,'y'),
+(3,80,12,true,'y'),
+(3,81,13,true,'y'),
+(3,82,14,true,'y'),
+(3,83,15,true,'y'),
+(3,84,16,true,'y'),
+(3,85,17,true,'y'),
+(3,86,18,true,'y'),
+(3,87,19,true,'y'),
+(3,88,20,true,'y'),
+(3,89,21,true,'y'),
+(3,90,22,true,'y'),
+(3,91,23,true,'y'),
+(3,92,24,true,'y'),
+(3,93,25,true,'y'),
+(3,94,26,true,'y'),
+(3,95,27,true,'y'),
+(3,96,28,true,'y'),
+(3,97,29,true,'y'),
+(3,98,30,true,'y'),
+(3,99,31,true,'y'),
+(3,100,32,true,'y'),
+(3,101,33,true,'y'),
+(3,102,34,true,'y'),
+(3,103,35,true,'y'),
+(3,104,36,true,'y'),
+(3,105,37,true,'y'),
+(3,106,38,true,'y'),
+(3,107,39,true,'y'),
+(3,108,40,true,'y'),
+(3,109,41,true,'y'),
+(3,110,42,true,'y'),
+(3,111,43,true,'y'),
+(3,112,44,true,'y'),
+(3,113,45,true,'y'),
+(3,114,46,true,'y'),
+(3,115,47,true,'y'),
+(4,116,1,true,'y'),
+(4,117,2,true,'y'),
+(4,118,3,true,'y'),
+(4,119,4,true,'y'),
+(4,120,5,true,'y'),
+(4,121,6,true,'y'),
+(4,122,7,true,'y'),
+(4,123,8,true,'y'),
+(4,124,9,true,'y'),
+(4,125,10,true,'y'),
+(4,126,11,true,'y'),
+(4,127,12,true,'y'),
+(4,128,13,true,'y'),
+(4,129,14,true,'y'),
+(4,130,15,true,'y'),
+(4,131,16,true,'y'),
+(4,132,17,true,'y'),
+(4,133,18,true,'y'),
+(4,134,19,true,'y'),
+(4,135,20,true,'y'),
+(4,136,21,true,'y'),
+(5,137,1,true,''),
+(5,138,2,true,''),
+(5,139,3,true,''),
+(5,140,4,true,''),
+(5,141,5,true,''),
+(5,142,6,true,''),
+(5,143,7,true,''),
+(5,144,8,true,''),
+(5,145,9,true,''),
+(5,146,10,true,''),
+(5,147,11,true,''),
+(5,148,12,true,''),
+(5,149,13,true,''),
+(5,150,14,true,''),
+(5,151,15,true,''),
+(5,152,16,true,''),
+(5,153,17,true,''),
+(5,154,18,true,''),
+(5,155,19,true,''),
+(5,156,20,true,''),
+(5,157,21,true,''),
+(5,158,22,true,''),
+(5,159,23,true,''),
+(5,160,24,true,''),
+(5,161,25,true,''),
+(5,162,26,true,''),
+(5,163,27,true,''),
+(5,164,28,true,''),
+(5,165,29,true,''),
+(5,166,30,true,''),
+(5,167,31,true,''),
+(5,168,32,true,''),
+(5,169,33,true,''),
+(5,170,34,true,''),
+(5,171,35,true,''),
+(5,172,36,true,''),
+(5,173,37,true,''),
+(5,174,38,true,''),
+(5,175,39,true,''),
+(5,176,40,true,''),
+(5,177,41,true,''),
+(5,178,42,true,''),
+(5,179,43,true,''),
+(5,180,44,true,''),
+(5,181,45,true,''),
+(5,182,46,true,''),
+(5,183,47,true,''),
+(6,184,1,true,''),
+(6,185,2,true,''),
+(6,186,3,true,''),
+(6,187,4,true,''),
+(6,188,5,true,''),
+(6,189,6,true,''),
+(6,190,7,true,''),
+(6,191,8,true,''),
+(6,192,9,true,''),
+(6,193,10,true,''),
+(6,194,11,true,''),
+(6,195,12,true,''),
+(6,196,13,true,''),
+(6,197,14,true,''),
+(6,198,15,true,''),
+(6,199,16,true,''),
+(6,200,17,true,''),
+(6,201,18,true,''),
+(6,202,19,true,''),
+(6,203,20,true,''),
+(6,204,21,true,'');
+
+-- for Preparer
+-- across all checklists
+-- remember you can get out from END in terminal using \q
+
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true; # link to template_questions question
+
+
+-- and by checklist 1-6
+--Checklist 1
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=1;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=1;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=1; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=1; # link to template_questions question
+--Checklist 2
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=2;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=2;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=2; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=2; # link to template_questions question
+--Checklist 3
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=3;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=3;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=3; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=3; # link to template_questions question
+--Checklist 4
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=4;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=4;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=4; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=4; # link to template_questions question
+--Checklist 5
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=5;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=5;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=5; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=5; # link to template_questions question
+--Checklist 6
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='y' AND role=true AND checklist_id=6;  # link to template_questions yes_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='n' AND role=true AND checklist_id=6;  # link to template_questions no_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='na' AND role=true AND checklist_id=6; # link to template_questions not_applicable_text
+-- SELECT checklist_id, question_number, answer FROM answers WHERE answer='' AND role=true AND checklist_id=6; # link to template_questions question
+
+--REVIEWER DATA
+
+INSERT INTO answers (checklist_id, answer_id, question_number, role, answer)
+VALUES
+(1,205,1,false,'y'),
+(1,206,2,false,'n'),
+(1,207,3,false,'na'),
+(1,208,4,false,''),
+(1,209,5,false,'y'),
+(1,210,6,false,'n'),
+(1,211,7,false,'na'),
+(1,212,8,false,''),
+(1,213,9,false,'y'),
+(1,214,10,false,'n'),
+(1,215,11,false,'na'),
+(1,216,12,false,''),
+(1,217,13,false,'y'),
+(1,218,14,false,'n'),
+(1,219,15,false,'na'),
+(1,220,16,false,''),
+(1,221,17,false,'y'),
+(1,222,18,false,'n'),
+(1,223,19,false,'na'),
+(1,224,20,false,''),
+(1,225,21,false,'y'),
+(1,226,22,false,'n'),
+(1,227,23,false,'na'),
+(1,228,24,false,''),
+(1,229,25,false,'y'),
+(1,230,26,false,'n'),
+(1,231,27,false,'na'),
+(1,232,28,false,''),
+(1,233,29,false,'y'),
+(1,234,30,false,'n'),
+(1,235,31,false,'na'),
+(1,236,32,false,''),
+(1,237,33,false,'y'),
+(1,238,34,false,'n'),
+(1,239,35,false,'na'),
+(1,240,36,false,''),
+(1,241,37,false,'y'),
+(1,242,38,false,'n'),
+(1,243,39,false,'na'),
+(1,244,40,false,''),
+(1,245,41,false,'y'),
+(1,246,42,false,'n'),
+(1,247,43,false,'na'),
+(1,248,44,false,''),
+(1,249,45,false,'y'),
+(1,250,46,false,'n'),
+(1,251,47,false,'na'),
+(2,252,1,false,''),
+(2,253,2,false,'y'),
+(2,254,3,false,'n'),
+(2,255,4,false,'na'),
+(2,256,5,false,''),
+(2,257,6,false,'y'),
+(2,258,7,false,'n'),
+(2,259,8,false,'na'),
+(2,260,9,false,''),
+(2,261,10,false,'y'),
+(2,262,11,false,'n'),
+(2,263,12,false,'na'),
+(2,264,13,false,''),
+(2,265,14,false,'y'),
+(2,266,15,false,'n'),
+(2,267,16,false,'na'),
+(2,268,17,false,'y'),
+(2,269,18,false,'n'),
+(2,270,19,false,'na'),
+(2,271,20,false,''),
+(2,272,21,false,'y'),
+(3,273,1,false,'y'),
+(3,274,2,false,'y'),
+(3,275,3,false,'y'),
+(3,276,4,false,'y'),
+(3,277,5,false,'y'),
+(3,278,6,false,'y'),
+(3,279,7,false,'y'),
+(3,280,8,false,'y'),
+(3,281,9,false,'y'),
+(3,282,10,false,'y'),
+(3,283,11,false,'y'),
+(3,284,12,false,'y'),
+(3,285,13,false,'y'),
+(3,286,14,false,'y'),
+(3,287,15,false,'y'),
+(3,288,16,false,'y'),
+(3,289,17,false,'y'),
+(3,290,18,false,'y'),
+(3,291,19,false,'y'),
+(3,292,20,false,'y'),
+(3,293,21,false,'y'),
+(3,294,22,false,'y'),
+(3,295,23,false,'y'),
+(3,296,24,false,'y'),
+(3,297,25,false,'y'),
+(3,298,26,false,'y'),
+(3,299,27,false,'y'),
+(3,300,28,false,'y'),
+(3,301,29,false,'y'),
+(3,302,30,false,'y'),
+(3,303,31,false,'y'),
+(3,304,32,false,'y'),
+(3,305,33,false,'y'),
+(3,306,34,false,'y'),
+(3,307,35,false,'y'),
+(3,308,36,false,'y'),
+(3,309,37,false,'y'),
+(3,310,38,false,'y'),
+(3,311,39,false,'y'),
+(3,312,40,false,'y'),
+(3,313,41,false,'y'),
+(3,314,42,false,'y'),
+(3,315,43,false,'y'),
+(3,316,44,false,'y'),
+(3,317,45,false,'y'),
+(3,318,46,false,'y'),
+(3,319,47,false,'y'),
+(4,320,1,false,'y'),
+(4,321,2,false,'y'),
+(4,322,3,false,'y'),
+(4,323,4,false,'y'),
+(4,324,5,false,'y'),
+(4,325,6,false,'y'),
+(4,326,7,false,'y'),
+(4,327,8,false,'y'),
+(4,328,9,false,'y'),
+(4,329,10,false,'y'),
+(4,330,11,false,'y'),
+(4,331,12,false,'y'),
+(4,332,13,false,'y'),
+(4,333,14,false,'y'),
+(4,334,15,false,'y'),
+(4,335,16,false,'y'),
+(4,336,17,false,'y'),
+(4,337,18,false,'y'),
+(4,338,19,false,'y'),
+(4,339,20,false,'y'),
+(4,340,21,false,'y'),
+(5,341,1,false,''),
+(5,342,2,false,''),
+(5,343,3,false,''),
+(5,344,4,false,''),
+(5,345,5,false,''),
+(5,346,6,false,''),
+(5,347,7,false,''),
+(5,348,8,false,''),
+(5,349,9,false,''),
+(5,350,10,false,''),
+(5,351,11,false,''),
+(5,352,12,false,''),
+(5,353,13,false,''),
+(5,354,14,false,''),
+(5,355,15,false,''),
+(5,356,16,false,''),
+(5,357,17,false,''),
+(5,358,18,false,''),
+(5,359,19,false,''),
+(5,360,20,false,''),
+(5,361,21,false,''),
+(5,362,22,false,''),
+(5,363,23,false,''),
+(5,364,24,false,''),
+(5,365,25,false,''),
+(5,366,26,false,''),
+(5,367,27,false,''),
+(5,368,28,false,''),
+(5,369,29,false,''),
+(5,370,30,false,''),
+(5,371,31,false,''),
+(5,372,32,false,''),
+(5,373,33,false,''),
+(5,374,34,false,''),
+(5,375,35,false,''),
+(5,376,36,false,''),
+(5,377,37,false,''),
+(5,378,38,false,''),
+(5,379,39,false,''),
+(5,380,40,false,''),
+(5,381,41,false,''),
+(5,382,42,false,''),
+(5,383,43,false,''),
+(5,384,44,false,''),
+(5,385,45,false,''),
+(5,386,46,false,''),
+(5,387,47,false,''),
+(6,388,1,false,''),
+(6,389,2,false,''),
+(6,390,3,false,''),
+(6,391,4,false,''),
+(6,392,5,false,''),
+(6,393,6,false,''),
+(6,394,7,false,''),
+(6,395,8,false,''),
+(6,396,9,false,''),
+(6,397,10,false,''),
+(6,398,11,false,''),
+(6,399,12,false,''),
+(6,400,13,false,''),
+(6,401,14,false,''),
+(6,402,15,false,''),
+(6,403,16,false,''),
+(6,404,17,false,''),
+(6,405,18,false,''),
+(6,406,19,false,''),
+(6,407,20,false,''),
+(6,408,21,false,'');
+-- for reviewer
 
 -- #SELECT answer FROM answers WHERE answer="y" # link to template_questions yes_text
 -- #SELECT answer FROM answers WHERE answer="n" # link to template_questions no_text
 -- #SELECT answer FROM answers WHERE answer="n/a"# link to template_questions not_applicable_text
 -- #SELECT answer FROM answers WHERE answer=""# link to template_questions question
 
--- # have preparer answer with a mix that will show all complete
+-- # 1.0 cont - button actions
 
--- # query for returning Kanban lists, counts, percents - ready for review look
-
--- # 1.0
 -- # have preparer enter send to reviewer the 2 complete and mark one for return and one ready.
-
--- # have reviewer answer with a mix showing incomplete which will produce Kanbans
 
 -- # have reviewer enter returned for corrections
 
--- # have reviewer answer with a mix that will show all complete - ready for recipient look
-
 -- # have reviewer enter sent to recipient
 
+
 -- # 2.0
+-- # query for returning Kanban lists, counts, percents - ready for review look
 -- # reviewer Kanbans
 
 -- # 3.0
