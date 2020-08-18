@@ -304,7 +304,7 @@
 "category":"TRUEUP",
 "primary_driver": false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Download an excel or csv file of the activity from the recordkeeping on a payroll basis and obtain the same in excel or csv if possible from the trust(custodian). Use vlookup to identify any errors. If needed use printing reports in 1/2 timeframes to narrow down the timeframe for any variances so you can research transactions causing."
 },
 {
 "template_name":"compliance testing",
@@ -315,7 +315,7 @@
 "category":"CLIENTRESPONSES",
 "primary_driver":true,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"If not, follow-up with the relationship manager every two days. Response time can easily delay testing two weeks or more when not frequently managed."
 },
 {
 "template_name":"compliance testing",
@@ -326,7 +326,7 @@
 "category":"CLIENTRESPONSES",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Enter the responses as soon as possible."
 },
 {
 "template_name":"compliance testing",
@@ -337,7 +337,7 @@
 "category":"REGENERATE",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Regenerate all reports and re-reconcile all worksheets as soon as possible so that the package can be sent into review."
 },
 {
 "template_name":"compliance testing",
@@ -348,7 +348,7 @@
 "category":"TITLEPAGE",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Not all plans/blocks require title pages. Some may require branding."
 },
 {
 "template_name":"compliance testing",
@@ -359,7 +359,7 @@
 "category":"TABLEOFCONTENTS",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Not all plans/blocks require a table of contents."
 },
 {
 "template_name":"compliance testing",
@@ -370,7 +370,7 @@
 "category":"RESULTS",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Use the results summary format that applies to the plan/block you are working on."
 },
 {
 "template_name":"compliance testing",
@@ -381,7 +381,7 @@
 "category":"ADPACP",
 "primary_driver": false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"The ADP or ACP tests may be irrelevant if the plan had no deferrals or match funded or as a source."
 },
 {
 "template_name":"compliance testing",
@@ -392,7 +392,7 @@
 "category":"ADPACP",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":"",
+"help_text":"The catch-up contribution may be irrelevant if no one was over 50 during the plan year being tested or the plan did not have deferrals. Special entries to calculate the catch-up amounts need to be made for off-calendar plans.",
 }
 {
 "template_name":"compliance testing",
@@ -403,7 +403,7 @@
 "category":"ANNUALADDITIONS",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"The annual additions test is also known as the 415 test and alows for contribution no greater than the amount stated by law for the year involved or 100% of compensation, whichever is least."
 },
 {
 "template_name":"compliance testing",
@@ -414,7 +414,7 @@
 "category":"PROFITSHARING",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"If the plan is not funding Profit Sharing or a Nonelective contribution or the contribution is integrated or a flat percentage of compensation or based on a nondiscriminatory age or service formula the test does not need to be generated."
 },
 {
 "template_name":"compliance testing",
@@ -425,7 +425,7 @@
 "category":"K1",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"The budget report will show the reductions for FICA and contributions to rank and file employees and their impact on how much the sole proprietors/partners can contribute when these amounts are factored in."
 },
 {
 "template_name":"compliance testing",
@@ -436,7 +436,7 @@
 "category":"414S",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"414(s) tests are rarely run but become neccessary when a plan makes contributions based on excluded compensation other than those in the 125 plan and reimbursements and compensation earned after entering the plan. Excluding commissions and bonuses will trigger the test."
 },
 {
 "template_name":"compliance testing",
@@ -447,7 +447,7 @@
 "category":"FILES",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"All files should be saved in teh appropriate folders. Use an archive folder if you are unsure whether you might need to revert back to an older version of testing then delete the folder when the approved files have been delivered to the recipient."
 },
 {
 "template_name":"compliance testing",
@@ -458,7 +458,7 @@
 "category":"OFFCALENDAR",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Obtain the necessary contribution amounts per person per source for 3 periods - 1/1 to the plan year end in the prior year; the first day of the plan year to 12/31 of the plan year end in the prior year. 1/1 of the current year to the plan year end."
 },
 {
 "template_name":"compliance testing",
@@ -469,7 +469,7 @@
 "category":"PLANTERMINATION",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"If the plan is terminating you will need to update the vesting to 100% for all participants. When the termination rate is 20%+ there may be a need to vest all partipants terminated that year 100% Cases where 20%+ of employees have been terminated during the year should be referred to consulting."
 },
 {
 "template_name":"compliance testing",
@@ -480,7 +480,7 @@
 "category":"SHORTPLANYEAR",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Use a ratio to prorate hours based on how much of the plan year lapsed from the beginning of the plan year to the end of the plan year based on the termination date adopted in the signed amendment."
 },
 {
 "template_name":"compliance testing",
@@ -491,7 +491,7 @@
 "category":"TRACKING",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Tracking databases could range from spreadsheets to customer relationship management software and might include a mix. Make sure you unerstand what tracking is used and under what circumstances. For example, all plans might be tracked in a database but only some on a spreadsheet - perhaps only those being billed for test failures, consulting issues, profit sharing calculations or special projects such as mid-year testing and projections, late deferrals or missed deferral opportunities."
 },
 {
 "template_name":"compliance testing",
@@ -502,7 +502,7 @@
 "category":"LATEDEFERRALS",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Late deferrals are generaly flagged by clients in questionnaires but may also appear as reconciling items when the trust accounting is performed."
 },
 {
 "template_name":"compliance testing",
@@ -513,12 +513,12 @@
 "category":"GOVERNMENTFORMS",
 "primary_driver":false,
 "resource_url":"https://www.youtube.com",
-"help_text":""
+"help_text":"Know what processes need to be logged to get the government forms generated, reviewed and sent to the client for signature."
 },
 // second test checklist
 {
 "template_name":"client compliance guide",
-"question":"Is your file organized with the same top row as the initial file downloaded?",
+"question":"1. Is your file organized with the same top row as the initial file downloaded?",
 "yes_text":"Headers fine.",
 "no_text":"Fix headers.",
 "not_applicable_text":"We assumed headers don't apply to your file. It is a custom file. This will likely slow down processing because the file will need to be manually formatted instead fo automatically processed.",
@@ -529,7 +529,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Apply a filter across the rows in the original template. When you filter social security numbers are there any blanks?",
+"question":"2. Apply a filter across the rows in the original template. When you filter social security numbers are there any blanks?",
 "yes_text":"Social Security Numbers fine.",
 "no_text":"Fix social security numbers.",
 "not_applicable_text":"You answered N/A. We can use employee ID numbers to load a file when social security numbers are not available. All employees must have employee IDs in order to link their information from year to year and avoid confusion when employees have similar names.",
@@ -540,7 +540,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"When you filter dates of birth are there any blanks?",
+"question":"3. When you filter dates of birth are there any blanks?",
 "yes_text":"Dates of Birth Fine.",
 "no_text":"Fix Dates of Birth.",
 "not_applicable_text":"Warning! All files should have dates of birth.",
@@ -551,7 +551,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"When you filter dates of birth are there any for persons under 18?",
+"question":"4. When you filter dates of birth are there any for persons under 18?",
 "yes_text":"Dates of birth for young employees are correct.",
 "no_text":"Fix dates of birth for employees that make them younger than they are.",
 "not_applicable_text":"No employees are under 18.",
@@ -562,7 +562,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"When you filter dates of birth are there any for persons over 80 who should not be?",
+"question":"5. When you filter dates of birth are there any for persons over 80 who should not be?",
 "yes_text":"Retiree dates of hire fine.",
 "no_text":"Fix dates of birth for retiree hires.",
 "not_applicable_text":"There are no retiree age hires.",
@@ -573,7 +573,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"When you filter dates of hire are there any blanks?",
+"question":"6. When you filter dates of hire are there any blanks?",
 "yes_text":"Dates of Hire fine.",
 "no_text":"Fix dates of hire.",
 "not_applicable_text":"All employees must have a valid date of hire. Correct the file and change your answer to Y.",
@@ -583,7 +583,7 @@
 "help_text":"All employees must have a valid date of hire so that we can accurately calculate their eligibility for the plan and entry date, as well as the vesting of their contributions. After testing is complete, the next step in annual administration is government forms filing, which includes the tracking and reporting of the numbers of persons with balances not 100% vested using the Form 8955-A." }
 {
 "template_name":"client compliance guide",
-"question":"Are there any blank dates of rehire for persons who have a termination date prior to this year and received compensation?",
+"question":"7. Are there any blank dates of rehire for persons who have a termination date prior to this year and received compensation?",
 "yes_text":"Dates of Rehire fine.",
 "no_text":"Fix dates of rehire.",
 "not_applicable_text":"Dates of rehire did not apply.",
@@ -594,7 +594,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Are there any termination dates for people before rehire dates?",
+"question":"8. Are there any termination dates for people before rehire dates?",
 "yes_text":"Dates of rehire after termination fine.",
 "no_text":"Fix dates of rehire.",
 "not_applicable_text":"There are no dates of rehire to correct.",
@@ -605,7 +605,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"When you apply a filter do you have percentages in the ownership column that add up to 100% or is not have you explained on tab 2?",
+"question":"9. When you apply a filter do you have percentages in the ownership column that add up to 100% or is not have you explained on tab 2?",
 "yes_text":"Owners identified.",
 "no_text":"Enter owner percentages onto the file.",
 "not_applicable_text":"If there are no owners, note on tab 2.",
@@ -616,7 +616,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Have you placed a Y in the officer column for each officer or explained on tab 2 that there are no officers?",
+"question":"10. Have you placed a Y in the officer column for each officer or explained on tab 2 that there are no officers?",
 "yes_text":"Officers have been marked in the file.",
 "no_text":"Mark officers.",
 "not_applicable_text":"No officers are employees.",
@@ -627,7 +627,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Have you indicated the relationship of all family members for anyone who has a relationship to the owner(s)?",
+"question":"11. Have you indicated the relationship of all family members for anyone who has a relationship to the owner(s)?",
 "yes_text":"Family attribution has been noted in the file, including for persons with the same last names as the owners.",
 "no_text":"Fix family attribution including noting relationship of persons with the same last name as the owners.",
 "not_applicable_text":"There is no ownership in this plan or persons with the same last name as the owners.",
@@ -638,7 +638,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Have you entered a formula for the Match or entered no match on tab 2?",
+"question":"12. Have you entered a formula for the Match or entered no match on tab 2?",
 "yes_text":"Match contributions clarified - either none or for yes, formula and principal class numbers and budget provided.",
 "no_text":"Provide match answer and formula if funding.",
 "not_applicable_text": "Match does not apply.",
@@ -649,7 +649,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Have you entered a formula for Profit Sharing including the class of each person based on how much Profit Sharing they should receive if eligible in the Principal column?",
+"question":"13. Have you entered a formula for Profit Sharing including the class of each person based on how much Profit Sharing they should receive if eligible in the Principal column?",
 "yes_text":"Profit sharing/nonelective contributions clarified - either none or for yes, formula and principal class numbers and budget provided.",
 "no_text":"Provide Profit Sharing formula, and if, each class is its own separate group in the plan document(adoption agreement), add a principal code column to your spreadsheet and enter the group number to use for each eligible individual. On tab 2 identify the target percentage or dollar amount for each group or the plan as a whole.",
 "not_applicable_text":"Profit Sharing or nonelective contributions will not be made for this testing year.",
@@ -660,7 +660,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Excluded Compensation must be excluded in the plan document to be disregarded in calculating the Match/Profit Sharing. Have you confirmed that you did not enter the same amount as the compensation for participants not yet eligible to participate in the plan?",
+"question":"14. Excluded Compensation must be excluded in the plan document to be disregarded in calculating the Match/Profit Sharing. Have you confirmed that you did not enter the same amount as the compensation for participants not yet eligible to participate in the plan?",
 "yes_text":"Excluded compensation provided.",
 "no_text":"Provide excluded compensation.",
 "not_applicable_text":"No excluded compensation is permitted in the plan document(adoption agreement) or the plan can use excluded compensation but chooses not to and is passing all tests and not funding any employer contributions such as a match or profit sharing or nonelective contribution, whether regular or Safe Harbor.",
@@ -671,7 +671,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Excluded Employees must be excluded in the plan document to be disregarded in testing. Have you marked all these employees with a Y?",
+"question":"15. Excluded Employees must be excluded in the plan document to be disregarded in testing. Have you marked all these employees with a Y?",
 "yes_text":"Excluded employees marked - fine.",
 "no_text":"Mark excluded employees.",
 "not_applicable_text":"There were no excluded employees.",
@@ -682,7 +682,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"If your plan transferred to us in the middle of the plan year, did you provide the prior testing results?",
+"question":"16. If your plan transferred to us in the middle of the plan year, did you provide the prior testing results?",
 "yes_text":"Prior testing results provided.",
 "no_text":"Prior testing results need to be provided.",
 "not_applicable_text":"Prior testing results do not need to be provided because the plan was tested at the current provider last year or the plan's first testing year is this year.",
@@ -693,7 +693,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"If your plan transferred to us in the middle of the plan year, did you provide the prior custodians statement of contributions by participant by money type(source)?",
+"question":"17. If your plan transferred to us in the middle of the plan year, did you provide the prior custodians statement of contributions by participant by money type(source)?",
 "yes_text":"Prior contribution data was provided.",
 "no_text":"Provide prior contribution information.",
 "not_applicable_text":"All activity for the testing year was conducted at the same provider. There were no conversions from another provider or outside accounts.",
@@ -704,7 +704,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"If your entity is a Sole Proprietorship or Partnership have you entered Schedule C or Schedule K income on the spreadsheet and provided draft or actual Schedules?",
+"question":"18. If your entity is a Sole Proprietorship or Partnership have you entered Schedule C or Schedule K income on the spreadsheet and provided draft or actual Schedules?",
 "yes_text":"Schedule C or K income entered comepletely on file and draft or final schedules provided.",
 "no_text":"Provide Schedule C or K income and draft or final schedules.",
 "not_applicable_text":"The plan is not a sole proprietorship or a partnership. Therefore Schedule C or K income does not have to be provided.",
@@ -715,7 +715,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Have you identified any Schedule K recipients who are actually receiving income as W-2 income?",
+"question":"19. Have you identified any Schedule K recipients who are actually receiving income as W-2 income?",
 "yes_text":"Schedule K participants receiving such income as W-2 income identified.",
 "no_text":"Identify Schedule K participants receiving income as W-2 and place W-2 amount on census.",
 "not_applicable_text":"Schedule K passing through as W-2 income not applicable.",
@@ -726,7 +726,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Are all participation agreements in place for all participating employers, especially if the sponsor is a partnership or sole proprietorship?",
+"question":"20. Are all participation agreements in place for all participating employers, especially if the sponsor is a partnership or sole proprietorship?",
 "yes_text":"Participation agreements in place for all participating employers.",
 "no_text":"Provide participating agreements or remove money contributed by non-participating employers. Seek advice of consulting.",
 "not_applicable_text":"Participation Agreements not applicable.",
@@ -737,7 +737,7 @@
 }
 {
 "template_name":"client compliance guide",
-"question":"Has all the income for employees been accounted for or have you explained who has not on tab 2?",
+"question":"21. Has all the income for employees been accounted for or have you explained who has not on tab 2?",
 "yes_text":"All income provided. Matches W-3.",
 "no_text":"Add all employees' information so that gross compensation matches W-3.",
 "not_applicable_text":"Please anwer yes or no as to whether all income was provided. The answer cannot be not applicable.",
