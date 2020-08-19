@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta charset="utf-8">
   <title>Creator Dashboard</title>
 
   <!-- Load Bootstrap 4 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <!-- CSS only -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- Load jQuery -->
+  <!-- <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"> 
+       </script> -->
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js">
 
   <!-- Load Font Awesome -->
   <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
   <!-- Load our stylesheet -->
+  <link rel="stylesheet" href="/static/styles.css">
   <style>
     h1 {font-weight: bold;}
     .row > div > div {
@@ -54,15 +63,52 @@
 
 <!-- Code goes here. -->
 <!-- NAV BAR CODE -->
-<nav class="navbar navbar-expand-lg override a:link">
+
+
+
+  <div class="row">
+    <nav class="navbar navbar-expand-lg override a:link">
   <div><a class="nav-link" href="#">My Checklists</a></div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
+        <section id="select-template">
+      <h3>Select ID</h3>
 
+      <p>
+        Select an ID number to view information about a particular template.
+      </p>
 
-  <div class="row">
+      <form id="get-template">
+        <label for="template-id">
+          Select an ID number:
+        </label>
+        <select id="template-id" name="template_id">
+          <option value="">Choose an ID</option>
+          {% for n in range(1, 3) %}
+         <!--  range is plus one from the highest number -->
+            <option value="{{ n }}">{{ n }}</option>
+          {% endfor %}
+        </select>
+        <input type="submit">
+      </form>
+    </section>
+
+    <section id="display-template">
+      <h3>Template Info</h3>
+
+      <dl>
+        <dt>Template Name</dt>
+        <dd id="templatename">Unknown</dd>
+
+        <dt>Created On</dt>
+        <dd id="createdby">Unknown</dd>
+
+        <dt>Created On</dt>
+        <dd id="createdon">Unknown</dd>
+      </dl>
+    </section>
 
     <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
        <div><img src="/static/img/pexels-breakingpic-3243.jpg" class="img">
@@ -204,10 +250,12 @@
       <td>Track your time to plan and live better.</td>
     </tr>
 </table>
+
+
 <!-- You need this in order to use JS-based components in the 
 further study. Leave this at the bottom and code above it. -->
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="/static/ajax.js"></script>
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> Causes problems with ajax
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- The scripts below are from teh current official site, commented out for now. -->

@@ -19,6 +19,26 @@ def connect_to_db(flask_app, db_uri='postgresql:///checklists', echo=True):
 
     print('Connected to the db!')
 
+class Template(db.Model):
+    """A template."""
+    
+    # Master templates established by creators that can be cloned to be checklists for individual clients, employees or personal use.
+    __tablename__ = 'templates'
+
+    template_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    templatename = db.Column(db.String)
+    createdby = db.Column(db.String) #alt Integer, db.ForeignKey('users.user_id')) #creator
+    createdon = db.Column(db.Date)
+    
+
+    # After a creator establishes a template they add the questions and help text so that a preparer can spin off a checklist for whomever they need for whatever time frame.
+    
+    #alt user = db.relationship('User', backref='templates')
+
+    def __repr__(self):
+        return f'<Template template_id={self.template_id} templatename={self.templatename}>'
+
+
 # create user database with  user_id as autoincrementing primary ID;
 # to test quite env and createdb ratings. If allready exists; dropdb ratings then createdb ratings again then resume virtual env
 # In venv
@@ -52,23 +72,7 @@ class User(db.Model):
 
 # create models class
 
-class Template(db.Model):
-    """A template."""
-    
-    # Master templates established by creators that can be cloned to be checklists for individual clients, employees or personal use.
-    __tablename__ = 'templates'
 
-    template_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    template_name = db.Column(db.String)
-    updated_at = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id')) #creator
-
-    # After a creator establishes a template they add the questions and help text so that a preparer can spin off a checklist for whomever they need for whatever time frame.
-    
-    user = db.relationship('User', backref='templates')
-
-    def __repr__(self):
-        return f'<Template template_id={self.templates_id} template_name={self.templates_name}>'
 
 class TemplateQuestions(db.Model):
  
