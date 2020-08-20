@@ -18,36 +18,61 @@ app.jinja_env.undefined = StrictUndefined
 
 
 # created basic homepage route at index
+# @app.route('/')
+# def homepage():
+#     """Show the homepage."""
+
+#     return render_template('index.html')
+
+
+# this works in separate project to push own data through/clone and get to work for pieces/ saved as separtae project databridgeoriginal
+# @app.route('/api/template/<int:template_id>')
+# def get_template(template_id):
+#     """Return a template from the database as JSON."""
+
+#     template = Template.query.get(template_id)
+
+#     if template:
+#         return jsonify({'status': 'success',
+#                         'template_id': template.template_id,
+#                         'templatename': template.templatename,
+#                         'createdby': template.createdby,
+#                         'createdon': template.createdon})
+#     else:
+#         return jsonify({'status': 'error',
+#                         'message': 'No template found with that ID'})
+
+
 @app.route('/')
 def homepage():
-    """Show the homepage."""
+    """View homepage."""
 
-    return render_template('index.html')
+    return render_template('login.html')
 
+@app.route('/register', methods=['POST'])
 
-@app.route('/api/template/<int:template_id>')
-def get_template(template_id):
-    """Return a template from the database as JSON."""
+def register_user():
+    """Create a new user."""
 
-    template = Template.query.get(template_id)
+    email = request.form.get('email')
+    password = request.form.get('password')
 
-    if template:
-        return jsonify({'status': 'success',
-                        'template_id': template.template_id,
-                        'templatename': template.templatename,
-                        'createdby': template.createdby,
-                        'createdon': template.createdon})
+    user = crud.get_user_by_email(email)
+    passwd = crud.get_user_by_password(password)
+
+    if user:
+        
+        if passwd:
+            ('Log-in successful...')
+            return render_template('/homepage.html')
+        else:
+            flash('Please re-enter your password')
+            return render_template('/login.html')
     else:
-        return jsonify({'status': 'error',
-                        'message': 'No template found with that ID'})
-
-
-#     @app.route('/')
-# def homepage():
-#     """View homepage."""
-
-#     return render_template('login.html')
-
+        crud.create_user(email, password)
+        flash('Account created! Please log in.')
+        return render_template('/login.html')
+        
 # @app.route('/users')
 # def all_users():
 #     """View all users."""
@@ -55,31 +80,6 @@ def get_template(template_id):
 #     users = crud.get_users()
 
 #     return render_template('all_users.html', users=users)
-
-# @app.route('/register', methods=['POST'])
-
-# def register_user():
-#     """Create a new user."""
-
-#     email = request.form.get('email')
-#     password = request.form.get('password')
-
-#     user = crud.get_user_by_email(email)
-#     passwd = crud.get_user_by_password(password)
-
-#     if user:
-        
-#         if passwd:
-#             ('Log-in successful...')
-#             return render_template('/homepage.html')
-#         else:
-#             flash('Please re-enter your password')
-#             return render_template('/login.html')
-#     else:
-#         crud.create_user(email, password)
-#         flash('Account created! Please log in.')
-#         return render_template('/login.html')
-
 # @app.route('/users/<user_id>')
 # def user_details(user_id):
 #     """View all users."""

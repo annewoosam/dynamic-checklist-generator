@@ -5,40 +5,6 @@ import datetime
 
 db = SQLAlchemy()
 
-
-# Replace this with your code!
-
-
-def connect_to_db(flask_app, db_uri='postgresql:///checklists', echo=True):
-    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
-    flask_app.config['SQLALCHEMY_ECHO'] = echo
-    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    db.app = flask_app
-    db.init_app(flask_app)
-
-    print('Connected to the db!')
-
-class Template(db.Model):
-    """A template."""
-    
-    # Master templates established by creators that can be cloned to be checklists for individual clients, employees or personal use.
-    __tablename__ = 'templates'
-
-    template_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    templatename = db.Column(db.String)
-    createdby = db.Column(db.String) #alt Integer, db.ForeignKey('users.user_id')) #creator
-    createdon = db.Column(db.Date)
-    
-
-    # After a creator establishes a template they add the questions and help text so that a preparer can spin off a checklist for whomever they need for whatever time frame.
-    
-    #alt user = db.relationship('User', backref='templates')
-
-    def __repr__(self):
-        return f'<Template template_id={self.template_id} templatename={self.templatename}>'
-
-
 # create user database with  user_id as autoincrementing primary ID;
 # to test quite env and createdb ratings. If allready exists; dropdb ratings then createdb ratings again then resume virtual env
 # In venv
@@ -63,112 +29,142 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
-    user_name = db.Column(db.String)
-    user_type = db.Column(db.String)
- # ratings = a list of Rating objects
+    user_full_name = db.Column(db.String)
+    # user_type = db.Column(db.String) - the user type should not be specified if you want people to be able to have multiple roles
+    
+    templates = db.relationship('Template')
+    preparerchecklist = db.relationship('Checklist', foreign_keys="Checklist.preparer_id")
+    reviewerchecklist = db.relationship('Checklist', foreign_keys="Checklist.reviewer_id")
+    
+    # the docs for the relationships are SQLAlchemy multiple join paths
+    # the use of templates plural is intentional as there are many templates that can be connected to a user
+    # Template is the class
+    # The backref is only needed when you want to say the relationship goes both ways without having to state
+    # on both tables.
+    # However, saving a line causes a lot of scrolling to identify relationships so backrefs are discouraged.
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} email={self.user_email}>'
-
-# create models class
+        return f'<User user_id={self.user_id} user_full_name={self.user_full_name}>'
 
 
+class Template(db.Model):
+    """A template."""
+    
+    # Master templates established by creators that can be cloned to be checklists for individual clients, employees or personal use.
+    __tablename__ = 'templates'
 
-class TemplateQuestions(db.Model):
+    template_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    templatename = db.Column(db.String)
+    createdby = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    createdon = db.Column(db.Date)
+
+    creator=db.relationship('User')
+    template_questions=db.relationship('TemplateQuestion')
+    # After a creator establishes a template they add the questions and help text so that a preparer can spin off a checklist for whomever they need for whatever time frame.
+    # For the template questions we use template_questions with an s for the many questions that belong to one template.
+    # Class names should really not be plural because it creates confusion.
+    # alt user = db.relationship('User', backref='templates')
+
+    def __repr__(self):
+        return f'<Template template_id={self.template_id} templatename={self.templatename}>'
+
+class TemplateQuestion(db.Model):
  
     """A template question and its features are added one by one by teh creator until finished. Sample templates are in the templates.json file that can be used to seed a demo database."""
  
     __tablename__ = 'template_questions'
     # Text rather than String is for textarea inputs
-    template_question_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    question_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     template_id = db.Column(db.Integer,  db.ForeignKey('templates.template_id'))
-    template_name = db.Column(db.String)
     question_number = db.Column(db.Integer)
     question = db.Column(db.Text)
     yes_text = db.Column(db.Text)
     no_text = db.Column(db.Text)
     not_applicable_text = db.Column(db.Text)
-    # when an answer is skipped the question will be reprinted for the preparer
+    # when an answer is skipped the question will be reprinted for the preparer in Sprint 2
     help_text = db.Column(db.Text)
     resource_url = db.Column(db.String) # input category will be URL. Name resource allows linking of video or any web-resource.
     category = db.Column(db.String)
     primary_driver = db. Column(db.Boolean) # when a preparer enters NA for this any item with the same category will be switched to NA
     # we still want to print these sub-questions so other viewers understand that the items wewre not dropped in error.
 
-    templates = db.relationship('Templates', backref='template_questions')
+    template = db.relationship('Template')
+    # we must use template singular and Template singular because 1 templatequestion should have a single relationship to one template.
+    
+    #checklists=db.relationship('Checklist')
+    
+    # by contrast a template question may appear on more than one checklist so we use checklists plural
+    
+    answers = db.relationship('Answer') # question will have many answers but we will filter to a specific checklist when displaying
+    
     def __repr__(self):
-        return f'<TemplateQuestions template_questions_id={self.template_question_id} template_questions={self.question}>'
+        return f'<TemplateQuestions question_id={self.question_id} template_questions={self.question}>'
 
 class Checklist(db.Model):
     
     """Once a template is created it may have many questions."""
     
-    __tablename__ = 'checklist'
-    checklist_id=db.Column(db.Integer, db.ForeignKey('corrections_required'), autoincrement=True, primary_key=True) 
-    preparer_id = db.Column(db.Integer) # from login on save via create checklist fromn template click
-    preparer_full_name = db.Column(db.String) # from login on save via create checklist fromn template click or if not in system added to user on save
+    __tablename__ = 'checklists'
+    checklist_id=db.Column(db.Integer, autoincrement=True, primary_key=True) 
+    template_id = db.Column(db.Integer, db.ForeignKey('templates.template_id')) # chosen by clicking on appropriate template link
+    checklist_who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
+    checklist_time_frame = db.Column(db.String) # such as 01/2020, 2020, Spring 2020, Q1 2020
+    preparer_id = db.Column(db.Integer, db.ForeignKey('users.user_id')) # from login on save via create checklist fromn template click
+    reviewer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    date_sent_to_review = db.Column(db.DateTime) # populated by on-click event
+    date_review_completed = db.Column(db.DateTime) # reviewer/populated by on-cick event
     # Will know e-mail and should populate user_name/update. Each checklist has a preparer whose name must
     # appear on reports and must be able to receive notifications.
-    template_name = db.Column(db.String, db.ForeignKey('template_questions.template_name')) # chosen by clicking on appropriate template link
     # provided when preparer clones checklist
-    checklist_who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
-    
-    checklist_time_frame = db.Column(db.String) # such as 01/2020, 2020, Spring 2020, Q1 2020
-
-   # once above provided, question data populated by preparer click event
-
-    question_number = db.Column(db.Integer)
-    question = db.Column(db.Text)
-    help_text = db.Column(db.Text)
-    resource_url = db.Column(db.String) # input category will be URL. Name resource allows linking of video or any web-resource.
-    category = db.Column(db.String)
-    primary_driver = db. Column(db.Boolean) 
-  
-  # preparer responsible for
-    preparer_answer = db.Column(db.String) #//yes/no/na/skipped default
-    preparer_time_spent = db.Column(db.Integer)
-    preparer_comment = db.Column(db.Text)
-    reviewer_full_name = db.Column(db.String) # must ADD. May know e-mail and should populate user_name/update. Each checklist has a reviewer whose name must
-    reviewer_email = db.Column(db.String)
-    reviewer_id = db.Column(db.Integer)
-    date_sent_to_review = db.Column(db.DateTime) # populated by on-click event
-    reviewer_comment = db.Column(db.Text)
     # appear on reports and must be able to receive notifications. If does not exist, need to create with a default password.
-    
     # reviewer responsible for
-    reviewer_answer = db.Column(db.String) #//yes/no/na/skipped default
-    reviewer_time_spent = db.Column(db.Integer)
     # populated by reviewer click events
-    date_review_completed = db.Column(db.DateTime) # reviewer/populated by on-cick event
-    recipient_full_name= db.Column(db.String) # May know e-mail. Does not need to add password. Each checklist has a recipient whose name must
-    # appear on reports and must be able to receive notifications. However, the recipient does not need to access the checklist site.
-    recipient_email = db.Column(db.String)
-    date_sent_to_recipient = db.Column(db.DateTime) # reviewer/ populated by on-click event
-
-    # in sum, added slots for preparer_name, reviewer_name and recipient_name which will feed back to Users.
-
+    # in sum, added slots for preparer_name, reviewer_name which will feed back to Users.
     # checklists = a list of checklist objects
-    templates_questions = db.relationship('TemplatesQuestions', backref='template_name')
-    checklist = db.relationship('CorrectionsRequiredAtAnyPoint', backref='checklist_id')
+
+    template = db.relationship('Template')
+    preparer = db.relationship('User', foreign_keys=[preparer_id])
+    reviewer = db.relationship('User', foreign_keys=[reviewer_id])
+    answers = db.relationship('Answer')
+
+    #(link through relationship to answers: answer, time-spent, comments by either preparer or reviewer role)
+
     def __repr__(self):
         return f'<Checklist checklist_id={self.checklist_id} checklist_name={self.checklist_name}>'
 
-class CorrectionsRequiredAtAnyPoint(db.Model):
+class Answer(db.Model):
+    """Data model for an answer."""
 
-    """A checklist item's preparer responses. Comments only not required"""
- 
-    __tablename__ = 'corrections_required'
+    __tablename__ = 'answers'
 
-    corrections_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    checklist_id = db.Column(db.Integer)
-    question_id = db.Column(db.Integer)
-    reviewer_answer = db.column(db.String) # dropdown restricted to y, n, na, blank
-    last_saved_at = db.column(db.DateTime)
-       
-    checklist = db.relationship('Checklists', backref='checklist_id')
+    answer_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    checklist_id = db.Column(db.Integer, db.ForeignKey('checklists.checklist_id'), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('template_questions.question_id'), nullable=False)
+    preparer_answer = db.Column(db.String(), nullable=True)
+    preparer_timespent = db.Column(db.Integer, nullable=True)
+    preparer_comment = db.Column(db.String(), nullable=True)
+    reviewer_ready = db.Column(db.Boolean(), nullable=True)
+    reviewer_timespent = db.Column(db.Integer, nullable=True)
+    reviewer_comment = db.Column(db.String(), nullable=True)
+
+    checklist = db.relationship('Checklist')
+    template_question = db.relationship('TemplateQuestion')
+
     def __repr__(self):
-        return f'CorrectionsRequiredAtAnyPoint checklist_id={self.checklist_id} question_id={self.question_id}>'
+        """Provide helpful representation when printing."""
 
+        return f'<answer answer_id={self.answer_id}'
+
+def connect_to_db(flask_app, db_uri='postgresql:///dynamic_checklists_db', echo=True):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print('Connected to the db!')
+    
 if __name__ == '__main__':
     from server import app
 

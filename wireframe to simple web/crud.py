@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, Template, TemplateQuestions, Checklist, CorrectionsRequiredAtAnyPoint, connect_to_db 
+from model import db, User, Template, TemplateQuestion, Checklist, Answer, connect_to_db 
 import datetime
 
 def create_user(email, password):
