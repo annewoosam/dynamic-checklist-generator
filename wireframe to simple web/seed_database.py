@@ -9,21 +9,25 @@ import crud
 import model
 import server
 
-os.system('dropdb checklists')
-os.system('createdb checklists')
+import faker
+from faker import Faker
+fake = Faker()
+
+os.system('dropdb dynamic_checklists_db')
+os.system('createdb dynamic_checklists_db')
 
 model.connect_to_db(server.app)
 model.db.create_all()
 
-# Load movie data from JSON file
+# Load checklist data from JSON file
 with open('data/checklists.json') as f:
     checklist_data = json.loads(f.read())
 
-# Create templates,questions, store them in list so we can use them
+# Create checklists, template, questions and key help items and store them in list so we can use them.
 
 checklists_in_db = []
 for checklist in checklist_data:
-    question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_URL, help_text = (
+    template_name, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_URL, help_text = (
                                    checklist['question'],
                                    checklist['yes_text'],
                                    checklist['no_text'],
@@ -33,7 +37,8 @@ for checklist in checklist_data:
                                    checklist['resource_url'],
                                    checklist['help_text'])
 
-    db_checklist = crud.create_checklist(question,
+    db_checklist = crud.create_checklist(template_name,
+                                 question,
                                  yes_text,
                                  no_text,
                                  not_applicable_text,
@@ -43,10 +48,13 @@ for checklist in checklist_data:
                                  help_text)
     checklist_in_db.append(db_checklist)
 
-# Create 10 users; each user will make 10 ratings
-for n in range(10):
-    user_email = f'user{n}@test.com'  # Voila! A unique email!
-    user_password = 'test'
+# Create 6 users
+# docs on generating random users at https://faker.readthedocs.io/en/master/
+# can fake addresses, internet providers, text and localize so names appear to be from certain country
+for n in range(6):
+    email = fake.email()
+    password= 'test'
+    user_full_name = fake.name()
 
-    user = crud.create_user(user_email, user_password)
+    user = crud.create_user(email, password, user_full_name)
 
