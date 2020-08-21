@@ -3,10 +3,10 @@
 from model import db, User, Template, TemplateQuestion, Checklist, Answer, connect_to_db 
 import datetime
 
-def create_user(email, password):
+def create_user(email, password, user_full_name):
     """Create and return a new user."""
 
-    user = User(email=email, password=password)
+    user = User(email=email, password=password, user_full_name=user_full_name)
 
     db.session.add(user)
     db.session.commit()
@@ -43,13 +43,12 @@ def get_user_by_id(user_id):
 # Functions for creating checklist templates, returning a list of all available checklists and
 # returning a specific checklist by id.
 
-def create_template(user_id, template_id, template_name, updated_at):
+def create_template(template_name, created_by, created_on):
     """Create and return a new template."""
 
-    template = Template(user_id=user_id, #passed by session
-                  template_id=template_id,
-                  template_name=template_name,
-                  updated_at=updated_at)
+    template = Template(template_name=template_name,
+                  created_by=created_by,
+                  created_on=created_on)
 
     db.session.add(template)
     db.session.commit()
@@ -57,15 +56,15 @@ def create_template(user_id, template_id, template_name, updated_at):
     return template
     
 
-# def get_checklists():
-#     """Return all checklists."""
+def get_templates():
+    """Return all checklists."""
 
-#     return Checklists.query.all()
+    return Template.query.all()
  
-# def get_checklist_by_id(checklist_id):
-#     """Return checklist by id."""
+def get_template_by_id(template_id):
+    """Return template by id."""
 
-#     return Checklist.query.get(checklist_id)
+    return Template.query.get(template_id)
 
 # # Functions for adding questions including help items to the checklist
 
