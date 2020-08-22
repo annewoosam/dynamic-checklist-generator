@@ -90,10 +90,10 @@ def get_questions():
 
     return TemplateQuestion.query.all()
  
-# def get_template_question_by_id(template_question_id):
-#      """Return template questions by id."""
+def get_question_by_id(question_id):
+    """Return template by id."""
 
-#     return TemplateQuestion.query.get(template_question_id)
+    return TemplateQuestion.query.get(question_id)
 
 # Functions for creating checklists, returning a list of all available checklists and
 # returning a specific checklist by id.
@@ -117,10 +117,10 @@ def get_checklists():
 
     return Checklist.query.all()
  
-# def get_checklist_by_id(checklist_id):
-#      """Return checklist_items by id."""
+def get_checklist_by_id(checklist_id):
+    """Return checklist by id."""
 
-#     return Checklist.query.get(checklist_id)
+    return Checklist.query.get(checklist_id)
 
 # Functions for creating answers, returning a list of all available answers and
 # returning a specific answers by id.
@@ -147,15 +147,11 @@ def get_answers():
     """Return all checklists."""
 
     return Answer.query.all()
-# def get_answer():
-#      """Return all answers."""
 
-#     return Answer.query.all()
- 
-# def get_answer_by_id(answer_id):
-#      """Return answer_items by id."""
+def get_answer_by_id(answer_id):
+    """Return answer by id."""
 
-#     return Answer.query.get(answer_id)
+    return Answer.query.get(answer_id)
 
 # 2.0 Kanban functionality for preparer
 

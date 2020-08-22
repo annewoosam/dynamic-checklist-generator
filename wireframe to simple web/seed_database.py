@@ -57,7 +57,7 @@ for template in template_data:
 with open('data/template_questions.json') as f:
     template_question_data = json.loads(f.read())
 
-templates_questions_in_db = []
+template_questions_in_db = []
 for template_question in template_question_data:
     template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text = (
                                    template_question['template_id'],
@@ -71,7 +71,7 @@ for template_question in template_question_data:
                                    template_question['resource_url'],
                                    template_question['help_text'])
 
-    db_templates_questions = crud.create_template_question(
+    db_template_questions = crud.create_template_question(
                                  template_id,
                                  question_number,
                                  question,
@@ -82,7 +82,7 @@ for template_question in template_question_data:
                                  primary_driver,
                                  resource_url,
                                  help_text)
-    templates_questions_in_db.append(db_templates_questions)
+    template_questions_in_db.append(db_template_questions)
 
 
 # load sample checklist data

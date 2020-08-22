@@ -16,18 +16,6 @@ from jinja2 import StrictUndefined
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-
-# created basic homepage route at index
-# @app.route('/')
-# def homepage():
-#     """Show the homepage."""
-
-#     return render_template('index.html')
-
-
-# this works in separate project to push own data through/clone and get to work for pieces/ saved as separtae project databridgeoriginal
-
-
 @app.route('/')
 def homepage():
     """View homepage."""
@@ -84,6 +72,16 @@ def all_templates():
 
     return render_template('all_templates.html', templates=templates)
 
+# app route for template details
+@app.route('/templates/<template_id>')
+def show_template(template_id):
+  #Show details on a particular template.
+
+    template = crud.get_template_by_id(template_id)
+
+    return render_template('template_details.html', template=template)
+
+# app route for all checklists
 @app.route('/checklists')
 def all_checklists():
     """View all checklists."""
@@ -92,14 +90,27 @@ def all_checklists():
 
     return render_template('all_checklists.html', checklists=checklists)
 
-@app.route('/questions')
+@app.route('/checklists/<checklist_id>')
+def show_checklist(checklist_id):
+  #Show details on a particular template.
+    checklist = crud.get_checklist_by_id(checklist_id)
 
+    return render_template('checklist_details.html', checklist=checklist)
+
+@app.route('/questions')
 def all_questions():
     """View all questions."""
 
     questions = crud.get_questions()
 
     return render_template('all_questions.html', questions=questions)
+
+@app.route('/questions/<question_id>')
+def show_question(question_id):
+  #Show details on a particular question.
+    question = crud.get_question_by_id(question_id)
+
+    return render_template('question_details.html', question=question)
 
 @app.route('/answers')
 def all_answers():
@@ -109,14 +120,13 @@ def all_answers():
 
     return render_template('all_answers.html', answers=answers)
 
-# app route for template details
-@app.route('/templates/<template_id>')
-def show_template(template_id):
-  #Show details on a particular template.
+@app.route('/answers/<answer_id>')
+def show_answer(answer_id):
+  #Show details on a particular answer.
+    answer = crud.get_answer_by_id(answer_id)
 
-    template = crud.get_template_by_id(template_id)
+    return render_template('answer_details.html', answer=answer)
 
-    return render_template('template_details.html', template=template)
 
 # @app.route('/api/templates/<int:template_id>')
 # def get_template(template_id):
