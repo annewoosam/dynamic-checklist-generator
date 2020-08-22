@@ -31,12 +31,13 @@ for n in range(6):
     user_full_name = fake.name()
 
     user = crud.create_user(email, password, user_full_name)
-    # Load checklist data from JSON file
 
+# Create template, questions, checklist and answer sample data and key help items and store them in list so we can use them.
+
+# load sample template data
 with open('data/templates.json') as f:
     template_data = json.loads(f.read())
 
-# Create checklists, template, questions and key help items and store them in list so we can use them.
 
 templates_in_db = []
 for template in template_data:
@@ -52,7 +53,7 @@ for template in template_data:
     templates_in_db.append(db_template)
 
 
-# change below to template questions
+# load sample data for template questions
 with open('data/template_questions.json') as f:
     template_question_data = json.loads(f.read())
 
@@ -84,4 +85,59 @@ for template_question in template_question_data:
     templates_questions_in_db.append(db_templates_questions)
 
 
+# load sample checklist data
+with open('data/checklists.json') as f:
+    checklist_data = json.loads(f.read())
 
+
+checklists_in_db = []
+for checklist in checklist_data:
+    template_id, who_for, time_frame, preparer_id, reviewer_id, date_sent_to_review, date_review_completed = (
+                                   checklist['template_id'],
+                                   checklist['who_for'],
+                                   checklist['time_frame'],
+                                   checklist['preparer_id'],
+                                   checklist['reviewer_id'],
+                                   checklist['date_sent_to_review'],
+                                   checklist['date_review_completed'])
+
+    db_checklist = crud.create_checklist(template_id,
+                                 who_for,
+                                 time_frame,
+                                 preparer_id,
+                                 reviewer_id,
+                                 date_sent_to_review,
+                                 date_review_completed)
+    
+    checklists_in_db.append(db_checklist)
+
+# load sample answer data
+with open('data/answers.json') as f:
+    answer_data = json.loads(f.read())
+
+
+answers_in_db = []
+for answer in answer_data:
+    checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete = (
+                                   answer['checklist_id'],
+                                   answer['question_id'],
+                                   answer['preparer_answer'],
+                                   answer['preparer_time'],
+                                   answer['preparer_comment'],
+                                   answer['reviewer_ready'],
+                                   answer['reviewer_time'],
+                                   answer['reviewer_comment'],
+                                   answer['complete']
+                                   )
+
+    db_answer = crud.create_answer(checklist_id,
+                                 question_id,
+                                 preparer_answer,
+                                 preparer_time,
+                                 preparer_comment,
+                                 reviewer_ready,
+                                 reviewer_time,
+                                 reviewer_comment,
+                                 complete)
+    
+    answers_in_db.append(db_answer)

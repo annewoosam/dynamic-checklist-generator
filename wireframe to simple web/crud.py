@@ -40,8 +40,8 @@ def get_user_by_id(user_id):
 
     return User.query.get(user_id)
 
-# Functions for creating checklist templates, returning a list of all available checklists and
-# returning a specific checklist by id.
+# Functions for creating templates, returning a list of all available templates and
+# returning a specific template by id.
 
 def create_template(template_name, created_by, created_on):
     """Create and return a new template."""
@@ -55,7 +55,6 @@ def create_template(template_name, created_by, created_on):
 
     return template
     
-
 def get_templates():
     """Return all checklists."""
 
@@ -65,6 +64,9 @@ def get_template_by_id(template_id):
     """Return template by id."""
 
     return Template.query.get(template_id)
+
+# Functions for creating template questions, returning a list of all available template questions and
+# returning a specific template question by id.
 
 def create_template_question(template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text):
     template_question = TemplateQuestion(template_id=template_id,
@@ -83,45 +85,72 @@ def create_template_question(template_id, question_number, question, yes_text, n
 
     return template_question
 
-# def get_template_question():
+# def get_template_questions():
 #      """Return all template questions."""
-
 #     return TemplateQuestion.query.all()
  
 # def get_template_question_by_id(template_question_id):
-#      """Return checklist_items by id."""
+#      """Return template questions by id."""
 
 #     return TemplateQuestion.query.get(template_question_id)
 
-# # Functions for cloning checklist template for preparer, returning a list of all available
-# # checklists by preparer and returning a specific checklist by id for the preparer.
-# # checklist who for, timeframe, cloning of questions from a specific checklist name and id.
+# Functions for creating checklists, returning a list of all available checklists and
+# returning a specific checklist by id.
 
-# def clone_checklist_id_items(checklist_id):
-#     clone_checklist_id_item=Clone_checklist_id_item(question=question,
-#         category=catgeory,
-#         primary_driver=primary_driver,
-#         video_url=video_url,
-#         help_text=help_text)
+def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id, date_sent_to_review, date_review_completed):
+    checklist = Checklist(template_id=template_id,
+                  who_for=who_for,
+                  time_frame=time_frame,
+                  preparer_id=preparer_id,
+                  reviewer_id=reviewer_id,
+                  date_sent_to_review=date_sent_to_review,
+                  date_review_completed=date_review_completed)
 
-#     for clone_checklist_id_item in clone_checklist_id_items:
+    db.session.add(checklist)
+    db.session.commit()
 
-#     db.session.add(clone_checklist_id_item)
-#     db.session.commit()
+    return checklist
 
-#     return clone_checklist_item
+# def get_checklist():
+#      """Return all checklists."""
 
-# def get_cloned_checklist_items():
-#     """Return all checklist items."""
-
-#     return Clone_checklist_id_items.query.all()
+#     return Checklist.query.all()
  
-# def get_cloned_checklist_item_by_id(item_id):
-#     """Return checklist_items by id."""
+# def get_checklist_by_id(checklist_id):
+#      """Return checklist_items by id."""
 
-#     return Clone_checklist_items_id.query.get(checklist_id)    
+#     return Checklist.query.get(checklist_id)
 
-# # Kanban functionality for preparer
+# Functions for creating answers, returning a list of all available answers and
+# returning a specific answers by id.
+
+def create_answer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete):
+    answer = Answer(checklist_id=checklist_id,
+                  question_id=question_id,
+                  preparer_answer=preparer_answer,
+                  preparer_comment=preparer_comment,
+                  preparer_time=preparer_time,
+                  reviewer_ready=reviewer_ready,
+                  reviewer_time=reviewer_time,
+                  reviewer_comment=reviewer_comment,
+                  complete=complete)
+
+    db.session.add(answer)
+    db.session.commit()
+
+    return answer
+
+# def get_answer():
+#      """Return all answers."""
+
+#     return Answer.query.all()
+ 
+# def get_answer_by_id(answer_id):
+#      """Return answer_items by id."""
+
+#     return Answer.query.get(answer_id)
+
+# 2.0 Kanban functionality for preparer
 
 # # Lists
 
@@ -182,6 +211,8 @@ def create_template_question(template_id, question_number, question, yes_text, n
 #     for clone_checklist_id_item in clone_checklist_id_items:
 #         if preparer_answer.lower()=="y":
 #             print (f"Done (count): \n", count((yes_text))
+
+# # Percentages
 
 # def preparer_to_do_percentage():
 #     # preparer answer set to no count divided by total questions in checklist, rounded to the nearest two decimal points.

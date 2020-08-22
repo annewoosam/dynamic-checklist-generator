@@ -146,7 +146,7 @@ class Answer(db.Model):
     preparer_answer = db.Column(db.String(), nullable=True) # answers restricted to y, n, n/a, blank. Yes is Done, No is To Do, N/A is not applicable. 
     preparer_time = db.Column(db.Integer, nullable=True)
     preparer_comment = db.Column(db.String(), nullable=True) # answers restricted to c,r, n/a, blank. C is Corrections Required and R is Ready for Delivery.
-    reviewer_ready = db.Column(db.Boolean, nullable=True)
+    reviewer_ready = db.Column(db.String(), nullable=True)
     reviewer_time = db.Column(db.Integer, nullable=True)
     reviewer_comment = db.Column(db.String(), nullable=True)
     complete = db.Column(db.Boolean, nullable=True)
