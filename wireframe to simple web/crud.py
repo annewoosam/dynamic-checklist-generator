@@ -66,38 +66,37 @@ def get_template_by_id(template_id):
 
     return Template.query.get(template_id)
 
-# # Functions for adding questions including help items to the checklist
+def create_template_question(template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text):
+    template_question = TemplateQuestion(template_id=template_id,
+                  question_number=question_number,
+                  question=question,
+                  yes_text=yes_text,
+                  no_text=no_text,
+                  not_applicable_text=not_applicable_text,
+                  category=category,
+                  primary_driver=primary_driver,
+                  resource_url=resource_url,
+                  help_text=help_text)
 
-# def create_question(question, yes_text, no_text, not_applicable_text, category, primary_driver, video_url, help_text):
-#     """Create and return a question and help features."""
+    db.session.add(template_question)
+    db.session.commit()
 
-#     checklist_item = Checklist(question=question, #passed by session
-#                   yes_text=yes_text,
-#                   no_text=no_text,
-#                   not_applicable_text=not_applicable_text,
-#                   category=category,
-#                   primary_driver=primary_driver,
-#                   video_url=video_url,
-#                   help_text=help_text)
+    return template_question
 
-#     db.session.add(checklist_item)
-#     db.session.commit()
+# def get_template_question():
+#      """Return all template questions."""
 
-#     return checklist_item
-
-# def get_checklist_items():
-#     """Return all checklist items."""
-
-#     return Checklist.query.all()
+#     return TemplateQuestion.query.all()
  
-# def get_checklist_item_by_id(item_id):
-#     """Return checklist_items by id."""
+# def get_template_question_by_id(template_question_id):
+#      """Return checklist_items by id."""
 
-#     return Checklist.query.get(checklist_id)
+#     return TemplateQuestion.query.get(template_question_id)
 
 # # Functions for cloning checklist template for preparer, returning a list of all available
 # # checklists by preparer and returning a specific checklist by id for the preparer.
 # # checklist who for, timeframe, cloning of questions from a specific checklist name and id.
+
 # def clone_checklist_id_items(checklist_id):
 #     clone_checklist_id_item=Clone_checklist_id_item(question=question,
 #         category=catgeory,

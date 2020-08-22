@@ -85,10 +85,12 @@ class TemplateQuestion(db.Model):
     no_text = db.Column(db.Text)
     not_applicable_text = db.Column(db.Text)
     # when an answer is skipped the question will be reprinted for the preparer in Sprint 2
-    help_text = db.Column(db.Text)
-    resource_url = db.Column(db.String) # input category will be URL. Name resource allows linking of video or any web-resource.
     category = db.Column(db.String)
     primary_driver = db. Column(db.Boolean) # when a preparer enters NA for this any item with the same category will be switched to NA
+    resource_url = db.Column(db.String) # input category will be URL. Name resource allows linking of video or any web-resource.
+    help_text = db.Column(db.Text)
+
+
     # we still want to print these sub-questions so other viewers understand that the items wewre not dropped in error.
 
     # relationship notes

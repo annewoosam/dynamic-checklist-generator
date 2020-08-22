@@ -21,6 +21,9 @@ model.db.create_all()
 
 
 # create users before templates
+# Create 6 users
+# docs on generating random users at https://faker.readthedocs.io/en/master/
+# can fake addresses, internet providers, text and localize so names appear to be from certain country
 
 for n in range(6):
     email = fake.email()  # Voila! A unique email!
@@ -50,34 +53,35 @@ for template in template_data:
 
 
 # change below to template questions
+with open('data/template_questions.json') as f:
+    template_question_data = json.loads(f.read())
 
-# templates_in_db = []
-# for template in template_data:
-#     template_id, template_name, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text = (
-#                                    template['template_id'],
-#                                    template['template_name'],
-#                                    template['question'],
-#                                    template['yes_text'],
-#                                    template['no_text'],
-#                                    template['not_applicable_text'],
-#                                    template['category'],
-#                                    template['primary_driver'],
-#                                    template['resource_url'],
-#                                    template['help_text'])
+templates_questions_in_db = []
+for template_question in template_question_data:
+    template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text = (
+                                   template_question['template_id'],
+                                   template_question['question_number'],
+                                   template_question['question'],
+                                   template_question['yes_text'],
+                                   template_question['no_text'],
+                                   template_question['not_applicable_text'],
+                                   template_question['category'],
+                                   template_question['primary_driver'],
+                                   template_question['resource_url'],
+                                   template_question['help_text'])
 
-#     db_template = crud.create_template(
-#                                  template_name,
-#                                  question,
-#                                  yes_text,
-#                                  no_text,
-#                                  not_applicable_text,
-#                                  category,
-#                                  primary_driver,
-#                                  resource_url,
-#                                  help_text)
-#     template_in_db.append(db_template)
-# Create 6 users
-# docs on generating random users at https://faker.readthedocs.io/en/master/
-# can fake addresses, internet providers, text and localize so names appear to be from certain country
+    db_templates_questions = crud.create_template_question(
+                                 template_id,
+                                 question_number,
+                                 question,
+                                 yes_text,
+                                 no_text,
+                                 not_applicable_text,
+                                 category,
+                                 primary_driver,
+                                 resource_url,
+                                 help_text)
+    templates_questions_in_db.append(db_templates_questions)
+
 
 
