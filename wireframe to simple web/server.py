@@ -26,21 +26,6 @@ app.jinja_env.undefined = StrictUndefined
 
 
 # this works in separate project to push own data through/clone and get to work for pieces/ saved as separtae project databridgeoriginal
-# @app.route('/api/template/<int:template_id>')
-# def get_template(template_id):
-#     """Return a template from the database as JSON."""
-
-#     template = Template.query.get(template_id)
-
-#     if template:
-#         return jsonify({'status': 'success',
-#                         'template_id': template.template_id,
-#                         'templatename': template.templatename,
-#                         'createdby': template.createdby,
-#                         'createdon': template.createdon})
-#     else:
-#         return jsonify({'status': 'error',
-#                         'message': 'No template found with that ID'})
 
 
 @app.route('/')
@@ -54,6 +39,7 @@ def homepage():
 def register_user():
     """Create a new user."""
 
+    user_full_name = request.form.get('user_full_name')
     email = request.form.get('email')
     password = request.form.get('password')
 
@@ -69,8 +55,8 @@ def register_user():
             flash('Please re-enter your password')
             return render_template('/login.html')
     else:
-        crud.create_user(email, password)
-        flash('Account created! Please log in.')
+        crud.create_user(email, password,user_full_name)
+        flash('Account created!')
         return render_template('/login.html')
         
 # @app.route('/users')
@@ -80,6 +66,7 @@ def register_user():
 #     users = crud.get_users()
 
 #     return render_template('all_users.html', users=users)
+
 # @app.route('/users/<user_id>')
 # def user_details(user_id):
 #     """View all users."""
@@ -88,24 +75,64 @@ def register_user():
 
 #     return render_template('user_details.html', user=user)
 
-# # app route for all templates
-# @app.route('/templates')
-# def all_templates():
-#     """View all templates."""
+# app route for all templates
+@app.route('/templates')
+def all_templates():
+    """View all templates."""
 
-#     templates = crud.get_templates()
+    templates = crud.get_templates()
 
-#     return render_template('all_templates.html', templates=templates)
+    return render_template('all_templates.html', templates=templates)
 
-# # app route for template questions(details)
-# @app.route('/templates/<template_id>')
-# def show_template_questions(template_id):
-#   #Show question details for a particular template.
+@app.route('/checklists')
+def all_checklists():
+    """View all checklists."""
 
-#     template = crud.get_template_by_id(template_id)
+    checklists = crud.get_checklists()
 
-#     return render_template('template_questions_details.html', template=template)
+    return render_template('all_checklists.html', checklists=checklists)
 
+@app.route('/questions')
+
+def all_questions():
+    """View all questions."""
+
+    questions = crud.get_questions()
+
+    return render_template('all_questions.html', questions=questions)
+
+@app.route('/answers')
+def all_answers():
+    """View all answers."""
+
+    answers = crud.get_answers()
+
+    return render_template('all_answers.html', answers=answers)
+
+# app route for template details
+@app.route('/templates/<template_id>')
+def show_template(template_id):
+  #Show details on a particular template.
+
+    template = crud.get_template_by_id(template_id)
+
+    return render_template('template_details.html', template=template)
+
+# @app.route('/api/templates/<int:template_id>')
+# def get_template(template_id):
+#     """Return a template from the database as JSON."""
+
+#     template = Template.query.get(template_id)
+
+#     if template:
+#         return jsonify({'status': 'success',
+#                         'template_id': template.template_id,
+#                         'templatename': template.templatename,
+#                         'createdby': template.createdby,
+#                         'createdon': template.createdon})
+#     else:
+#         return jsonify({'status': 'error',
+#                         'message': 'No template found with that ID'})
 
 if __name__ == '__main__':
 # added connection to database

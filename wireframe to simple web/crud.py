@@ -56,7 +56,7 @@ def create_template(template_name, created_by, created_on):
     return template
     
 def get_templates():
-    """Return all checklists."""
+    """Return all templates."""
 
     return Template.query.all()
  
@@ -85,9 +85,10 @@ def create_template_question(template_id, question_number, question, yes_text, n
 
     return template_question
 
-# def get_template_questions():
-#      """Return all template questions."""
-#     return TemplateQuestion.query.all()
+def get_questions():
+    """Return all questions."""
+
+    return TemplateQuestion.query.all()
  
 # def get_template_question_by_id(template_question_id):
 #      """Return template questions by id."""
@@ -111,10 +112,10 @@ def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id,
 
     return checklist
 
-# def get_checklist():
-#      """Return all checklists."""
+def get_checklists():
+    """Return all checklists."""
 
-#     return Checklist.query.all()
+    return Checklist.query.all()
  
 # def get_checklist_by_id(checklist_id):
 #      """Return checklist_items by id."""
@@ -123,6 +124,8 @@ def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id,
 
 # Functions for creating answers, returning a list of all available answers and
 # returning a specific answers by id.
+
+
 
 def create_answer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete):
     answer = Answer(checklist_id=checklist_id,
@@ -140,6 +143,10 @@ def create_answer(checklist_id, question_id, preparer_answer, preparer_time, pre
 
     return answer
 
+def get_answers():
+    """Return all checklists."""
+
+    return Answer.query.all()
 # def get_answer():
 #      """Return all answers."""
 

@@ -1,28 +1,15 @@
-<!-- template_question_details.html -->
+<!-- movie_details.html -->
 {% extends 'base.html' %}
 
 {% block title %}{{ template.template_name }} - Details{% endblock %}
 
 {% block body %}
+
 <h1>{{ template.template_name }}</h1>
 
 <p>
-  {{ template_questions.template_question_number }}
+  {{ template.created_on }}
+  {{ template.created_by }}
 </p>
-<p>
-  {{ template_questions.template_question }}
-</p>
-<p>
-  {{ template_questions.help_text }}
-</p>
-<p>
-  {{ template_questions.resource_url }}
-</p>
-<p>
-  {{ template_questions.category }}
-</p>
-<p>
-  {{ template_questions.primary_driver }}
-</p>
-<img src="{{ template_questions.poster_path }}">
+
 {% endblock %}
