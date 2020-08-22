@@ -1,0 +1,12 @@
+[
+	{
+		"key based on model py skipping the primary key":"value that is a string or a date",
+		"key":value that is a number,
+		"created_on":"2020-08-07"
+	},
+    {
+        "key based on model py skipping the primary key":"value that is a string or a date",
+		"key":value that is a number,
+		"key":"value"
+	}
+]
