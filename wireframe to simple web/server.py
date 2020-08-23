@@ -47,30 +47,14 @@ def register_user():
         flash('Account created!')
         return render_template('/login.html')
         
-# @app.route('/users')
-# def all_users():
-#     """View all users."""
-
-#     users = crud.get_users()
-
-#     return render_template('all_users.html', users=users)
-
-# @app.route('/users/<user_id>')
-# def user_details(user_id):
-#     """View all users."""
-
-#     user = crud.get_user_by_id(user_id)
-
-#     return render_template('user_details.html', user=user)
-
 # app route for all templates
 @app.route('/templates')
 def all_templates():
     """View all templates."""
 
     templates = crud.get_templates()
-
-    return render_template('all_templates.html', templates=templates)
+    users=crud.get_users()
+    return render_template('all_templates.html', templates=templates, users=users)
 
 # app route for template details
 @app.route('/templates/<template_id>')
@@ -80,6 +64,20 @@ def show_template(template_id):
     template = crud.get_template_by_id(template_id)
     users=crud.get_users()
     return render_template('template_details.html', template=template, users=users)
+
+@app.route('/createtemplate', methods=['POST'])
+def createtemplate():
+    """Create new template."""
+
+    template_name = request.form.get('template_name')
+    created_by = request.form.get('created_by')
+    created_on = request.form.get('created_on')
+
+    crud.create_template(template_name, created_by, created_on)
+    flash('Template created!')
+    templates = crud.get_templates()
+    users=crud.get_users()
+    return render_template('/all_templates.html', templates=templates, users=users)
 
 @app.route('/questions')
 def all_questions():
@@ -96,33 +94,6 @@ def show_question(question_id):
 
     return render_template('question_details.html', question=question)
     
-@app.route('/createchecklist', methods=['POST'])
-
-def createtemplate():
-    """Create new template."""
-
-    template_name = request.form.get('template_name')
-    created_by = request.form.get('created_by')
-    created_on = request.form.get('created_on')
-
-    crud.create_template(template_name, created_by, created_on)
-    flash('Template created!')
-    templates = crud.get_templates()
-    return render_template('/all_templates.html', templates=templates)
-
-def createchecklist():
-    """Create new checklist."""
-
-    preparer = request.form.get('preparer')
-    reviewer = request.form.get('reviewer')
-    who_for = request.form.get('who_for')
-    time_frame = request.form.get('time_frame')
-
-    crud.create_checklist(preparer, reviewer, who_for, time_frame)
-    flash('Checklist created!')
-    checklists = crud.get_checklists()
-    return render_template('/all_checklists.html', checklists=checklists)
-
 # app route for all checklists
 @app.route('/checklists')
 def all_checklists():
@@ -139,6 +110,20 @@ def show_checklist(checklist_id):
     users=crud.get_users()
     return render_template('checklist_details.html', checklist=checklist, user=users)
 
+@app.route('/createchecklist', methods=['POST'])
+def createchecklist():
+    """Create new checklist."""
+
+    preparer = request.form.get('preparer')
+    reviewer = request.form.get('reviewer')
+    who_for = request.form.get('who_for')
+    time_frame = request.form.get('time_frame')
+
+    crud.create_checklist(preparer, reviewer, who_for, time_frame)
+    flash('Checklist created!')
+    checklists = crud.get_checklists()
+    return render_template('/all_checklists.html', checklists=checklists)
+
 @app.route('/answers')
 def all_answers():
     """View all answers."""
@@ -149,7 +134,7 @@ def all_answers():
 
 @app.route('/answers/<answer_id>')
 def show_answer(answer_id):
-  #Show details on a particular answer.
+  # Show details on a particular answer.
     answer = crud.get_answer_by_id(answer_id)
 
     return render_template('answer_details.html', answer=answer)
