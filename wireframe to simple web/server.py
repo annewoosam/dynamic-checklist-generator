@@ -98,6 +98,18 @@ def show_question(question_id):
     
 @app.route('/createchecklist', methods=['POST'])
 
+def createtemplate():
+    """Create new template."""
+
+    template_name = request.form.get('template_name')
+    created_by = request.form.get('created_by')
+    created_on = request.form.get('created_on')
+
+    crud.create_template(template_name, created_by, created_on)
+    flash('Template created!')
+    templates = crud.get_templates()
+    return render_template('/all_templates.html', templates=templates)
+
 def createchecklist():
     """Create new checklist."""
 

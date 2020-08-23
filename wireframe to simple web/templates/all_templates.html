@@ -11,4 +11,23 @@
   </li>
 {% endfor %}
   </ul>
+
+ <h1>Create a new template</h1>h1>
+ <form action="createtemplate" method="post">
+
+<label>for="template_name">Enter a unique template name:</label>
+<input type="text" id="template name" name="template_name">
+
+<label>for="created_by">Choose who will be listed as the template's creator:</label>
+
+<select id="created_by" required>
+{% for user in users %}
+<option value={{ user.user_id }} >{{ user.user_full_name }}</option>
+{% endfor %}
+</select>
+
+<label>for="created_on">Enter date created:</label>
+<input type="date" id="created_on" name="created_on">
+<button type="submit" class="btn btn-primary btns">Create template</button> 
+ </form>
 {% endblock body%}
