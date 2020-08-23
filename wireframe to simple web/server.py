@@ -81,22 +81,6 @@ def show_template(template_id):
     users=crud.get_users()
     return render_template('template_details.html', template=template, users=users)
 
-@app.route('/createchecklist', methods=['POST'])
-
-def createchecklist():
-    """Create new checklist."""
-
-    preparer = request.form.get('preparer')
-    reviewer = request.form.get('reviewer')
-    who_for = request.form.get('who_for')
-    time_frame = request.form.get('time_frame')
-
-    crud.create_checklist(preparer, reviewer, who_for, time_frame)
-    flash('Checklist created!')
-    checklists = crud.get_checklists()
-    return render_template('/all_checklists.html', checklists=checklists)
-
-
 @app.route('/questions')
 def all_questions():
     """View all questions."""
@@ -112,6 +96,21 @@ def show_question(question_id):
 
     return render_template('question_details.html', question=question)
     
+@app.route('/createchecklist', methods=['POST'])
+
+def createchecklist():
+    """Create new checklist."""
+
+    preparer = request.form.get('preparer')
+    reviewer = request.form.get('reviewer')
+    who_for = request.form.get('who_for')
+    time_frame = request.form.get('time_frame')
+
+    crud.create_checklist(preparer, reviewer, who_for, time_frame)
+    flash('Checklist created!')
+    checklists = crud.get_checklists()
+    return render_template('/all_checklists.html', checklists=checklists)
+
 # app route for all checklists
 @app.route('/checklists')
 def all_checklists():
@@ -125,8 +124,8 @@ def all_checklists():
 def show_checklist(checklist_id):
   #Show details on a particular template.
     checklist = crud.get_checklist_by_id(checklist_id)
-
-    return render_template('checklist_details.html', checklist=checklist)
+    users=crud.get_users()
+    return render_template('checklist_details.html', checklist=checklist, user=users)
 
 @app.route('/answers')
 def all_answers():
@@ -143,22 +142,26 @@ def show_answer(answer_id):
 
     return render_template('answer_details.html', answer=answer)
 
+@app.route('/createanswer', methods=['POST'])
 
-# @app.route('/api/templates/<int:template_id>')
-# def get_template(template_id):
-#     """Return a template from the database as JSON."""
+def createanswer():
+    """Create new answer."""
 
-#     template = Template.query.get(template_id)
+    checklist_id = request.form.get('checklist_id')
+    question_id = request.form.get('question_id')
+    preparer_answer = request.form.get('preparer_answer')
+    preparer_time = request.form.get('preparer_time')
+    preparer_comment = request.form.get('preparer_comment')
+    reviewer_ready = request.form.get('reviewer_ready')
+    reviewer_time = request.form.get('reviewer_time')
+    reviewer_comment = request.form.get('reviewer_comment')
+    complete = request.form.get('complete')
+    
+    crud.create_answer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete)
+    flash('Answer posted!')
+    checklists = crud.get_checklists()
+    return render_template('all_checklists.html', checklists=checklists)
 
-#     if template:
-#         return jsonify({'status': 'success',
-#                         'template_id': template.template_id,
-#                         'templatename': template.templatename,
-#                         'createdby': template.createdby,
-#                         'createdon': template.createdon})
-#     else:
-#         return jsonify({'status': 'error',
-#                         'message': 'No template found with that ID'})
 
 if __name__ == '__main__':
 # added connection to database
