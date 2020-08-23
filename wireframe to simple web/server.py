@@ -78,24 +78,24 @@ def show_template(template_id):
   #Show details on a particular template.
 
     template = crud.get_template_by_id(template_id)
+    users=crud.get_users()
+    return render_template('template_details.html', template=template, users=users)
 
-    return render_template('template_details.html', template=template)
+@app.route('/createchecklist', methods=['POST'])
 
-# app route for all checklists
-@app.route('/checklists')
-def all_checklists():
-    """View all checklists."""
+def createchecklist():
+    """Create new checklist."""
 
+    preparer = request.form.get('preparer')
+    reviewer = request.form.get('reviewer')
+    who_for = request.form.get('who_for')
+    time_frame = request.form.get('time_frame')
+
+    crud.create_checklist(preparer, reviewer, who_for, time_frame)
+    flash('Checklist created!')
     checklists = crud.get_checklists()
+    return render_template('/all_checklists.html', checklists=checklists)
 
-    return render_template('all_checklists.html', checklists=checklists)
-
-@app.route('/checklists/<checklist_id>')
-def show_checklist(checklist_id):
-  #Show details on a particular template.
-    checklist = crud.get_checklist_by_id(checklist_id)
-
-    return render_template('checklist_details.html', checklist=checklist)
 
 @app.route('/questions')
 def all_questions():
@@ -111,6 +111,22 @@ def show_question(question_id):
     question = crud.get_question_by_id(question_id)
 
     return render_template('question_details.html', question=question)
+    
+# app route for all checklists
+@app.route('/checklists')
+def all_checklists():
+    """View all checklists."""
+
+    checklists = crud.get_checklists()
+
+    return render_template('all_checklists.html', checklists=checklists)
+
+@app.route('/checklists/<checklist_id>')
+def show_checklist(checklist_id):
+  #Show details on a particular template.
+    checklist = crud.get_checklist_by_id(checklist_id)
+
+    return render_template('checklist_details.html', checklist=checklist)
 
 @app.route('/answers')
 def all_answers():

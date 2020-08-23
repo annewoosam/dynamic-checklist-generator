@@ -103,6 +103,7 @@ class TemplateQuestion(db.Model):
     
     answers = db.relationship('Answer') # question will have many answers but we will filter to a specific checklist when displaying
     
+
     def __repr__(self):
         return f'<TemplateQuestions question_id={self.question_id} template_questions={self.question}>'
 
@@ -114,10 +115,12 @@ class Checklist(db.Model):
     
     checklist_id=db.Column(db.Integer, autoincrement=True, primary_key=True) 
     template_id = db.Column(db.Integer, db.ForeignKey('templates.template_id')) # chosen by clicking on appropriate template link
+    # used to create a checklist instance
     who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
     time_frame = db.Column(db.String) # such as 01/2020, 2020, Spring 2020, Q1 2020
     preparer_id = db.Column(db.Integer, db.ForeignKey('users.user_id')) # from login on save via create checklist fromn template click
     reviewer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    # gathered after checklist created
     date_sent_to_review = db.Column(db.DateTime) # populated by on-click event
     date_review_completed = db.Column(db.DateTime) # reviewer/populated by on-cick event
     
@@ -129,6 +132,7 @@ class Checklist(db.Model):
     preparer = db.relationship('User', foreign_keys=[preparer_id])
     reviewer = db.relationship('User', foreign_keys=[reviewer_id])
     answers = db.relationship('Answer')
+
 
     #(link through relationship to answers: answer, time-spent, comments by either preparer or reviewer role)
 

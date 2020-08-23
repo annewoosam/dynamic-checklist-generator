@@ -5,11 +5,73 @@
 
 {% block body %}
 
-<h1>{{ template.template_name }}</h1>
+<h1>Template Name: {{ template.template_name }}</h1>
 
 <p>
-  {{ template.created_on }}
-  {{ template.created_by }}
+  <table>
+
+    <tr>
+      <td>Created on:</td>
+      <td> {{ template.created_on }} </td>
+    </tr>
+      <tr>
+        <td>Created by:</td>
+        <td> {{ template.created_by }} </td>
+      </tr>
+   
+  </table>
+   
 </p>
+<h1>Questions</h1>
+<ul>
+{% for template_question in template.template_questions %}
+<li>{{ template_question.question }}</li>
+{% endfor %}
+</ul>
+
+<h1>Create a checklist from this template:</h1>
+<!-- create checklist form -->
+<div>
+<form action="/createchecklist" method="POST"><table>
+<tr>
+  <td><label for="preparer">Choose a preparer:</label></td>
+  <td>
+    <select id="preparer" required>
+  {% for user in users %}
+  <option value={{ user.user_id }} >{{ user.user_full_name }}</option>
+  {% endfor %}
+  </select>
+  </td>
+</tr> 
+
+<tr>
+
+<td><label for="reviewer">Choose a reviewer</label></td>
+<td><select id="reviewer" required>
+  {% for user in users %}
+  <option value={{ user.user_id}} >{{ user.user_full_name }}</option>
+  {% endfor %}
+</select>
+</td>
+</tr>
+
+<tr>
+
+  <td><label for="who_for">Who is this checklist for?</label></td>
+  <td><input type "who_for" id="who_for" name="who_for" required>
+  </td>
+</tr>
+
+<tr>
+
+  <td><label for="time_frame">What time period is this for?</label></td>
+  <td><input type "time_frame" id="time_frame" name="time_frame" required>
+  </td>
+</tr>
+
+</table>
+<button type="submit" class="btn btn-primary btns">Create checklist</button> 
+</form>
+<p id="date_time_button"></p></div>
 
 {% endblock %}

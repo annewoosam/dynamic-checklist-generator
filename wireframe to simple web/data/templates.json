@@ -1,11 +1,11 @@
 [
 	{
-		"template_name":"compliance testing",
+		"template_name":"Compliance Testing",
 		"created_by":1,
 		"created_on":"2020-08-07"
 	},
     {
-		"template_name":"client compliance guide",
+		"template_name":"Client Compliance Guide",
 		"created_by":1,
 		"created_on":"2020-08-08"
 	}
