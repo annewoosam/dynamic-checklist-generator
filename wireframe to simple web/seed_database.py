@@ -92,18 +92,22 @@ with open('data/checklists.json') as f:
 
 checklists_in_db = []
 for checklist in checklist_data:
-    template_id, who_for, time_frame, preparer_id, reviewer_id = (
+    template_id, who_for, time_frame, preparer_id, reviewer_id, date_sent_to_review, date_review_completed = (
                                    checklist['template_id'],
                                    checklist['who_for'],
                                    checklist['time_frame'],
                                    checklist['preparer_id'],
-                                   checklist['reviewer_id'])
+                                   checklist['reviewer_id'],
+                                   checklist['date_sent_to_review'],
+                                   checklist['date_review_completed'])
 
     db_checklist = crud.create_checklist(template_id,
                                  who_for,
                                  time_frame,
                                  preparer_id,
-                                 reviewer_id)
+                                 reviewer_id,
+                                 date_sent_to_review,
+                                 date_review_completed)
     
     checklists_in_db.append(db_checklist)
 
