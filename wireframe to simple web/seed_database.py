@@ -71,7 +71,7 @@ for template_question in template_question_data:
                                    template_question['resource_url'],
                                    template_question['help_text'])
 
-    db_template_questions = crud.create_template_question(
+    db_template_questions = crud.create_question(
                                  template_id,
                                  question_number,
                                  question,

@@ -98,11 +98,12 @@ def get_question_by_id(question_id):
 # Functions for creating checklists, returning a list of all available checklists and
 # returning a specific checklist by id.
 
-def create_checklist(preparer_id, reviewer_id, who_for, time_frame)  :
-    checklist = Checklist(preparer_id=preparer_id,
-                  reviewer_id=reviewer_id,
+def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)  :
+    checklist = Checklist(template_id=template_id,
                   who_for=who_for,
-                  time_frame=time_frame)
+                  time_frame=time_frame,
+                  preparer_id=preparer_id,
+                  reviewer_id=reviewer_id)
     
     db.session.add(checklist)
     db.session.commit()
