@@ -79,6 +79,31 @@ def createtemplate():
     users=crud.get_users()
     return render_template('/all_templates.html', templates=templates, users=users)
 
+@app.route('/createquestion', methods=['POST'])
+def createquestion():
+    """Create new question."""
+
+    template_id = request.form.get('template_id')
+    question_number = request.form.get('question_number')
+    question = request.form.get('question')
+    yes_text =request.form.get('yes_text')
+    no_text = request.form.get('no_text')
+    not_applicable_text = request.form.get('not_applicable_text')
+    category = request.form.get('category')
+    primary_driver = request.form.get('primary_driver')
+    resource_url = request.form.get('resource_url')
+    help_text = request.form.get('help-text')
+
+    crud.create_question(template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text)
+    
+    flash('Question added!')
+
+    questions = crud.get_questions()
+    templates = crud.get_templates()
+    users=crud.get_users()
+    return render_template('/template_details.html', questions=questions, users=users)
+
+
 @app.route('/questions')
 def all_questions():
     """View all questions."""

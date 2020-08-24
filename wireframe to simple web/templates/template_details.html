@@ -61,7 +61,7 @@
 <!-- Code goes here. -->
 <!-- NAV BAR CODE -->
 <nav class="navbar navbar-expand-lg override a:link">
-  <div><a class="nav-link" href="#"></a></div>
+  <div><a class="nav-link" href="/question_details">Questions</a></div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -94,11 +94,110 @@
    
 </p>
 <h1>Questions</h1>
-<ul>
+  <div class="pb-2 mt-3 mb-2">
+    <div class="col">
+      <h1></h1>
+      <p class="lead"></p>
+    </div>
+  </div>
+
+  <table class="table table-hover table-striped">
+    <thead>
+    <tr><b>
+      <th>Template</th>
+      <th>Question Number</th>
+      <th>Question <i class="far fa-question-circle"></i></th>
+      <th>Help <i class="far fa-life-ring"></i></th>
+      <th>Training <i class="fas fa-video"></i></th>
+      <th>Driver <i class="fas fa-key"></th>
+      <th>Category <i class="fas fa-link"></i></th>
+    </tr></b>
+    </thead>
+    <tr>
+      <ol>
 {% for template_question in template.template_questions %}
-<li>{{ template_question.question }}</li>
+<td><li>{{ template_question.template_id }}</li></td>
+<td><li>{{ template_question.question_number }}</li></td>
+<td><li>{{ template_question.question }}</li></td>
+<td><li>{{ template_question.help_text }}</li></td>
+<td><li>{{ template_question.resource_url }}</li></td>
+<td><li>{{ template_question.primary_driver }}</li></td>
+<td><li>{{ template_question.category }}</li><td>
+</tr>
 {% endfor %}
-</ul>
+</ol></td>
+    </tr>
+    <tr>
+
+    </tr>
+  </table>
+
+<h1>Add a question to this template, template id {{ template.template_id }}:</h1>
+<!-- create question form -->
+<div>
+<form action="/createquestion" method="POST"><table>
+
+<tr>
+  <td><label for="template_id">Enter the template id:</label></td>
+  <td><input type "number" id="template_id" name="template_id" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="question_number">Enter the question number:</label></td>
+  <td><input type "number" id="question_number" name="question_number" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="question">Enter the question:</label></td>
+  <td><input type "text area" id="question" name="question" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="yes_text">Enter the response for items marked yes, done:</label></td>
+  <td><input type "text area" id="yes_text" name="yes_text" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="no-text">Enter the response for items marked no, done:</label></td>
+  <td><input type "text_area" id="no_text" name="no_text" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="not_applicable text">Enter the response for items marked not applicable:?</label></td>
+  <td><input type "text_area" id="not_applicable_text" name="not_applicable_text" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="category">Enter the category:</label></td>
+  <td><input type "text_area" id="category" name="category" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="resource_url">Enter the link to a video or web-resource:</label></td>
+  <td><input type "url" id="resource_url" name="resource_url" required>
+  </td>
+</tr>
+
+<tr>
+  <td><label for="help_text">Enter help text:</label></td>
+  <td><input type "text area" id="help_text" name="help_text" required>
+  </td>
+</tr>
+
+
+</table>
+
+<button type="submit" class="btn btn-primary btns">Add question</button> 
+</form>
+
+</p></div>
 
 <h1>Create a checklist from this template:</h1>
 <!-- create checklist form -->
@@ -129,14 +228,14 @@
 <tr>
 
   <td><label for="who_for">Who is this checklist for?</label></td>
-  <td><input type "who_for" id="who_for" name="who_for" required>
+  <td><input type "text" id="who_for" name="who_for" required>
   </td>
 </tr>
 
 <tr>
 
   <td><label for="time_frame">What time period is this for?</label></td>
-  <td><input type "time_frame" id="time_frame" name="time_frame" required>
+  <td><input type "text" id="time_frame" name="time_frame" required>
   </td>
 </tr>
 

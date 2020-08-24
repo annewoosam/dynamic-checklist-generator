@@ -68,7 +68,7 @@ def get_template_by_id(template_id):
 # Functions for creating template questions, returning a list of all available template questions and
 # returning a specific template question by id.
 
-def create_template_question(template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text):
+def create_question(template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text):
     template_question = TemplateQuestion(template_id=template_id,
                   question_number=question_number,
                   question=question,
