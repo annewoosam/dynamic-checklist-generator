@@ -101,7 +101,7 @@ def createquestion():
     questions = crud.get_questions()
     templates = crud.get_templates()
     users=crud.get_users()
-    return render_template('/template_details.html', questions=questions, users=users)
+    return render_template('/all_templates.html', templates=templates, questions=questions, users=users)
 
 
 @app.route('/questions')
@@ -138,13 +138,15 @@ def show_checklist(checklist_id):
 @app.route('/createchecklist', methods=['POST'])
 def createchecklist():
     """Create new checklist."""
-
-    preparer = request.form.get('preparer')
-    reviewer = request.form.get('reviewer')
+    template_id = request.form.get('template_id')
     who_for = request.form.get('who_for')
     time_frame = request.form.get('time_frame')
+    preparer = request.form.get('preparer')
+    reviewer = request.form.get('reviewer')
+    date_sent_to_review = request.form.get('date_sent_to_review')
+    date_review_completed = request.form.get('date_review_completed')
 
-    crud.create_checklist(preparer, reviewer, who_for, time_frame)
+    crud.create_checklist(template_id,  who_for, time_frame, preparer, reviewer, date_sent_to_review, date_review_completed)
     flash('Checklist created!')
     checklists = crud.get_checklists()
     return render_template('/all_checklists.html', checklists=checklists)

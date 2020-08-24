@@ -1,7 +1,7 @@
 <!-- movie_details.html -->
 {% extends 'base.html' %}
 
-{% block title %}{{ template.template_name }} - Details{% endblock %}
+{% block title %} Details{% endblock %}
 
 {% block body %}
 <!DOCTYPE html>
@@ -76,7 +76,7 @@
        <div>Fill out this form and submit it to create your checklist.</div>
 
   <div>
-<h1>Template Name: {{ template.template_name }}</h1>
+<h1>Template </h1>
 
 <p>
   <table>
@@ -203,6 +203,13 @@
 <!-- create checklist form -->
 <div>
 <form action="/createchecklist" method="POST"><table>
+
+<tr>
+  <td><label for="template_id">What template id is this for?</label></td>
+  <td><input type "text" id="template_id" name="template_id" required></td>
+
+</tr>
+
 <tr>
   <td><label for="preparer">Choose a preparer:</label></td>
   <td>
@@ -215,7 +222,6 @@
 </tr> 
 
 <tr>
-
 <td><label for="reviewer">Choose a reviewer</label></td>
 <td><select id="reviewer" required>
   {% for user in users %}
@@ -226,16 +232,26 @@
 </tr>
 
 <tr>
-
   <td><label for="who_for">Who is this checklist for?</label></td>
-  <td><input type "text" id="who_for" name="who_for" required>
+  <td><input type "text" id="who_for" name="who_for" required></td>
+
+</tr>
+
+<tr>
+  <td><label for="time_frame">What time period is this for?</label></td>
+  <td><input type "text" id="time_frame" name="time_frame" required>
   </td>
 </tr>
 
 <tr>
+  <td><label for="date_sent_to_review">Date sent to review?</label></td>
+  <td><input type "date" id="date_sent_to_review"" name="date_sent_to_review"" required>
+  </td>
+</tr>
 
-  <td><label for="time_frame">What time period is this for?</label></td>
-  <td><input type "text" id="time_frame" name="time_frame" required>
+<tr>
+  <td><label for="date_review_completed">Date review completed?</label></td>
+  <td><input type "date" id="date_review_completed" name="date_review_completed" required>
   </td>
 </tr>
 
