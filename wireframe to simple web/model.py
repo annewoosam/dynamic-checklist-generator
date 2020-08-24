@@ -113,13 +113,19 @@ class Checklist(db.Model):
     
     __tablename__ = 'checklists'
     
-    checklist_id=db.Column(db.Integer, autoincrement=True, primary_key=True) 
-    template_id = db.Column(db.Integer, db.ForeignKey('templates.template_id')) # chosen by clicking on appropriate template link
     # used to create a checklist instance
+    checklist_id=db.Column(db.Integer, autoincrement=True, primary_key=True) 
+    
+    # link to templates and template_questions
+    template_id = db.Column(db.Integer, db.ForeignKey('templates.template_id')) # chosen by clicking on appropriate template link
+
     who_for = db.Column(db.String) # such as a person, client, employer or client number that could mix numbers and characters
     time_frame = db.Column(db.String) # such as 01/2020, 2020, Spring 2020, Q1 2020
+    
+    # link to users
     preparer_id = db.Column(db.Integer, db.ForeignKey('users.user_id')) # from login on save via create checklist fromn template click
     reviewer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    
     # gathered after checklist created
     date_sent_to_review = db.Column(db.DateTime) # populated by on-click event
     date_review_completed = db.Column(db.DateTime) # reviewer/populated by on-cick event

@@ -155,7 +155,7 @@ def createanswer():
     complete = request.form.get('complete')
     
     crud.create_answer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete)
-    flash('Answer posted!')
+    flash('Answer posted! Select checklist.')
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
 

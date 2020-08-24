@@ -1,9 +1,67 @@
 {% extends 'base.html' %}
-{% block title %}Checklist Templates Home{% endblock %}
+{% block title %}Welcome{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome</title>
 
+  <!-- Load Bootstrap 4 -->
+  <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- Load Font Awesome -->
+  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
+  <!-- Load our stylesheet -->
+  <style>
+    h1 {font-weight: bold;}
+      .row > div > div {
+          text-align: center;
+          font-size: 100%;
+      }
+    .override {
+      background-color: rgb(45,110,104);
+      font-color: black;
+    }
+    a:link {
+      color: black;
+    }
+    a:hover {
+      color: black;
+    }
+    a:active {
+      color: black;
+    }
+    a:visited {
+      color: black;
+    }
+    .img {
+      padding-top: 2em;
+      padding-bottom: 2em;
+
+    }
+    .btns {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      background-color: rgb(45,110,104);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Code goes here. -->
+<!-- NAV BAR CODE -->
+<nav class="navbar navbar-expand-lg override a:link">
+  <div><a class="nav-link" href="#"></a></div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+
+  <h1>Welcome!</h1>
+ <div><img src="/static/img/boats.jpg" class="img"> 
   <h2>Navigation</h2>
   <ul>
     <li><a href="/templates">View all templates</a></li>
