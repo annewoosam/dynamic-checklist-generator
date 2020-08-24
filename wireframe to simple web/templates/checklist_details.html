@@ -1,0 +1,429 @@
+<!-- movie_details.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ checklist.who_for }} Checklist - Details{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preparer Dashboard</title>
+
+  <!-- Load Bootstrap 4 -->
+  <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- Load Font Awesome -->
+  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
+  <!-- Load our stylesheet -->
+  <style>
+    h1 {font-weight: bold;}
+      .row > div > div {
+          text-align: center;
+          font-size: 100%;
+      }
+    .override {
+      background-color: rgb(45,110,104);
+      font-color: black;
+    }
+    a:link {
+      color: black;
+    }
+    a:hover {
+      color: black;
+    }
+    a:active {
+      color: black;
+    }
+    a:visited {
+      color: black;
+    }
+    .img {
+      padding-top: 2em;
+      padding-bottom: 2em;
+
+    }
+    .btns {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      background-color: rgb(45,110,104);
+    }
+  </style>
+</head>
+
+<body>
+<!-- Code goes here. -->
+<!-- NAV BAR CODE -->
+<nav class="navbar navbar-expand-lg override a:link">
+  <div><a class="nav-link" href="/question_details"></a></div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+
+
+
+    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+    <div class="row">
+    <img src="/static/img/pexels-breakingpic-3243.jpg" class="img">
+    </div>
+
+<h1>{{ checklist.who_for }} Checklist</h1>
+
+
+
+ <table class="table table-hover table-striped">
+  <th>For the period</th> 
+  <th>By Preparer ID</th> 
+  <th>By Reviewer ID</th>
+  <th>Sent to Review</th>
+  <th>Review Complete</th>
+
+  <tr> 
+
+    <td> {{ checklist.time_frame }} </td> 
+    <td> {{ checklist.preparer_id }}  </td>
+    <td> {{ checklist.reviewer_id }} </td> 
+    <td> {{ checklist.date_sent_to_review.strftime('%m-%d-%Y') }} </td>
+    <td> {{ checklist.date_review_completed.strftime('%m-%d-%Y') }}  </td>
+   
+   </tr>
+
+ </table>
+
+
+<h1>Questions - For now keep the template open</h1>
+
+  <table class="table table-hover table-striped">
+
+    <thead>
+
+      <th>Template</th>
+
+      <th>Question Number</th>
+
+      <th>Question <i class="far fa-question-circle"></i></th>
+
+      <th>Help <i class="far fa-life-ring"></i></th>
+
+      <th>Training <i class="fas fa-video"></i></th>
+
+      <th>Driver <i class="fas fa-key"></th>
+
+      <th>Category <i class="fas fa-link"></th>
+
+    </thead>
+
+    <tr>
+
+      <td></td>
+
+      <td></td>
+
+      <td></td>
+
+      <td></td>
+
+      <td></td>
+
+      <td></td>
+
+      <td></td>
+
+    </tr>
+
+    <tr>
+
+      <td>  </td>
+
+    </tr>
+
+  </table>
+
+<h1>Answers</h1>
+
+<table class="table table-hover table-striped">
+
+  <thead>
+
+    <th>Question ID <i class="far fa-question-circle"></i></th>
+
+    <th>Preparer Answer <i class="fas fa-traffic-light"></i></th>
+
+    <th>Preparer Time <i class="far fa-clock"></i></th>
+
+    <th>Preparer Comment <i class="far fa-comment"></i></th> 
+
+    <th>Reviewer Answer <i class="fas fa-traffic-light"></i></th> 
+
+    <th>Reviewer Time <i class="far fa-clock"></i></th>
+
+    <th>Reviewer Comment <i class="far fa-comment"></i></th>
+
+  </thead>
+
+{% for answer in checklist.answers %}
+
+ <tr>
+
+  <ol>
+
+     <td> {{ answer.question_id }} </td>
+
+     <td> {{ answer.preparer_answer }}</td>
+
+     <td> {{ answer.preparer_time }}  </td>
+
+     <td> {{ answer.preparer_comment }} </td>
+
+     <td> {{ answer.reviewer_ready }} </td>
+
+     <td> {{ answer.reviewer_time }} </td>
+
+     <td> {{ answer.reviewer_comment }} </td>
+
+  </ol>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+ <table class="table table-hover table-striped">
+  <th>Done</th> 
+  <th>To-Do</th> 
+  <th>Not Applicable</th>
+  <th>Not Answered</th>
+
+
+  <tr> 
+
+    <td>     {% for answer in checklist.answers %}
+
+      <ol>
+
+        {% if answer.preparer_answer == 'y' %}
+ 
+          <li> {{ answer.question_id }} </li>
+
+      </ol>
+
+    {% endif %}
+
+    {% endfor %} </td> 
+
+    <td>     {% for answer in checklist.answers %}
+
+      <ol>
+
+        {% if answer.preparer_answer == 'n' %}
+ 
+          <li> {{ answer.question_id }} </li>
+
+      </ol>
+
+    {% endif %}
+
+    {% endfor %} </td>
+
+
+        <td>     {% for answer in checklist.answers %}
+
+      <ol>
+
+        {% if answer.preparer_answer == 'na' %}
+ 
+          <li> {{ answer.question_id }} </li>
+
+      </ol>
+
+    {% endif %}
+
+    {% endfor %} </td>
+           <td>     {% for answer in checklist.answers %}
+
+      <ol>
+
+        {% if answer.preparer_answer == '' %}
+ 
+          <li> {{ answer.question_id }} </li>
+
+      </ol>
+
+    {% endif %}
+
+    {% endfor %} </td>
+   </tr>
+
+ </table>
+
+
+
+
+<h1>Add answers to Checklist ID {{ checklist.checklist_id }}:</h1>
+
+<!-- create checklist form -->
+
+<div>
+
+<form action="/createanswer" method="POST">
+
+  <table>
+
+    <tr>
+
+      <td>
+
+        <label for="checklist_id">Enter checklist id. If you do not enter a number you will get an error:</label></td>
+      
+      <td>
+
+        <input type "number" id="checklist_id" name="checklist_id" required>
+  
+      </td>
+
+    </tr>
+
+<tr>
+
+  <td>
+  
+    <label for="question_id">Enter question id. If you do not enter a number you will get an error:</label></td>
+  
+  <td>
+  
+    <input type "number" id="question_id" name="question_id" required>
+  
+  </td>
+
+</tr>
+
+<tr>
+
+  <td><label for="preparer_answer">Enter preparer answer:</label></td>
+
+  <td><select id="preparer_answer" name="preparer_answer">
+
+    <option value="">Skipped</option>
+
+    <option value="y">Yes</option>
+
+    <option value="n">No</option>
+
+    <option value="na">Not applicable</option>
+
+  </td>
+
+</tr>
+
+<tr>
+
+  <td><label for="preparer_time">Enter preparer minutes. If you do not enter a number you will get an error:</label></td>
+  <td><input type "number" id="preparer_time" name="preparer_time">
+  </td>
+
+</tr>
+
+<tr>
+
+  <td><label for="preparer_comment">Enter preparer comments:</label></td>
+
+  <td><input type "textarea" id="preparer_comment" name="preparer_comment">
+  </td>
+</tr>
+
+<tr>
+
+  <td><label for="reviewer_ready">Enter reviewer readiness to release:</label></td>
+
+  <td><select id="reviewer_ready" name="reviewer_ready">
+
+    <option value="">Skipped</option>
+
+    <option value="c">Corrections Required</option>
+
+    <option value="r">Ready</option>
+
+    <option value="na">Not Applicable</option>  
+
+  </td>
+
+</tr>
+
+<tr>
+
+  <td><label for="reviewer_time">Enter reviewer minutes. If you do not enter a number you will get an error:</label></td>
+  <td><input type "number" id="reviewer_time" name="reviewer_time">
+  </td>
+
+</tr>
+
+<tr>
+
+  <td><label for="reviewer_comment">Enter reviewer comments?</label></td>
+
+  <td><input type "text area" id="reviewer_comment" name="reviewer_comment">
+  </td>
+</tr>
+
+</table>
+<button type="submit" class="btn btn-primary btns">Add Answer</button> 
+</form>
+
+<h1>Notifications</h1>
+
+<a href="mailto:reviewer name field?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
+
+<a href="mailto:preparer name field?subject={{ checklist.who_for }} corrections required&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Return for Corrections</a></p>
+
+<a href="mailto:recipient name field?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
+
+
+<table class="table table-hover table-striped">
+ 
+  <thead>
+ 
+    <tr>
+
+      <th><i class="fas fa-trophy"> </i> You're Amazing</th>
+
+      <th><i class="fas fa-hands-helping"></i> We're here to Help</th>
+
+      <th><i class="fas fa-leaf"></i> Let's make this Sustainable</th>
+
+      <th><i class="fas fa-spa"></i> Mindfulness is Awesome</th>
+    
+    </tr>
+  
+  </thead>
+    
+    <tr>
+      <td>You know it!</td>
+
+      <td>That's right!</td>  
+
+      <td>Leave comments to improve the process.</td> 
+
+      <td>Track your time to plan and live better.</td>
+
+    </tr>
+</table>
+</div>
+
+<!-- You need this in order to use JS-based components in the 
+further study. Leave this at the bottom and code above it. -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- The scripts below are from teh current official site, commented out for now. -->
+<!-- JS, Popper.js, and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+ -->
+
+{% endblock %}
