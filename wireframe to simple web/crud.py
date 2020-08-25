@@ -127,21 +127,29 @@ def get_checklist_by_id(checklist_id):
 
 
 
-def create_answer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete):
-    answer = Answer(checklist_id=checklist_id,
+def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
+    prepareranswer = Answer(checklist_id=checklist_id,
                   question_id=question_id,
                   preparer_answer=preparer_answer,
                   preparer_comment=preparer_comment,
-                  preparer_time=preparer_time,
-                  reviewer_ready=reviewer_ready,
-                  reviewer_time=reviewer_time,
-                  reviewer_comment=reviewer_comment,
-                  complete=complete)
+                  preparer_time=preparer_time)
 
-    db.session.add(answer)
+    db.session.add(prepareranswer)
     db.session.commit()
 
-    return answer
+    return prepareranswer
+
+def create_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment):
+    revieweranswer = Answer(checklist_id=checklist_id,
+                  question_id=question_id,
+                  reviewer_ready=reviewer_ready,
+                  reviewer_time=reviewer_time,
+                  reviewer_comment=reviewer_comment)
+
+    db.session.add(revieweranswer)
+    db.session.commit()
+
+    return revieweranswer
 
 def get_answers():
     """Return all checklists."""
@@ -155,37 +163,12 @@ def get_answer_by_id(answer_id):
 
 # 2.0 Kanban functionality for preparer
 
-# # Lists
+# Lists
 
-# # Item response based on what the creator coded when the question was set-up.
+# Item response based on what the creator coded when the question was set-up.
+# mail to integrated for send to reviewer
 
-# def preparer_to_do_list():
-#     # preparer answer set to no
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="n":
-#             print (f"To do:\n")
-#             print(checklist_item.no_text)
-
-# def preparer_not_applicable_list():
-#     # preparer answer set to not applicable
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="na":
-#             print (f"Not applicable:\n")
-#             print(checklist_item.not_applicable_text)
-
-# def prepaper_blanks_list():
-#     # preparer left answer at default, skipped.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="":
-#             print (f"To answer:\n")
-#             print(checklist_item.question)
-
-# def preparer_done_list():
-#     # preparer answered yes.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="y":
-#             print (f"Done:\n")
-#             print(yes_text)
+# Integrated
 
 # # Scorecard Elements: Counts & Percentages 
 
@@ -248,26 +231,14 @@ def get_answer_by_id(answer_id):
 
 # def reviewer_save_current_answers():
 
-# # anything marked return for corrections to be saved to separate database with date
+#  anything marked return for corrections to be saved to separate database with date
 
-# def return_to_preparer():
-#     # psuedo-code
-#     # if button return for corrections clicked
-#     # populate the prepare email in to field
-#     # populate the checklist_name, who for and timeframe and returned for corrections in subject field
-#     # save the date and time e-mail created to the database
 
-# def send_to_recipient():  
-#     # psuedo-code
-#     # if button send to recipient clicked
-#     # populate the recipient email in to field
-#     # populate the checklist_name, who for and timeframe and ready for delivery in subject field
-#     # save the date and time e-mail created to the database as date_review_completed and date_sent to recipient
 
 # # Kanban functionality for reviewer
 
 # # Lists
-
+# Integrated return for corrections and notify recipient.
 # # Item response based on what the creator coded when the question was set-up.
 
 # def reviewer_to_do_list():

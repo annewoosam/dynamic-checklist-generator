@@ -37,7 +37,7 @@ class User(db.Model):
     templates = db.relationship('Template')
     preparerchecklist = db.relationship('Checklist', foreign_keys="Checklist.preparer_id")
     reviewerchecklist = db.relationship('Checklist', foreign_keys="Checklist.reviewer_id")
-    
+
     # the docs for the relationships are SQLAlchemy multiple join paths
     # the use of templates plural is intentional as there are many templates that can be connected to a user
     # Template is the class
@@ -62,6 +62,7 @@ class Template(db.Model):
 
     # Establish relationships between top and below tables and continue to add as go
     creator=db.relationship('User')
+  
     template_questions=db.relationship('TemplateQuestion')
     # After a creator establishes a template they add the questions and help text so that a preparer can spin off a checklist for whomever they need for whatever time frame.
     # For the template questions we use template_questions with an s for the many questions that belong to one template.

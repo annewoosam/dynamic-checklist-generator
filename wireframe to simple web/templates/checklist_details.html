@@ -76,16 +76,16 @@
 
  <table class="table table-hover table-striped">
   <th>For the period</th> 
-  <th>By Preparer ID</th> 
-  <th>By Reviewer ID</th>
+  <th>Preparer</th> 
+  <th>Reviewer</th>
   <th>Sent to Review</th>
   <th>Review Complete</th>
 
   <tr> 
 
     <td> {{ checklist.time_frame }} </td> 
-    <td> {{ checklist.preparer_id }}  </td>
-    <td> {{ checklist.reviewer_id }} </td> 
+    <td> {{ checklist.preparer.user_full_name }}, {{ checklist.preparer.email }}</td>
+    <td> {{ checklist.reviewer.user_full_name }}, {{ checklist.reviewer.email }} </td> 
     <td> {{ checklist.date_sent_to_review.strftime('%m-%d-%Y') }} </td>
     <td> {{ checklist.date_review_completed.strftime('%m-%d-%Y') }}  </td>
    
@@ -94,15 +94,13 @@
  </table>
 
 
-<h1>Questions - For now keep the template open</h1>
+<h1>Questions</h1>
 
   <table class="table table-hover table-striped">
 
     <thead>
 
-      <th>Template</th>
-
-      <th>Question Number</th>
+      <th>Question Number<i class="far fa-question-circle"></i></th>
 
       <th>Question <i class="far fa-question-circle"></i></th>
 
@@ -116,30 +114,19 @@
 
     </thead>
 
-    <tr>
+ {% for template_question in checklist.template.template_questions %}
+<tr>
+      <ol>
 
-      <td></td>
-
-      <td></td>
-
-      <td></td>
-
-      <td></td>
-
-      <td></td>
-
-      <td></td>
-
-      <td></td>
-
+            <td>{{ template_question.question_number}}</td>
+            <td>{{ template_question.question}}</td>
+            <td>{{ template_question.help_text}}</td>
+            <td>{{ template_question.resource_url}}</td>
+            <td>{{ template_question.primary_driver}}</td>
+            <td>{{ template_question.category}}</td>
+      </ol>
     </tr>
-
-    <tr>
-
-      <td>  </td>
-
-    </tr>
-
+    {% endfor %}
   </table>
 
 <h1>Answers</h1>
@@ -149,6 +136,8 @@
   <thead>
 
     <th>Question ID <i class="far fa-question-circle"></i></th>
+
+    <th>Question <i class="far fa-question-circle"></i></th>
 
     <th>Preparer Answer <i class="fas fa-traffic-light"></i></th>
 
@@ -171,6 +160,8 @@
   <ol>
 
      <td> {{ answer.question_id }} </td>
+
+     <td>{{ answer.template_question.question}}</td>
 
      <td> {{ answer.preparer_answer }}</td>
 
@@ -203,13 +194,13 @@
 
     <td>     {% for answer in checklist.answers %}
 
-      <ol>
+      
 
         {% if answer.preparer_answer == 'y' %}
  
-          <li> {{ answer.question_id }} </li>
+          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.yes_text}} </li>
 
-      </ol>
+      
 
     {% endif %}
 
@@ -217,13 +208,13 @@
 
     <td>     {% for answer in checklist.answers %}
 
-      <ol>
+     
 
         {% if answer.preparer_answer == 'n' %}
  
-          <li> {{ answer.question_id }} </li>
+          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.no_text}}</li>
 
-      </ol>
+      
 
     {% endif %}
 
@@ -232,26 +223,26 @@
 
         <td>     {% for answer in checklist.answers %}
 
-      <ol>
+    
 
         {% if answer.preparer_answer == 'na' %}
  
-          <li> {{ answer.question_id }} </li>
+          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.not_applicable_text}} </li>
 
-      </ol>
+   
 
     {% endif %}
 
     {% endfor %} </td>
            <td>     {% for answer in checklist.answers %}
 
-      <ol>
+      
 
         {% if answer.preparer_answer == '' %}
  
-          <li> {{ answer.question_id }} </li>
+          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.question}} </li>
 
-      </ol>
+      
 
     {% endif %}
 
@@ -263,13 +254,17 @@
 
 
 
-<h1>Add answers to Checklist ID {{ checklist.checklist_id }}:</h1>
+<h1>Add answers to Checklist ID {{ checklist.checklist_id }}.</h1>
+<h2> You must answer items marked with an * with a number or you will receive an error:</h2>
 
 <!-- create checklist form -->
 
 <div>
 
-<form action="/createanswer" method="POST">
+<!-- Preparer Answers -->
+<h1>Preparer Answers</h1>
+
+<form action="/createprepareranswer" method="POST">
 
   <table>
 
@@ -277,7 +272,7 @@
 
       <td>
 
-        <label for="checklist_id">Enter checklist id. If you do not enter a number you will get an error:</label></td>
+        <label for="checklist_id">Enter checklist id*:</label></td>
       
       <td>
 
@@ -291,7 +286,7 @@
 
   <td>
   
-    <label for="question_id">Enter question id. If you do not enter a number you will get an error:</label></td>
+    <label for="question_id">Enter question id*:</label></td>
   
   <td>
   
@@ -321,7 +316,7 @@
 
 <tr>
 
-  <td><label for="preparer_time">Enter preparer minutes. If you do not enter a number you will get an error:</label></td>
+  <td><label for="preparer_time">Enter preparer minutes*:</label></td>
   <td><input type "number" id="preparer_time" name="preparer_time">
   </td>
 
@@ -333,6 +328,53 @@
 
   <td><input type "textarea" id="preparer_comment" name="preparer_comment">
   </td>
+</tr>
+</table>
+<button type="submit" class="btn btn-primary btns">Add Preparer Answer</button> 
+</form>
+</div>
+<h2>Notification</h2>
+
+ 
+ <p>Date ready for review: {{ checklist.date_sent_to_review.strftime('%m-%d-%Y') }}  </p>
+ 
+ <h2>Notify Reviewer</h2>
+
+ <a href="mailto:{{ checklist.reviewer.email }}?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
+<!-- Reviewer Answers -->
+<h1>Reviewer Answers</h1>
+<div>
+
+<form action="/creatreviewereanswer" method="POST">
+
+<table>
+
+    <tr>
+
+      <td>
+
+        <label for="checklist_id">Enter checklist id*:</label></td>
+      
+      <td>
+
+        <input type "number" id="checklist_id" name="checklist_id" required>
+  
+      </td>
+
+    </tr>
+
+<tr>
+
+  <td>
+  
+    <label for="question_id">Enter question id*:</label></td>
+  
+  <td>
+  
+    <input type "number" id="question_id" name="question_id" required>
+  
+  </td>
+
 </tr>
 
 <tr>
@@ -355,7 +397,7 @@
 
 <tr>
 
-  <td><label for="reviewer_time">Enter reviewer minutes. If you do not enter a number you will get an error:</label></td>
+  <td><label for="reviewer_time">Enter reviewer minutes*:</label></td>
   <td><input type "number" id="reviewer_time" name="reviewer_time">
   </td>
 
@@ -370,17 +412,25 @@
 </tr>
 
 </table>
-<button type="submit" class="btn btn-primary btns">Add Answer</button> 
+<button type="submit" class="btn btn-primary btns">Add Reviewer Answer</button> 
 </form>
 
-<h1>Notifications</h1>
+</div>
 
-<a href="mailto:reviewer name field?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
+<h2>Notifications</h2>
 
-<a href="mailto:preparer name field?subject={{ checklist.who_for }} corrections required&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Return for Corrections</a></p>
+
+<a href="mailto:{{ checklist.preparer.email }}?subject={{ checklist.who_for }} corrections required&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Return for Corrections</a></p>
+    
+<h3>Review Complete</h3>   
+
+<p>Date review completed: {{ checklist.date_review_completed.strftime('%m-%d-%Y') }} </p>
+
+<h3>Notify Recipient</h3> 
 
 <a href="mailto:recipient name field?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
 
+<h3>Mark Complete</h3> 
 
 <table class="table table-hover table-striped">
  

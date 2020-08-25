@@ -76,7 +76,7 @@
        <div>Fill out this form and submit it to create your checklist.</div>
 
   <div>
-<h1>Template </h1>
+<h1>{{ template.template_name }}  </h1>
 
 <p>
   <table>
@@ -85,10 +85,7 @@
       <td>Created on:</td>
       <td> {{ template.created_on }} </td>
     </tr>
-      <tr>
-        <td>Created by:</td>
-        <td> {{ template.created_by }} </td>
-      </tr>
+  
    
   </table>
    
@@ -122,10 +119,10 @@
 <td><li>{{ template_question.help_text }}</li></td>
 <td><li>{{ template_question.resource_url }}</li></td>
 <td><li>{{ template_question.primary_driver }}</li></td>
-<td><li>{{ template_question.category }}</li><td>
+<td><li>{{ template_question.category }}</li></td>
 </tr>
 {% endfor %}
-</ol></td>
+</ol>
     </tr>
     <tr>
 
@@ -243,17 +240,6 @@
   </td>
 </tr>
 
-<tr>
-  <td><label for="date_sent_to_review">Date sent to review?</label></td>
-  <td><input type "date" id="date_sent_to_review"" name="date_sent_to_review"" required>
-  </td>
-</tr>
-
-<tr>
-  <td><label for="date_review_completed">Date review completed?</label></td>
-  <td><input type "date" id="date_review_completed" name="date_review_completed" required>
-  </td>
-</tr>
 
 </table>
 <button type="submit" class="btn btn-primary btns">Create checklist</button> 

@@ -166,23 +166,35 @@ def show_answer(answer_id):
 
     return render_template('answer_details.html', answer=answer)
 
-@app.route('/createanswer', methods=['POST'])
+@app.route('/createprepareranswer', methods=['POST'])
 
-def createanswer():
-    """Create new answer."""
+def createprepareranswer():
+    """Create new preparer answer."""
 
     checklist_id = request.form.get('checklist_id')
     question_id = request.form.get('question_id')
     preparer_answer = request.form.get('preparer_answer')
     preparer_time = request.form.get('preparer_time')
     preparer_comment = request.form.get('preparer_comment')
+    
+    crud.create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment)
+    flash('Preparer answer posted! Select checklist.')
+    checklists = crud.get_checklists()
+    return render_template('all_checklists.html', checklists=checklists)
+
+@app.route('/creatreviewereanswer', methods=['POST'])
+
+def createrevieweranswer():
+    """Create new reviewer answer."""
+
+    checklist_id = request.form.get('checklist_id')
+    question_id = request.form.get('question_id')
     reviewer_ready = request.form.get('reviewer_ready')
     reviewer_time = request.form.get('reviewer_time')
     reviewer_comment = request.form.get('reviewer_comment')
-    complete = request.form.get('complete')
     
-    crud.create_answer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete)
-    flash('Answer posted! Select checklist.')
+    crud.create_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment)
+    flash('Reviewer answer posted! Select checklist.')
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
 
