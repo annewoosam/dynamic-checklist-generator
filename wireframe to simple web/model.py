@@ -37,6 +37,7 @@ class User(db.Model):
     templates = db.relationship('Template')
     preparerchecklist = db.relationship('Checklist', foreign_keys="Checklist.preparer_id")
     reviewerchecklist = db.relationship('Checklist', foreign_keys="Checklist.reviewer_id")
+    # recipientchecklist = db.relationship('Checklist', foreign_keys="Checklist.recipient_id")
 
     # the docs for the relationships are SQLAlchemy multiple join paths
     # the use of templates plural is intentional as there are many templates that can be connected to a user
@@ -126,7 +127,8 @@ class Checklist(db.Model):
     # link to users
     preparer_id = db.Column(db.Integer, db.ForeignKey('users.user_id')) # from login on save via create checklist fromn template click
     reviewer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    
+    # recipient_id = db.Column(db.Integer, db. ForeignKey('users.user_id'))
+
     # gathered after checklist created
     date_sent_to_review = db.Column(db.Date) # populated by on-click event
     date_review_completed = db.Column(db.Date) # reviewer/populated by on-cick event
@@ -139,6 +141,7 @@ class Checklist(db.Model):
     template = db.relationship('Template')
     preparer = db.relationship('User', foreign_keys=[preparer_id])
     reviewer = db.relationship('User', foreign_keys=[reviewer_id])
+    # recipient = db.relationship('User', foreign_keys=[recipient_id])
     answers = db.relationship('Answer')
 
 

@@ -1,4 +1,4 @@
-<!-- movie_details.html -->
+<!-- checklist_details.html -->
 {% extends 'base.html' %}
 
 {% block title %}{{ checklist.who_for }} Checklist - Details{% endblock %}
@@ -276,7 +276,7 @@
       
       <td>
 
-        <input type "number" id="checklist_id" name="checklist_id" required>
+        <input type="number" id="checklist_id" name="checklist_id" required>
   
       </td>
 
@@ -290,7 +290,7 @@
   
   <td>
   
-    <input type "number" id="question_id" name="question_id" required>
+    <input type="number" id="question_id" name="question_id" required>
   
   </td>
 
@@ -317,7 +317,7 @@
 <tr>
 
   <td><label for="preparer_time">Enter preparer minutes*:</label></td>
-  <td><input type "number" id="preparer_time" name="preparer_time">
+  <td><input type="number" id="preparer_time" name="preparer_time">
   </td>
 
 </tr>
@@ -326,10 +326,12 @@
 
   <td><label for="preparer_comment">Enter preparer comments:</label></td>
 
-  <td><input type "textarea" id="preparer_comment" name="preparer_comment">
-  </td>
+  <td><textarea id="preparer_comment" name="preparer_comment" rows="5" cols="33"></textarea></td>
+
 </tr>
+
 </table>
+
 <button type="submit" class="btn btn-primary btns">Add Preparer Answer</button> 
 </form>
 </div>
@@ -355,7 +357,7 @@
     
     <td>
 
-      <input type "number" id="checklist_id" name="checklist_id" required>
+      <input type="number" id="checklist_id" name="checklist_id" required>
 
     </td>
 
@@ -363,7 +365,7 @@
 <tr>
 
   <td> <label for="date_sent_to_review">Enter date sent to review:</label></td></td>
-  <td><input type "date" id="date_sent_to_review" name="date_sent_to_review"></td>
+  <td><input type="date" id="date_sent_to_review" name="date_sent_to_review"></td>
 
 </tr>
 
@@ -392,7 +394,7 @@
       
       <td>
 
-        <input type "number" id="checklist_id" name="checklist_id" required>
+        <input type="number" id="checklist_id" name="checklist_id" required>
   
       </td>
 
@@ -406,7 +408,7 @@
   
   <td>
   
-    <input type "number" id="question_id" name="question_id" required>
+    <input type="number" id="question_id" name="question_id" required>
   
   </td>
 
@@ -433,7 +435,7 @@
 <tr>
 
   <td><label for="reviewer_time">Enter reviewer minutes*:</label></td>
-  <td><input type "number" id="reviewer_time" name="reviewer_time"></td>
+  <td><input type="number" id="reviewer_time" name="reviewer_time"></td>
 
 </tr>
 
@@ -441,7 +443,7 @@
 
   <td><label for="reviewer_comment">Enter reviewer comments?</label></td>
 
-  <td><input type "text area" id="reviewer_comment" name="reviewer_comment">
+  <td><textarea id="reviewer_comment" name="reviewer_comment" rows="5" cols="33" ></textarea>
   </td>
 </tr>
 
@@ -477,7 +479,7 @@
     
     <td>
 
-      <input type "number" id="checklist_id" name="checklist_id" required>
+      <input type="number" id="checklist_id" name="checklist_id" required>
 
     </td>
 
@@ -485,7 +487,7 @@
 <tr>
 
   <td> <label for="date_review_completed">Enter date sent to review:</label></td></td>
-  <td><input type "date" id="date_review_completed name="date_review_completed"></td>
+  <td><input type="date" id="date_review_completed name="date_review_completed"></td>
 
 </tr>
 
@@ -496,6 +498,8 @@
 </div>
 
 <h3>Notify Recipient</h3> 
+
+
 
 <a href="mailto:recipient name field?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
 
@@ -517,7 +521,7 @@
     
     <td>
 
-      <input type "number" id="checklist_id" name="checklist_id" required>
+      <input type="number" id="checklist_id" name="checklist_id" required>
 
     </td>
 
@@ -525,7 +529,7 @@
 <tr>
 
   <td> <label for="date_complete">Enter date complete:</label></td></td>
-  <td><input type "date" id="date_complete" name="date_complete"></td>
+  <td><input type="date" id="date_complete" name="date_complete"></td>
 
 </tr>
 
@@ -566,13 +570,12 @@
 </table>
 </div>
 
-<!-- You need this in order to use JS-based components in the 
-further study. Leave this at the bottom and code above it. -->
+<!-- You need this in order to use JS-based components. Leave this at the bottom and code above it. -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- The scripts below are from teh current official site, commented out for now. -->
+<!-- The scripts below are from the current official site, commented out for now. -->
 <!-- JS, Popper.js, and jQuery -->
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
