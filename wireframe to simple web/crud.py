@@ -98,14 +98,12 @@ def get_question_by_id(question_id):
 # Functions for creating checklists, returning a list of all available checklists and
 # returning a specific checklist by id.
 
-def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id, date_sent_to_review, date_review_completed)  :
+def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)  :
     checklist = Checklist(template_id=template_id,
                   who_for=who_for,
                   time_frame=time_frame,
                   preparer_id=preparer_id,
-                  reviewer_id=reviewer_id,
-                  date_sent_to_review=date_sent_to_review,
-                  date_review_completed=date_review_completed)
+                  reviewer_id=reviewer_id)
     
     db.session.add(checklist)
     db.session.commit()
@@ -160,6 +158,33 @@ def get_answer_by_id(answer_id):
     """Return answer by id."""
 
     return Answer.query.get(answer_id)
+
+def mark_complete(checklist_id, date_complete)  :
+    complete = Checklist(checklist_id=checklist_id,
+                  date_complete=date_complete)
+    
+    db.session.add(complete)
+    db.session.commit()
+
+    return complete
+
+def mark_datesenttoreview(checklist_id, date_sent_to_review):
+    readyforreview = Checklist(checklist_id=checklist_id,
+                   date_sent_to_review=date_sent_to_review)
+
+    db.session.add(readyforreview)
+    db.session.commit() 
+
+    return readyforreview
+
+def mark_datereviewcompleted(checklist_id, date_review_completed):
+    reviewcomplete = Checklist(checklist_id=checklist_id,
+                   date_review_completed=date_review_completed)
+
+    db.session.add(reviewcomplete)
+    db.session.commit() 
+
+    return reviewcomplete
 
 # 2.0 Kanban functionality for preparer
 

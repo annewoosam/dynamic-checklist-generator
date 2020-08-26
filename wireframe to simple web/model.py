@@ -128,9 +128,10 @@ class Checklist(db.Model):
     reviewer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     
     # gathered after checklist created
-    date_sent_to_review = db.Column(db.DateTime) # populated by on-click event
-    date_review_completed = db.Column(db.DateTime) # reviewer/populated by on-cick event
-    
+    date_sent_to_review = db.Column(db.Date) # populated by on-click event
+    date_review_completed = db.Column(db.Date) # reviewer/populated by on-cick event
+    date_complete = db.Column(db.Date) # reviewer/populated by on-cick event
+
     # Relationships
     
     # Note the special way that the foreign keys for user_id are handled here and in Users
@@ -160,7 +161,7 @@ class Answer(db.Model):
     reviewer_ready = db.Column(db.String(), nullable=True)
     reviewer_time = db.Column(db.Integer, nullable=True)
     reviewer_comment = db.Column(db.String(), nullable=True)
-    complete = db.Column(db.Boolean, nullable=True)
+    
 
     # Relationships
     checklist = db.relationship('Checklist')

@@ -4,17 +4,13 @@
 		"who_for":"ABC",
 		"time_frame":"2020-12-31",
 		"preparer_id":1,
-		"reviewer_id":2,
-		"date_sent_to_review":"2020-01-01",
-		"date_review_completed":"2020-01-02"
+		"reviewer_id":2
 	},
     {
 		"template_id":1,
 		"who_for":"DEF",
 		"time_frame":"2020-12-31",
 		"preparer_id":1,
-		"reviewer_id":2,
-		"date_sent_to_review":"2020-01-01",
-		"date_review_completed":"2020-01-02"
+		"reviewer_id":2
 	}
 ]

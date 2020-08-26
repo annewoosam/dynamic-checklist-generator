@@ -143,10 +143,8 @@ def createchecklist():
     time_frame = request.form.get('time_frame')
     preparer = request.form.get('preparer')
     reviewer = request.form.get('reviewer')
-    date_sent_to_review = request.form.get('date_sent_to_review')
-    date_review_completed = request.form.get('date_review_completed')
 
-    crud.create_checklist(template_id,  who_for, time_frame, preparer, reviewer, date_sent_to_review, date_review_completed)
+    crud.create_checklist(template_id,  who_for, time_frame, preparer, reviewer)
     flash('Checklist created!')
     checklists = crud.get_checklists()
     return render_template('/all_checklists.html', checklists=checklists)
@@ -198,6 +196,40 @@ def createrevieweranswer():
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
 
+@app.route('/markcomplete', methods=['POST'])
+
+def markcomplete():
+    """Mark checklist complete."""
+
+    checklist_id = request.form.get('checklist_id')
+    date_complete = request.form.get('date_complete')
+    
+    crud.mark_complete(checklist_id, date_complete)
+    flash('Checklist marked complete! Select checklist desired.')
+    checklists = crud.get_checklists()
+    return render_template('all_checklists.html', checklists=checklists)
+
+def markdatesenttoreview():
+    """Mark date sent to review."""
+
+    checklist_id = request.form.get('checklist_id')
+    date_sent_to_review = request.form.get('date_sent_to_review')
+    
+    crud.mark_datesenttoreview(checklist_id, date_sent_to_review)
+    flash('Date sent to review registered! Select checklist desired.')
+    checklists = crud.get_checklists()
+    return render_template('all_checklists.html', checklists=checklists)
+
+def markdatereviewcompleted():
+    """Mark date review completed."""
+
+    checklist_id = request.form.get('checklist_id')
+    date_review_completed = request.form.get('date_review_completed')
+    
+    crud.mark_datereviewcompleted(checklist_id, date_review_completed)
+    flash('Date review completed registered! Select checklist desired.')
+    checklists = crud.get_checklists()
+    return render_template('all_checklists.html', checklists=checklists)
 
 if __name__ == '__main__':
 # added connection to database

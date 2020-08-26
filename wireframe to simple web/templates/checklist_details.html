@@ -86,9 +86,9 @@
     <td> {{ checklist.time_frame }} </td> 
     <td> {{ checklist.preparer.user_full_name }}, {{ checklist.preparer.email }}</td>
     <td> {{ checklist.reviewer.user_full_name }}, {{ checklist.reviewer.email }} </td> 
-    <td> {{ checklist.date_sent_to_review.strftime('%m-%d-%Y') }} </td>
-    <td> {{ checklist.date_review_completed.strftime('%m-%d-%Y') }}  </td>
-   
+    <td> {{ checklist.date_sent_to_review }} </td>
+    <td> {{ checklist.date_review_completed }}  </td>
+    <!-- .strftime('%m-%d-%Y')  -->
    </tr>
 
  </table>
@@ -336,9 +336,44 @@
 <h2>Notification</h2>
 
  
- <p>Date ready for review: {{ checklist.date_sent_to_review.strftime('%m-%d-%Y') }}  </p>
+ <p>** Date ready for review: {{ checklist.date_sent_to_review }}  </p>
+ <!-- .strftime('%m-%d-%Y') -->
  
- <h2>Notify Reviewer</h2>
+ ** In progress - Must be able to UPDATE a Checklist
+
+<div>
+
+<form action="/markdatesenttoreview" method="POST">
+
+<table>
+
+  <tr>
+
+    <td>
+
+      <label for="checklist_id">Enter checklist id*:</label></td>
+    
+    <td>
+
+      <input type "number" id="checklist_id" name="checklist_id" required>
+
+    </td>
+
+  </tr>
+<tr>
+
+  <td> <label for="date_sent_to_review">Enter date sent to review:</label></td></td>
+  <td><input type "date" id="date_sent_to_review" name="date_sent_to_review"></td>
+
+</tr>
+
+</table>
+<button type="submit" class="btn btn-primary btns">Register Date Sent to Review</button> 
+</form>
+
+</div>
+
+<h2>Notify Reviewer</h2>
 
  <a href="mailto:{{ checklist.reviewer.email }}?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
 <!-- Reviewer Answers -->
@@ -398,8 +433,7 @@
 <tr>
 
   <td><label for="reviewer_time">Enter reviewer minutes*:</label></td>
-  <td><input type "number" id="reviewer_time" name="reviewer_time">
-  </td>
+  <td><input type "number" id="reviewer_time" name="reviewer_time"></td>
 
 </tr>
 
@@ -424,13 +458,82 @@
     
 <h3>Review Complete</h3>   
 
-<p>Date review completed: {{ checklist.date_review_completed.strftime('%m-%d-%Y') }} </p>
+<p>** Date review completed: {{ checklist.date_review_completed }} </p>
+<!-- .strftime('%m-%d-%Y')  -->
+
+** In progress - Must be able to UPDATE a Checklist
+
+<div>
+
+<form action="/markdatereviewcompleted" method="POST">
+
+<table>
+
+  <tr>
+
+    <td>
+
+      <label for="checklist_id">Enter checklist id*:</label></td>
+    
+    <td>
+
+      <input type "number" id="checklist_id" name="checklist_id" required>
+
+    </td>
+
+  </tr>
+<tr>
+
+  <td> <label for="date_review_completed">Enter date sent to review:</label></td></td>
+  <td><input type "date" id="date_review_completed name="date_review_completed"></td>
+
+</tr>
+
+</table>
+<button type="submit" class="btn btn-primary btns">Register Date Review Completed</button> 
+</form>
+
+</div>
 
 <h3>Notify Recipient</h3> 
 
 <a href="mailto:recipient name field?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
 
-<h3>Mark Complete</h3> 
+<h3>Mark Complete **</h3> 
+
+** In progress - Must be able to UPDATE a Checklist
+
+<div>
+
+<form action="/markcomplete" method="POST">
+
+<table>
+
+  <tr>
+
+    <td>
+
+      <label for="checklist_id">Enter checklist id*:</label></td>
+    
+    <td>
+
+      <input type "number" id="checklist_id" name="checklist_id" required>
+
+    </td>
+
+  </tr>
+<tr>
+
+  <td> <label for="date_complete">Enter date complete:</label></td></td>
+  <td><input type "date" id="date_complete" name="date_complete"></td>
+
+</tr>
+
+</table>
+<button type="submit" class="btn btn-primary btns">Register Date Checklist Complete</button> 
+</form>
+
+</div>
 
 <table class="table table-hover table-striped">
  

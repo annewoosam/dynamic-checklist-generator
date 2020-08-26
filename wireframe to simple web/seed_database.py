@@ -92,52 +92,61 @@ with open('data/checklists.json') as f:
 
 checklists_in_db = []
 for checklist in checklist_data:
-    template_id, who_for, time_frame, preparer_id, reviewer_id, date_sent_to_review, date_review_completed = (
+    template_id, who_for, time_frame, preparer_id, reviewer_id = (
                                    checklist['template_id'],
                                    checklist['who_for'],
                                    checklist['time_frame'],
                                    checklist['preparer_id'],
-                                   checklist['reviewer_id'],
-                                   checklist['date_sent_to_review'],
-                                   checklist['date_review_completed'])
+                                   checklist['reviewer_id'])
 
     db_checklist = crud.create_checklist(template_id,
                                  who_for,
                                  time_frame,
                                  preparer_id,
-                                 reviewer_id,
-                                 date_sent_to_review,
-                                 date_review_completed)
+                                 reviewer_id)
     
     checklists_in_db.append(db_checklist)
 
 # load sample answer data
-with open('data/answers.json') as f:
-    answer_data = json.loads(f.read())
+# with open('data/prepareranswers.json') as f:
+#     prepareranswer_data = json.loads(f.read())
 
 
-answers_in_db = []
-for answer in answer_data:
-    checklist_id, question_id, preparer_answer, preparer_time, preparer_comment, reviewer_ready, reviewer_time, reviewer_comment, complete = (
-                                   answer['checklist_id'],
-                                   answer['question_id'],
-                                   answer['preparer_answer'],
-                                   answer['preparer_time'],
-                                   answer['preparer_comment'],
-                                   answer['reviewer_ready'],
-                                   answer['reviewer_time'],
-                                   answer['reviewer_comment'],
-                                   answer['complete']
-                                   )
+# prepareranswers_in_db = []
+# for prepareranswer in prepareranswer_data:
+#     checklist_id, question_id, preparer_answer, preparer_time, preparer_comment (
+#                                    answer['checklist_id'],
+#                                    answer['question_id'],
+#                                    answer['preparer_answer'],
+#                                    answer['preparer_time'],
+#                                    answer['preparer_comment']
+#                                    )
 
-    db_answer = crud.create_answer(checklist_id,
-                                 question_id,
-                                 preparer_answer,
-                                 preparer_time,
-                                 preparer_comment,
-                                 reviewer_ready,
-                                 reviewer_time,
-                                 reviewer_comment,
-                                 complete)
+#     db_prepareranswer = crud.create_prepareranswer(checklist_id,
+#                                  question_id,
+#                                  preparer_answer,
+#                                  preparer_time,
+#                                  preparer_comment)
     
-    answers_in_db.append(db_answer)
+#     prepareranswers_in_db.append(db_prepareranswer)
+
+# with open('data/revieweranswers.json') as f:
+#     revieweranswer_data = json.loads(f.read())
+
+# revieweranswers_in_db = []
+# for revieweranswer in revieweranswer_data:
+#     checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment (
+#                                    answer['checklist_id'],
+#                                    answer['question_id'],
+#                                    answer['reviewer_ready'],
+#                                    answer['reviewer_time'],
+#                                    answer['reviewer_comment']
+#                                    )
+
+#     db_revieweranswer = crud.create_revieweranswer(checklist_id,
+#                                  question_id,
+#                                  reviewer_ready,
+#                                  reviewer_time,
+#                                  reviewer_comment)
+    
+#     revieweranswers_in_db.append(db_revieweranswer)
