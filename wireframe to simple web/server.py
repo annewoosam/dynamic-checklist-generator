@@ -209,6 +209,8 @@ def markcomplete():
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
 
+@app.route('/markdatesenttoreview', methods=['POST'])
+
 def markdatesenttoreview():
     """Mark date sent to review."""
 
@@ -219,6 +221,8 @@ def markdatesenttoreview():
     flash('Date sent to review registered! Select checklist desired.')
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
+
+@app.route('/markdatereviewcompleted', methods=['POST'])
 
 def markdatereviewcompleted():
     """Mark date review completed."""

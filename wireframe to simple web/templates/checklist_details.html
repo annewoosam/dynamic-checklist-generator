@@ -198,49 +198,56 @@
 
         {% if answer.preparer_answer == 'y' %}
  
-          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.yes_text}} </li>
+          <li> {{ answer.template_question.yes_text}} </li>
 
       
 
     {% endif %}
 
-    {% endfor %} </td> 
+    {% endfor %}
+
+     </td> 
 
     <td>     {% for answer in checklist.answers %}
 
      
 
         {% if answer.preparer_answer == 'n' %}
+
  
-          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.no_text}}</li>
+          <li> {{ answer.template_question.no_text}}</li>
 
       
-
     {% endif %}
 
-    {% endfor %} </td>
+    {% endfor %}
+
+     </td>
 
 
-        <td>     {% for answer in checklist.answers %}
+     <td>     {% for answer in checklist.answers %}
 
     
 
         {% if answer.preparer_answer == 'na' %}
  
-          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.not_applicable_text}} </li>
+          <li> {{ answer.template_question.not_applicable_text}} </li>
 
    
 
     {% endif %}
 
-    {% endfor %} </td>
-           <td>     {% for answer in checklist.answers %}
+    {% endfor %} 
+
+    </td>
+           
+    <td>     {% for answer in checklist.answers %}
 
       
 
         {% if answer.preparer_answer == '' %}
  
-          <li> {{ answer.template_question.question_number}}. {{ answer.template_question.question}} </li>
+          <li> {{ answer.template_question.question}} </li>
 
       
 
@@ -269,16 +276,8 @@
   <table>
 
     <tr>
-
-      <td>
-
-        <label for="checklist_id">Enter checklist id*:</label></td>
       
-      <td>
-
-        <input type="number" id="checklist_id" name="checklist_id" required>
-  
-      </td>
+      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
 
     </tr>
 
@@ -337,6 +336,7 @@
 </div>
 <h2>Notification</h2>
 
+
  
  <p>** Date ready for review: {{ checklist.date_sent_to_review }}  </p>
  <!-- .strftime('%m-%d-%Y') -->
@@ -350,14 +350,10 @@
 <table>
 
   <tr>
-
-    <td>
-
-      <label for="checklist_id">Enter checklist id*:</label></td>
     
     <td>
 
-      <input type="number" id="checklist_id" name="checklist_id" required>
+      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
 
     </td>
 
@@ -390,12 +386,8 @@
 
       <td>
 
-        <label for="checklist_id">Enter checklist id*:</label></td>
-      
-      <td>
+        <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
 
-        <input type="number" id="checklist_id" name="checklist_id" required>
-  
       </td>
 
     </tr>
@@ -453,6 +445,81 @@
 
 </div>
 
+ <table class="table table-hover table-striped">
+  <th>Done</th> 
+  <th>To-Do</th> 
+  <th>Not Applicable</th>
+  <th>Not Answered</th>
+
+
+  <tr> 
+
+    <td>     {% for answer in checklist.answers %}
+
+      
+
+        {% if answer.reviewer_ready == 'r' %}
+ 
+          <li> {{ answer.template_question.yes_text}} </li>
+
+      
+
+    {% endif %}
+
+    {% endfor %}
+
+     </td> 
+
+    <td>     {% for answer in checklist.answers %}
+
+     
+
+        {% if answer.reviewer_ready == 'c' %}
+
+ 
+          <li> {{ answer.template_question.no_text}}</li>
+
+      
+    {% endif %}
+
+    {% endfor %}
+
+     </td>
+
+
+     <td>     {% for answer in checklist.answers %}
+
+    
+
+        {% if answer.reviewer_ready == 'na' %}
+ 
+          <li> {{ answer.template_question.not_applicable_text}} </li>
+
+   
+
+    {% endif %}
+
+    {% endfor %} 
+
+    </td>
+           
+    <td>     {% for answer in checklist.answers %}
+
+      
+
+        {% if answer.reviewer_ready == '' %}
+ 
+          <li> {{ answer.template_question.question}} </li>
+
+      
+
+    {% endif %}
+
+    {% endfor %} </td>
+   </tr>
+
+ </table>
+
 <h2>Notifications</h2>
 
 
@@ -475,18 +542,14 @@
 
     <td>
 
-      <label for="checklist_id">Enter checklist id*:</label></td>
-    
-    <td>
-
-      <input type="number" id="checklist_id" name="checklist_id" required>
+      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
 
     </td>
 
   </tr>
 <tr>
 
-  <td> <label for="date_review_completed">Enter date sent to review:</label></td></td>
+  <td> <label for="date_review_completed">Enter date review completed:</label></td></td>
   <td><input type="date" id="date_review_completed name="date_review_completed"></td>
 
 </tr>
@@ -517,11 +580,7 @@
 
     <td>
 
-      <label for="checklist_id">Enter checklist id*:</label></td>
-    
-    <td>
-
-      <input type="number" id="checklist_id" name="checklist_id" required>
+      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
 
     </td>
 

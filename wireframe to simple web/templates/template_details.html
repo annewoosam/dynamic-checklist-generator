@@ -83,9 +83,9 @@
 
     <tr>
       <td>Created on:</td>
-      <td> {{ template.created_on }} </td>
+      <td> {{ template.created_on.strftime('%m-%d-%Y') }} </td>
     </tr>
-  
+  <!-- .strftime('%m-%d-%Y')  -->
    
   </table>
    
@@ -114,7 +114,7 @@
       <ol>
 {% for template_question in template.template_questions %}
 <td><li>{{ template_question.template_id }}</li></td>
-<td><li>{{ template_question.question_number }}</li></td>
+<td><li>{{ template_question.question_number|length }}</li></td>
 <td><li>{{ template_question.question }}</li></td>
 <td><li>{{ template_question.help_text }}</li></td>
 <td><li>{{ template_question.resource_url }}</li></td>
@@ -135,59 +135,49 @@
 <form action="/createquestion" method="POST"><table>
 
 <tr>
-  <td><label for="template_id">Enter the template id:</label></td>
-  <td><input type "number" id="template_id" name="template_id" required>
-  </td>
+  <td><input type="hidden" id="template_id" name="template_id" value={{template.template_id}}></td>
 </tr>
 
 <tr>
   <td><label for="question_number">Enter the question number:</label></td>
-  <td><input type "number" id="question_number" name="question_number" required>
+  <td><input type="number" id="question_number" name="question_number" min=1 required>
   </td>
 </tr>
 
 <tr>
   <td><label for="question">Enter the question:</label></td>
-  <td><input type "text area" id="question" name="question" required>
-  </td>
+  <td><textarea id="question" name="question" rows="5" cols="33" required></textarea></td>
 </tr>
 
 <tr>
   <td><label for="yes_text">Enter the response for items marked yes, done:</label></td>
-  <td><input type "text area" id="yes_text" name="yes_text" required>
-  </td>
+  <td><textarea id="yes_text" name="yes_text" rows="5" cols="33" required></textarea></td>
 </tr>
 
 <tr>
   <td><label for="no-text">Enter the response for items marked no, done:</label></td>
-  <td><input type "text_area" id="no_text" name="no_text" required>
-  </td>
+  <td><textarea id="no_text" name="no_text" rows="5" cols="33" required></textarea></td>
 </tr>
 
 <tr>
   <td><label for="not_applicable text">Enter the response for items marked not applicable:?</label></td>
-  <td><input type "text_area" id="not_applicable_text" name="not_applicable_text" required>
-  </td>
+  <td><textarea id="not_applicable_text" name="not_applicable_text" rows="5" cols="33" required></textarea></td>
 </tr>
 
 <tr>
   <td><label for="category">Enter the category:</label></td>
-  <td><input type "text_area" id="category" name="category" required>
-  </td>
+  <td><input type="category" name="category" required></td>
 </tr>
 
 <tr>
   <td><label for="resource_url">Enter the link to a video or web-resource:</label></td>
-  <td><input type "url" id="resource_url" name="resource_url" required>
-  </td>
+  <td><input type="url" id="resource_url" name="resource_url" required></td>
 </tr>
 
 <tr>
   <td><label for="help_text">Enter help text:</label></td>
-  <td><input type "text area" id="help_text" name="help_text" required>
-  </td>
+  <td><textarea id="help_text" name="help_text" rows="5" cols="33" required></textarea></td>
 </tr>
-
 
 </table>
 
@@ -202,9 +192,7 @@
 <form action="/createchecklist" method="POST"><table>
 
 <tr>
-  <td><label for="template_id">What template id is this for?</label></td>
-  <td><input type "text" id="template_id" name="template_id" required></td>
-
+  <td><input type="hidden" id="template_id" name="template_id" value={{template.template_id}}></td>
 </tr>
 
 <tr>
