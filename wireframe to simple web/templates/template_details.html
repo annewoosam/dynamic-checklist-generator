@@ -1,59 +1,37 @@
-<!-- movie_details.html -->
+<!-- template_details.html -->
 {% extends 'base.html' %}
 
 {% block title %} Details{% endblock %}
 
 {% block body %}
+
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Creator Dashboard</title>
 
   <!-- Load Bootstrap 4 -->
-  <!-- CSS only -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
   <!-- Load Font Awesome -->
-  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
-  <!-- Load our stylesheet -->
-  <style>
-    h1 {font-weight: bold;}
-    .row > div > div {
-          text-align: center;
-          font-size: 100%;
-    }
-    .rowform > div > div {
-          text-align: left;
-          font-size: 100%;
-    }
-    .override {
-      background-color: rgb(45,110,104);
-      font-color: black;
-    }
-    a:link {
-      color: white;
-    }
-    a:hover {
-      color: white;
-    }
-    a:active {
-      color: white;
-    }
-    a:visited {
-      color: white;
-    }
-    .img {
-      padding-top: 2em;
-      padding-bottom: 2em;
 
-    }
-    .btns {
-      margin-top: 2em;
-      margin-bottom: 2em;
-      background-color: rgb(45,110,104);
-    }
-  </style>
+  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
+
+  <!-- Load our stylesheet -->
+
+  <style></style>
+
+  <!-- CSS only -->
+
+  <link rel="stylesheet" type="text/css" HREF="../css/styles.css">
+
 </head>
 
 <body>
@@ -61,18 +39,17 @@
 <!-- Code goes here. -->
 <!-- NAV BAR CODE -->
 <nav class="navbar navbar-expand-lg override a:link">
-  <div><a class="nav-link" href="/question_details">Questions</a></div>
+  <div><a class="nav-link" href=""></a></div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
 
-
-
-
-    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+    <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
        <div class="row"><img src="/static/img/pexels-breakingpic-3243.jpg" class="img"></div>
+       
        <div><h1>Let's Create!</div></h1>
+
        <div>Fill out this form and submit it to create your checklist.</div>
 
   <div>
@@ -83,6 +60,7 @@
 
     <tr>
       <td>Created on:</td>
+
       <td> {{ template.created_on.strftime('%m-%d-%Y') }} </td>
     </tr>
   <!-- .strftime('%m-%d-%Y')  -->
@@ -90,149 +68,238 @@
   </table>
    
 </p>
+
 <h1>Questions</h1>
-  <div class="pb-2 mt-3 mb-2">
+
+  <div class="pb-4 mt-6 mb-4">
+
     <div class="col">
+
       <h1></h1>
+
       <p class="lead"></p>
+
     </div>
+
   </div>
 
   <table class="table table-hover table-striped">
+
     <thead>
-    <tr><b>
+
       <th>Template</th>
+
       <th>Question Number</th>
+
       <th>Question <i class="far fa-question-circle"></i></th>
+
       <th>Help <i class="far fa-life-ring"></i></th>
+
       <th>Training <i class="fas fa-video"></i></th>
+
       <th>Driver <i class="fas fa-key"></th>
+
       <th>Category <i class="fas fa-link"></i></th>
-    </tr></b>
+      
+
     </thead>
-    <tr>
-      <ol>
-{% for template_question in template.template_questions %}
-<td><li>{{ template_question.template_id }}</li></td>
-<td><li>{{ template_question.question_number|length }}</li></td>
-<td><li>{{ template_question.question }}</li></td>
-<td><li>{{ template_question.help_text }}</li></td>
-<td><li>{{ template_question.resource_url }}</li></td>
-<td><li>{{ template_question.primary_driver }}</li></td>
-<td><li>{{ template_question.category }}</li></td>
-</tr>
-{% endfor %}
-</ol>
-    </tr>
+
+       {% for template_question in template.template_questions %} 
+
     <tr>
 
+      <ol>
+
+        <td>{{ template_question.template_id }}</td>
+
+        <td>{{ template_question.question_number }}</td>
+
+        <td>{{ template_question.question }}</td>
+
+        <td>{{ template_question.help_text }}</td>
+
+        <td>{{ template_question.resource_url }}</td>
+
+        <td>{{ template_question.primary_driver }}</td>
+
+        <td>{{ template_question.category }}</td>
+
+       {% endfor %}
+
     </tr>
+
+      </ol>
+
   </table>
 
-<h1>Add a question to this template, template id {{ template.template_id }}:</h1>
+<h1>Add a question to this template:</h1>
+
 <!-- create question form -->
-<div>
-<form action="/createquestion" method="POST"><table>
+<div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
 
-<tr>
-  <td><input type="hidden" id="template_id" name="template_id" value={{template.template_id}}></td>
-</tr>
+  <form action="/createquestion" method="POST">
 
-<tr>
-  <td><label for="question_number">Enter the question number:</label></td>
-  <td><input type="number" id="question_number" name="question_number" min=1 required>
-  </td>
-</tr>
+    <table>
 
-<tr>
-  <td><label for="question">Enter the question:</label></td>
-  <td><textarea id="question" name="question" rows="5" cols="33" required></textarea></td>
-</tr>
+      <tr>
+  
+        <td><input type="hidden" id="template_id" name="template_id" value={{template.template_id}}></td>
 
-<tr>
-  <td><label for="yes_text">Enter the response for items marked yes, done:</label></td>
-  <td><textarea id="yes_text" name="yes_text" rows="5" cols="33" required></textarea></td>
-</tr>
+      </tr>
 
-<tr>
-  <td><label for="no-text">Enter the response for items marked no, done:</label></td>
-  <td><textarea id="no_text" name="no_text" rows="5" cols="33" required></textarea></td>
-</tr>
+      <tr>
 
-<tr>
-  <td><label for="not_applicable text">Enter the response for items marked not applicable:?</label></td>
-  <td><textarea id="not_applicable_text" name="not_applicable_text" rows="5" cols="33" required></textarea></td>
-</tr>
+        <td><label for="question_number">Enter the question number:</label></td>
+  
+        <td><input type="number" id="question_number" name="question_number" min=1 required></td>
 
-<tr>
-  <td><label for="category">Enter the category:</label></td>
-  <td><input type="category" name="category" required></td>
-</tr>
+      </tr>
 
-<tr>
-  <td><label for="resource_url">Enter the link to a video or web-resource:</label></td>
-  <td><input type="url" id="resource_url" name="resource_url" required></td>
-</tr>
+      <tr>
+      
+        <td><label for="question">Enter the question:</label></td>
+  
+        <td><textarea id="question" name="question" rows="5" cols="70" required></textarea></td>
+        
+      </tr>
 
-<tr>
-  <td><label for="help_text">Enter help text:</label></td>
-  <td><textarea id="help_text" name="help_text" rows="5" cols="33" required></textarea></td>
-</tr>
+      <tr>
 
-</table>
+        <td><label for="yes_text">Enter the response for items marked yes, done:</label></td>
+  
+        <td><textarea id="yes_text" name="yes_text" rows="5" cols="70" required></textarea></td>
 
-<button type="submit" class="btn btn-primary btns">Add question</button> 
+      </tr>
+
+      <tr>
+
+        <td><label for="no-text">Enter the response for items marked no, done:</label></td>
+  
+        <td><textarea id="no_text" name="no_text" rows="5" cols="70" required></textarea></td>
+
+      </tr>
+
+      <tr>
+
+        <td><label for="not_applicable text">Enter the response for items marked not applicable:</label></td>
+  
+        <td><textarea id="not_applicable_text" name="not_applicable_text" rows="5" cols="70" required></textarea></td>
+
+      </tr>
+
+      <tr>
+
+        <td><label for="category">Enter the category:</label></td>
+  
+        <td><input type="category" name="category" required></td>
+
+      </tr>
+
+      <tr>
+  
+        <td><label for="resource_url">Enter the link to a video or web-resource:</label></td>
+  
+        <td><input type="url" id="resource_url" name="resource_url" required></td>
+
+      </tr>
+
+      <tr>
+   
+        <td><label for="help_text">Enter help text:</label></td>
+  
+        <td><textarea id="help_text" name="help_text" rows="5" cols="33" required></textarea></td>
+
+      </tr>
+
+    </table>
+
+  <button type="submit" class="btn btn-primary btns">Add question</button> 
+
 </form>
 
-</p></div>
+</p>
+
+</div>
 
 <h1>Create a checklist from this template:</h1>
+
 <!-- create checklist form -->
-<div>
-<form action="/createchecklist" method="POST"><table>
+
+<div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+
+  <form action="/createchecklist" method="POST"><table>
 
 <tr>
+
   <td><input type="hidden" id="template_id" name="template_id" value={{template.template_id}}></td>
+
 </tr>
 
 <tr>
+
   <td><label for="preparer">Choose a preparer:</label></td>
+
   <td>
     <select id="preparer" required>
+
   {% for user in users %}
+
   <option value={{ user.user_id }} >{{ user.user_full_name }}</option>
+
   {% endfor %}
+
   </select>
+
   </td>
+
 </tr> 
 
 <tr>
+
 <td><label for="reviewer">Choose a reviewer</label></td>
+
 <td><select id="reviewer" required>
+
   {% for user in users %}
+
   <option value={{ user.user_id}} >{{ user.user_full_name }}</option>
+
   {% endfor %}
+
 </select>
+
 </td>
+
 </tr>
 
+
 <tr>
+
   <td><label for="who_for">Who is this checklist for?</label></td>
+
   <td><input type "text" id="who_for" name="who_for" required></td>
 
 </tr>
 
 <tr>
   <td><label for="time_frame">What time period is this for?</label></td>
+
   <td><input type "text" id="time_frame" name="time_frame" required>
+
   </td>
+
 </tr>
 
 
 </table>
+
 <button type="submit" class="btn btn-primary btns">Create checklist</button> 
+
 </form>
-</p></div>
+
+</p>
+</div>
+
 <!-- You need this in order to use JS-based components in the 
 further study. Leave this at the bottom and code above it. -->
 

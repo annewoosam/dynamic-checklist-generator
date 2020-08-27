@@ -1,0 +1,31 @@
+    h1 {font-weight: bold;}
+      .row > div > div {
+          text-align: center;
+          font-size: 100%;
+      }
+    .override {
+      background-color: rgb(45,110,104);
+      font-color: black;
+    }
+    a:link {
+      color: black;
+    }
+    a:hover {
+      color: black;
+    }
+    a:active {
+      color: black;
+    }
+    a:visited {
+      color: black;
+    }
+    .img {
+      padding-top: 2em;
+      padding-bottom: 2em;
+
+    }
+    .btns {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      background-color: rgb(45,110,104);
+    }

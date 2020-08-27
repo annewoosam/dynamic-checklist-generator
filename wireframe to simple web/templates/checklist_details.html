@@ -4,70 +4,61 @@
 {% block title %}{{ checklist.who_for }} Checklist - Details{% endblock %}
 
 {% block body %}
+
 <!DOCTYPE html>
+
 <html>
+
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=de/Users/gsanda/src/project planning/projects/dynamic-checklists/wireframe to simple web/templates/template_details.htmlvice-width, initial-scale=1">
+
   <title>Preparer Dashboard</title>
 
   <!-- Load Bootstrap 4 -->
-  <!-- CSS only -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
   <!-- Load Font Awesome -->
-  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
-  <!-- Load our stylesheet -->
-  <style>
-    h1 {font-weight: bold;}
-      .row > div > div {
-          text-align: center;
-          font-size: 100%;
-      }
-    .override {
-      background-color: rgb(45,110,104);
-      font-color: black;
-    }
-    a:link {
-      color: black;
-    }
-    a:hover {
-      color: black;
-    }
-    a:active {
-      color: black;
-    }
-    a:visited {
-      color: black;
-    }
-    .img {
-      padding-top: 2em;
-      padding-bottom: 2em;
 
-    }
-    .btns {
-      margin-top: 2em;
-      margin-bottom: 2em;
-      background-color: rgb(45,110,104);
-    }
-  </style>
+  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
+
+  <!-- Load our stylesheet -->
+
+  <style></style>
+
+  <!-- CSS only -->
+
+  <link rel="stylesheet" type="text/css" HREF="../css/styles.css">
+
 </head>
 
 <body>
 <!-- Code goes here. -->
+
 <!-- NAV BAR CODE -->
+
 <nav class="navbar navbar-expand-lg override a:link">
+
   <div><a class="nav-link" href="/question_details"></a></div>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
     <span class="navbar-toggler-icon"></span>
+
   </button>
+
 </nav>
 
 
 
 
-    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+    <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+    
     <div class="row">
+    
     <img src="/static/img/pexels-breakingpic-3243.jpg" class="img">
+    
     </div>
 
 <h1>{{ checklist.who_for }} Checklist</h1>
@@ -75,19 +66,29 @@
 
 
  <table class="table table-hover table-striped">
+
   <th>For the period</th> 
+
   <th>Preparer</th> 
+
   <th>Reviewer</th>
+
   <th>Sent to Review</th>
+
   <th>Review Complete</th>
 
   <tr> 
 
     <td> {{ checklist.time_frame }} </td> 
+
     <td> {{ checklist.preparer.user_full_name }}, {{ checklist.preparer.email }}</td>
+
     <td> {{ checklist.reviewer.user_full_name }}, {{ checklist.reviewer.email }} </td> 
+
     <td> {{ checklist.date_sent_to_review }} </td>
+
     <td> {{ checklist.date_review_completed }}  </td>
+
     <!-- .strftime('%m-%d-%Y')  -->
    </tr>
 
@@ -119,11 +120,17 @@
       <ol>
 
             <td>{{ template_question.question_number}}</td>
+
             <td>{{ template_question.question}}</td>
+
             <td>{{ template_question.help_text}}</td>
+
             <td>{{ template_question.resource_url}}</td>
+
             <td>{{ template_question.primary_driver}}</td>
+
             <td>{{ template_question.category}}</td>
+
       </ol>
     </tr>
     {% endfor %}
@@ -161,7 +168,7 @@
 
      <td> {{ answer.question_id }} </td>
 
-     <td>{{ answer.template_question.question}}</td>
+     <td> {{ answer.template_question.question}} </td>
 
      <td> {{ answer.preparer_answer }}</td>
 
@@ -184,9 +191,13 @@
 </table>
 
  <table class="table table-hover table-striped">
+
   <th>Done</th> 
+
   <th>To-Do</th> 
+
   <th>Not Applicable</th>
+
   <th>Not Answered</th>
 
 
@@ -254,6 +265,7 @@
     {% endif %}
 
     {% endfor %} </td>
+
    </tr>
 
  </table>
@@ -261,8 +273,7 @@
 
 
 
-<h1>Add answers to Checklist ID {{ checklist.checklist_id }}.</h1>
-<h2> You must answer items marked with an * with a number or you will receive an error:</h2>
+<h1>Add answers to Checklist</h1>
 
 <!-- create checklist form -->
 
@@ -316,8 +327,8 @@
 <tr>
 
   <td><label for="preparer_time">Enter preparer minutes*:</label></td>
-  <td><input type="number" id="preparer_time" name="preparer_time">
-  </td>
+
+  <td><input type="number" id="preparer_time" name="preparer_time"></td>
 
 </tr>
 
@@ -325,15 +336,18 @@
 
   <td><label for="preparer_comment">Enter preparer comments:</label></td>
 
-  <td><textarea id="preparer_comment" name="preparer_comment" rows="5" cols="33"></textarea></td>
+  <td><textarea id="preparer_comment" name="preparer_comment" rows="5" cols="70"></textarea></td>
 
 </tr>
 
 </table>
 
 <button type="submit" class="btn btn-primary btns">Add Preparer Answer</button> 
+
 </form>
+
 </div>
+
 <h2>Notification</h2>
 
 
@@ -360,13 +374,16 @@
   </tr>
 <tr>
 
-  <td> <label for="date_sent_to_review">Enter date sent to review:</label></td></td>
+  <td> <label for="date_sent_to_review">Enter date sent to review:</label></td>
+
   <td><input type="date" id="date_sent_to_review" name="date_sent_to_review"></td>
 
 </tr>
 
 </table>
+
 <button type="submit" class="btn btn-primary btns">Register Date Sent to Review</button> 
+
 </form>
 
 </div>
@@ -374,8 +391,10 @@
 <h2>Notify Reviewer</h2>
 
  <a href="mailto:{{ checklist.reviewer.email }}?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
+
 <!-- Reviewer Answers -->
 <h1>Reviewer Answers</h1>
+
 <div>
 
 <form action="/creatreviewereanswer" method="POST">
@@ -427,6 +446,7 @@
 <tr>
 
   <td><label for="reviewer_time">Enter reviewer minutes*:</label></td>
+
   <td><input type="number" id="reviewer_time" name="reviewer_time"></td>
 
 </tr>
@@ -435,20 +455,26 @@
 
   <td><label for="reviewer_comment">Enter reviewer comments?</label></td>
 
-  <td><textarea id="reviewer_comment" name="reviewer_comment" rows="5" cols="33" ></textarea>
-  </td>
+  <td><textarea id="reviewer_comment" name="reviewer_comment" rows="5" cols="70" ></textarea> </td>
+
 </tr>
 
 </table>
+
 <button type="submit" class="btn btn-primary btns">Add Reviewer Answer</button> 
+
 </form>
 
 </div>
 
  <table class="table table-hover table-striped">
+
   <th>Done</th> 
+
   <th>To-Do</th> 
+
   <th>Not Applicable</th>
+
   <th>Not Answered</th>
 
 
@@ -550,12 +576,15 @@
 <tr>
 
   <td> <label for="date_review_completed">Enter date review completed:</label></td></td>
+
   <td><input type="date" id="date_review_completed name="date_review_completed"></td>
 
 </tr>
 
 </table>
+
 <button type="submit" class="btn btn-primary btns">Register Date Review Completed</button> 
+
 </form>
 
 </div>
@@ -587,13 +616,16 @@
   </tr>
 <tr>
 
-  <td> <label for="date_complete">Enter date complete:</label></td></td>
+  <td> <label for="date_complete">Enter date complete:</label></td>
+
   <td><input type="date" id="date_complete" name="date_complete"></td>
 
 </tr>
 
 </table>
+
 <button type="submit" class="btn btn-primary btns">Register Date Checklist Complete</button> 
+
 </form>
 
 </div>
@@ -626,7 +658,9 @@
       <td>Track your time to plan and live better.</td>
 
     </tr>
+
 </table>
+
 </div>
 
 <!-- You need this in order to use JS-based components. Leave this at the bottom and code above it. -->
