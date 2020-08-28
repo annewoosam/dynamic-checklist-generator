@@ -68,7 +68,18 @@ def get_template_by_id(template_id):
 # Functions for creating template questions, returning a list of all available template questions and
 # returning a specific template question by id.
 
-def create_question(template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text):
+def create_question(template_id, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text):
+   
+    question_number=db.session.query(db.func.max(TemplateQuestion.question_number)).group_by("template_id").filter(TemplateQuestion.template_id==template_id).first()
+    
+    if question_number:
+
+      question_number=question_number[0]+1
+
+    else:
+
+      question_number=1 
+
     template_question = TemplateQuestion(template_id=template_id,
                   question_number=question_number,
                   question=question,
@@ -123,8 +134,6 @@ def get_checklist_by_id(checklist_id):
 # Functions for creating answers, returning a list of all available answers and
 # returning a specific answers by id.
 
-
-
 def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
     prepareranswer = Answer(checklist_id=checklist_id,
                   question_id=question_id,
@@ -159,20 +168,14 @@ def get_answer_by_id(answer_id):
 
     return Answer.query.get(answer_id)
 
-def mark_complete(checklist_id, date_complete)  :
-    complete = Checklist(checklist_id=checklist_id,
-                  date_complete=date_complete)
-    
-    db.session.add(complete)
-    db.session.commit()
-
-    return complete
 
 def mark_datesenttoreview(checklist_id, date_sent_to_review):
     readyforreview = Checklist(checklist_id=checklist_id,
                    date_sent_to_review=date_sent_to_review)
+    
+    date_sent_to_review=db.session.query(Checklist.checklist_id).filter(Checklist.checklist_id==checklist_id).update({Checklist.date_sent_to_review:date_sent_to_review})
+    # print(date_sent_to_review)
 
-    db.session.add(readyforreview)
     db.session.commit() 
 
     return readyforreview
@@ -181,10 +184,44 @@ def mark_datereviewcompleted(checklist_id, date_review_completed):
     reviewcomplete = Checklist(checklist_id=checklist_id,
                    date_review_completed=date_review_completed)
 
-    db.session.add(reviewcomplete)
+    date_review_completed=db.session.query(Checklist.checklist_id).filter(Checklist.checklist_id==checklist_id).update({Checklist.date_review_completed:date_review_completed})
+    # print(date_review_completed)
     db.session.commit() 
 
     return reviewcomplete
+
+
+
+def mark_complete(checklist_id, date_complete)  :
+    complete = Checklist(checklist_id=checklist_id,
+                  date_complete=date_complete)
+    
+    date_complete=db.session.query(Checklist.checklist_id).filter(Checklist.checklist_id==checklist_id).update({Checklist.date_complete:date_complete})
+    # print(date_review_completed)
+
+    db.session.commit()
+
+    return complete
+
+# def choose_recipient(checklist_id, recipient_id):
+#     recipient = Checklist(checklist_id=checklist_id,
+#                   recipient_id=recipient_id)
+    
+#     db.session.add(recipient)
+#     db.session.commit()
+
+#     return recipient
+
+def create_recipient(checklist_id, user_full_name, email, password) :
+    """Create and return a new user."""
+
+    user = User(user_full_name=user_full_name, email=email, password=password)
+    checklist_id=checklist_id
+    db.session.add(user)
+    db.session.commit()
+
+    return user
+
 
 # 2.0 Kanban functionality for preparer
 

@@ -24,6 +24,7 @@ model.db.create_all()
 # Create 6 users
 # docs on generating random users at https://faker.readthedocs.io/en/master/
 # can fake addresses, internet providers, text and localize so names appear to be from certain country
+# note that Faker separately randomizes the emails and names so this can appear a little mismatched.
 
 for n in range(6):
     email = fake.email()  # Voila! A unique email!
@@ -73,7 +74,6 @@ for template_question in template_question_data:
 
     db_template_questions = crud.create_question(
                                  template_id,
-                                 question_number,
                                  question,
                                  yes_text,
                                  no_text,

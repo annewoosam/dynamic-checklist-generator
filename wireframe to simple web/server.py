@@ -84,7 +84,6 @@ def createquestion():
     """Create new question."""
 
     template_id = request.form.get('template_id')
-    question_number = request.form.get('question_number')
     question = request.form.get('question')
     yes_text =request.form.get('yes_text')
     no_text = request.form.get('no_text')
@@ -94,7 +93,7 @@ def createquestion():
     resource_url = request.form.get('resource_url')
     help_text = request.form.get('help-text')
 
-    crud.create_question(template_id, question_number, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text)
+    crud.create_question(template_id, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text)
     
     flash('Question added!')
 
@@ -133,7 +132,8 @@ def show_checklist(checklist_id):
   #Show details on a particular template.
     checklist = crud.get_checklist_by_id(checklist_id)
     users=crud.get_users()
-    return render_template('checklist_details.html', checklist=checklist, user=users)
+    answers=crud.get_answers()
+    return render_template('checklist_details.html', checklist=checklist, users=users, answers=answers)
 
 @app.route('/createchecklist', methods=['POST'])
 def createchecklist():
@@ -195,6 +195,41 @@ def createrevieweranswer():
     flash('Reviewer answer posted! Select checklist.')
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
+
+# @app.route('/chooserecipient', methods=['POST'])
+
+# def chooserecipient():
+#     """Choose pre-existing recipient."""
+
+#     checklist_id = request.form.get('checklist_id')
+#     recipient = request.form.get('recipient')
+
+#     crud.choose_recipient(checklist_id, recipient)
+#     flash('Recipient attached to checklist!')
+#     checklists = crud.get_checklists()
+#     return render_template('/all_checklists.html', checklists=checklists)
+
+# @app.route('/registerrecipient', methods=['POST'])
+
+# def register_recipient():
+#     """Create a new recipient user."""
+
+#     checklist_id = request.form.get('checklist_id')
+
+#     user_full_name = request.form.get('user_full_name')
+
+#     email = request.form.get('email')
+
+#     password = request.form.get('password')
+
+#     crud.create_recipient(user_full_name, email, password)
+    
+   
+
+#     flash('Account created!')
+#     checklist = crud.get_checklist_by_id() 
+#     users=crud.get_users()
+#     return render_template('checklist_details.html', checklist=checklist, users=users)
 
 @app.route('/markcomplete', methods=['POST'])
 
