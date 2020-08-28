@@ -1,4 +1,4 @@
-"""Server for movie ratings app."""
+"""Server for checklist app."""
 
 # increased flask
 from flask import Flask, render_template, request, flash, session, jsonify, redirect
@@ -63,6 +63,7 @@ def show_template(template_id):
 
     template = crud.get_template_by_id(template_id)
     users=crud.get_users()
+    # isnotcreator=template.created_by!=session.get("user_id")
     return render_template('template_details.html', template=template, users=users)
 
 @app.route('/createtemplate', methods=['POST'])

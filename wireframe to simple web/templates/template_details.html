@@ -68,7 +68,7 @@
   </table>
    
 </p>
-
+<h1></h1>{{ session[‘created_by’] }}<h1></h1>
 <h1>Questions</h1>
 
   <div class="pb-4 mt-6 mb-4">
@@ -146,7 +146,7 @@
         <td><input type="hidden" id="template_id" name="template_id" value={{template.template_id}}></td>
 
       </tr>
-
+   
 
       <tr>
       
@@ -187,7 +187,13 @@
         <td><input type="category" name="category" required></td>
 
       </tr>
+      <tr>
 
+        <td><label for="primary_driver">Primary Driver?:</label></td>
+  
+        <td><input type="text" name="primary_driver" ></td>
+
+      </tr>
       <tr>
   
         <td><label for="resource_url">Enter the link to a video or web-resource:</label></td>
@@ -205,8 +211,11 @@
       </tr>
 
     </table>
-
-  <button type="submit" class="btn btn-primary btns">Add question</button> 
+{% if template.created_by==session.get('user_id') %}
+  <button type="submit" class="btn btn-primary btns" >Add question</button> 
+{% else %}
+  <button type="submit" class="btn btn-primary btns" disabled >Add question</button> 
+{% endif %}
 
 </form>
 

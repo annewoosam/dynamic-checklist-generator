@@ -194,6 +194,7 @@
 
 </table>
 
+<h1>Preparer Kanban</h1>
 
  <table class="table table-hover table-striped">
 
@@ -351,7 +352,6 @@
 
 </form>
 
-</div>
 
 <script>
 function myFunction() {
@@ -362,17 +362,19 @@ function myFunction() {
 <h2>Notification</h2>
 
 
- 
- <p>** Date ready for review: {{ checklist.date_sent_to_review }}  </p>
- <!-- .strftime('%m-%d-%Y') -->
- 
- ** In progress - Must be able to UPDATE a Checklist
+<table class="table table-hover table-striped">
+  
+  <tr>
+  <p>Date sent to review: {{ checklist.date_sent_to_review }}  </p>  
+  </tr>
 
-<div>
+  <tr>
+
+
 
 <form action="/markdatesenttoreview" method="POST">
 
-<table>
+ <table>
 
   <tr>
     
@@ -393,20 +395,30 @@ function myFunction() {
 
 </table>
 
-<button type="submit" class="btn btn-primary btns">Register Date Sent to Review - Query Ready</button> 
-
-</form>
-
-</div>
-
+<button type="submit" class="btn btn-primary btns">Register Date Sent to Review - WORKING</button> 
 <h2>Notify Reviewer</h2>
 
  <a href="mailto:{{ checklist.reviewer.email }}?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
 
+</form>
+
+
+  </tr>
+  <tr>
+  <td>
+
+  </td></tr>
+  </table> 
+ 
+
+ 
+
+
+<div>
 <!-- Reviewer Answers -->
 <h1>Reviewer Answers</h1>
 
-<div>
+
 
 <form action="/creatreviewereanswer" method="POST">
 
@@ -477,6 +489,10 @@ function myFunction() {
 </form>
 
 </div>
+
+<div>
+
+<h1>Reviewer Kanban</h1>
 
  <table class="table table-hover table-striped">
 
@@ -556,47 +572,47 @@ function myFunction() {
    </tr>
 
  </table>
+</div>
+  <div>
+  <h3>Review Complete</h3>   
 
-<h2>Notifications</h2>
+  <p> Date completed: {{ checklist.date_review_completed }}</p>
+  
+
+  
+  <form action="/markdatereviewcompleted" method="POST">
+  
+  <table>
+  
+    <tr>
+  
+      <td>
+  
+        <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
+  
+      </td>
+  
+    </tr>
+  <tr>
+  
+    <td> <label for="date_review_completed">Enter date review completed:</label></td></td>
+  
+    <td><input type="date" id="date_review_completed" name="date_review_completed"></td>
+  
+  </tr>
+  
+  </table>
+  
+  <button type="submit" class="btn btn-primary btns">Register Date Review Completed - Working</button> 
+  
+  </form>
+ </tr>
+ <h2>Notifications</h2>
 
 
 <a href="mailto:{{ checklist.preparer.email }}?subject={{ checklist.who_for }} corrections required&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Return for Corrections</a></p>
-    
-<h3>Review Complete</h3>   
 
-<p>** Date review completed: {{ checklist.date_review_completed }} </p>
-<!--  -->
 
-** In progress - Must be able to UPDATE a Checklist
-
-<div>
-
-<form action="/markdatereviewcompleted" method="POST">
-
-<table>
-
-  <tr>
-
-    <td>
-
-      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-
-    </td>
-
-  </tr>
-<tr>
-
-  <td> <label for="date_review_completed">Enter date review completed:</label></td></td>
-
-  <td><input type="date" id="date_review_completed name="date_review_completed"></td>
-
-</tr>
-
-</table>
-
-<button type="submit" class="btn btn-primary btns">Register Date Review Completed - Query ready</button> 
-
-</form>
 
 
 <h3>Notify Recipient</h3> 
@@ -697,10 +713,9 @@ function myFunction() {
 
 <a href="mailto:recipient name field?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
 
-<h3>Mark Complete **</h3> 
+<h3>Mark Complete</h3> 
 
-** In progress - Must be able to UPDATE a Checklist
-
+<p> Date completed: {{ checklist.date_complete }}</p>
 <div>
 
 <form action="/markcomplete" method="POST">
@@ -726,11 +741,11 @@ function myFunction() {
 
 </table>
 
-<button type="submit" class="btn btn-primary btns">Mark Complete - Query Ready</button> 
+<button type="submit" class="btn btn-primary btns">Mark Complete - Working</button> 
 
 </form>
 
-</div>
+</div>   
 
 <table class="table table-hover table-striped">
  
