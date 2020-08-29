@@ -148,10 +148,10 @@ def createchecklist():
     template_id = request.form.get('template_id')
     who_for = request.form.get('who_for')
     time_frame = request.form.get('time_frame')
-    preparer = request.form.get('preparer')
-    reviewer = request.form.get('reviewer')
+    preparer_id = request.form.get('preparer_id')
+    reviewer_id = request.form.get('reviewer_id')
 
-    crud.create_checklist(template_id,  who_for, time_frame, preparer, reviewer)
+    crud.create_checklist(template_id,  who_for, time_frame, preparer_id, reviewer_id)
     flash('Checklist created!')
     
     checklists = crud.get_checklists()
