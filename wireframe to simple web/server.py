@@ -33,11 +33,15 @@ def register_user():
 
     user = crud.get_user_by_email(email)
     passwd = crud.get_user_by_password(password)
+    
+
 
     if user:
         
         if passwd:
             ('Log-in successful...')
+            # session['user-id']=user_id
+            # user_id=session['user_id']
             return render_template('/homepage.html')
         else:
             flash('Please re-enter your password')
@@ -45,6 +49,8 @@ def register_user():
     else:
         crud.create_user(email, password,user_full_name)
         flash('Account created!')
+        # session['user-id']=user_id
+        # user_id=session['user_id']
         return render_template('/login.html')
         
 # app route for all templates
@@ -92,7 +98,7 @@ def createquestion():
     category = request.form.get('category')
     primary_driver = request.form.get('primary_driver')
     resource_url = request.form.get('resource_url')
-    help_text = request.form.get('help-text')
+    help_text = request.form.get('help_text')
 
     crud.create_question(template_id, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text)
     
@@ -125,8 +131,8 @@ def all_checklists():
     """View all checklists."""
 
     checklists = crud.get_checklists()
-
-    return render_template('all_checklists.html', checklists=checklists)
+    users=crud.get_users()
+    return render_template('all_checklists.html', checklists=checklists, users=users)
 
 @app.route('/checklists/<checklist_id>')
 def show_checklist(checklist_id):
@@ -147,8 +153,10 @@ def createchecklist():
 
     crud.create_checklist(template_id,  who_for, time_frame, preparer, reviewer)
     flash('Checklist created!')
+    
     checklists = crud.get_checklists()
-    return render_template('/all_checklists.html', checklists=checklists)
+    users=crud.get_users()
+    return render_template('/all_checklists.html', checklists=checklists, users=users)
 
 @app.route('/answers')
 def all_answers():
@@ -197,40 +205,37 @@ def createrevieweranswer():
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
 
-# @app.route('/chooserecipient', methods=['POST'])
+@app.route('/chooserecipient', methods=['POST'])
 
-# def chooserecipient():
-#     """Choose pre-existing recipient."""
+def chooserecipient():
+    """Choose pre-existing recipient."""
 
-#     checklist_id = request.form.get('checklist_id')
-#     recipient = request.form.get('recipient')
+    checklist_id = request.form.get('checklist_id')
+    recipient_id = request.form.get('recipient_id')
 
-#     crud.choose_recipient(checklist_id, recipient)
-#     flash('Recipient attached to checklist!')
-#     checklists = crud.get_checklists()
-#     return render_template('/all_checklists.html', checklists=checklists)
+    crud.choose_recipient(checklist_id, recipient_id)
+    flash('Recipient attached to checklist!')
+    checklists = crud.get_checklists()
+    return render_template('/all_checklists.html', checklists=checklists)
 
-# @app.route('/registerrecipient', methods=['POST'])
+@app.route('/registerrecipient', methods=['POST'])
 
-# def register_recipient():
-#     """Create a new recipient user."""
-
-#     checklist_id = request.form.get('checklist_id')
-
-#     user_full_name = request.form.get('user_full_name')
-
-#     email = request.form.get('email')
-
-#     password = request.form.get('password')
-
-#     crud.create_recipient(user_full_name, email, password)
+def register_recipient():
+    """Create a new recipient user."""
     
-   
 
-#     flash('Account created!')
-#     checklist = crud.get_checklist_by_id() 
-#     users=crud.get_users()
-#     return render_template('checklist_details.html', checklist=checklist, users=users)
+    user_full_name = request.form.get('user_full_name')
+
+    email = request.form.get('email')
+
+    password = request.form.get('password')
+
+    crud.create_recipient(user_full_name, email, password)
+    
+    flash('Account created!')
+    checklists = crud.get_checklists()
+    users=crud.get_users()
+    return render_template('all_checklists.html', users=users, checklists=checklists)
 
 @app.route('/markcomplete', methods=['POST'])
 

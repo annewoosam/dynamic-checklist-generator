@@ -306,7 +306,7 @@
   
   <td>
   
-    <input type="number" id="question_id" name="question_id" required>
+    <input type="number" id="question_id" name="question_id" min=1 required>
   
   </td>
 
@@ -334,7 +334,7 @@
 
   <td><label for="preparer_time">Enter preparer minutes*:</label></td>
 
-  <td><input type="number" id="preparer_time" name="preparer_time"></td>
+  <td><input type="number" id="preparer_time" name="preparer_time" min=1></td>
 
 </tr>
 
@@ -442,7 +442,7 @@ function myFunction() {
   
   <td>
   
-    <input type="number" id="question_id" name="question_id" required>
+    <input type="number" id="question_id" name="question_id" min=1 required>
   
   </td>
 
@@ -470,7 +470,7 @@ function myFunction() {
 
   <td><label for="reviewer_time">Enter reviewer minutes*:</label></td>
 
-  <td><input type="number" id="reviewer_time" name="reviewer_time"></td>
+  <td><input type="number" id="reviewer_time" name="reviewer_time" min=1></td>
 
 </tr>
 
@@ -625,22 +625,16 @@ function myFunction() {
 
 
 <tr>
-
-  <td><label for="recipient">Choose a recipient:</label></td>
-
+  <td>
     <tr>
-
-    <td>
-
-      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-
-    </td>
-
+    <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
   </tr>
+  </td>
 
   <td>
-   
-    <select id="recipient" required>
+    
+    <td><label for="recipient_id">Choose a recipient:</label></td>
+    <select id="recipient_id" required>
 
   {% for user in users %}
 
@@ -674,11 +668,11 @@ function myFunction() {
   <div>
     <form action="/registerrecipient" method="POST">
 
-    
+      <input type="hidden" id="checklist_id"  name="checklist_id" value = "test">
 
     <div class="form-group">
 
-<input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
+      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
         <label>Enter Recipient's Full Name
 
         <input type="text"
@@ -703,7 +697,7 @@ function myFunction() {
 
       </label>
 
-     <input type="hidden" id="password" name="password" value = "test" >
+     <input type="hidden" id="password"  name="password" value = "test">
 
     <input type="submit">
 

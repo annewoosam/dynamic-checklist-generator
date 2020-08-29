@@ -40,8 +40,7 @@ def get_user_by_id(user_id):
 
     return User.query.get(user_id)
 
-# Functions for creating templates, returning a list of all available templates and
-# returning a specific template by id.
+# Functions for creating templates, returning a list of all available templates and returning a specific template by id.
 
 def create_template(template_name, created_by, created_on):
     """Create and return a new template."""
@@ -65,8 +64,7 @@ def get_template_by_id(template_id):
 
     return Template.query.get(template_id)
 
-# Functions for creating template questions, returning a list of all available template questions and
-# returning a specific template question by id.
+# Functions for creating template questions, returning a list of all available template questions and returning a specific template question by id.
 
 def create_question(template_id, question, yes_text, no_text, not_applicable_text, category, primary_driver, resource_url, help_text):
    
@@ -168,7 +166,6 @@ def get_answer_by_id(answer_id):
 
     return Answer.query.get(answer_id)
 
-
 def mark_datesenttoreview(checklist_id, date_sent_to_review):
     readyforreview = Checklist(checklist_id=checklist_id,
                    date_sent_to_review=date_sent_to_review)
@@ -190,202 +187,130 @@ def mark_datereviewcompleted(checklist_id, date_review_completed):
 
     return reviewcomplete
 
-
-
 def mark_complete(checklist_id, date_complete)  :
     complete = Checklist(checklist_id=checklist_id,
                   date_complete=date_complete)
     
     date_complete=db.session.query(Checklist.checklist_id).filter(Checklist.checklist_id==checklist_id).update({Checklist.date_complete:date_complete})
-    # print(date_review_completed)
+    # print(mark_complete)
 
     db.session.commit()
 
     return complete
 
-# def choose_recipient(checklist_id, recipient_id):
-#     recipient = Checklist(checklist_id=checklist_id,
-#                   recipient_id=recipient_id)
+def choose_recipient(checklist_id, recipient_id):
+    recipient = Checklist(checklist_id=checklist_id,
+                  recipient_id=recipient_id)
     
-#     db.session.add(recipient)
-#     db.session.commit()
+    recipient=db.session.query(Checklist.checklist_id).filter(Checklist.checklist_id==checklist_id).update({Checklist.recipient_id:recipient_id})
+    db.session.commit()
+    # update confirmed in sqlalchemy/psql. not causing error on save via web. causing error when trying to pull into table. Clearing cache and reloading worked when fed through 
+    # backend. Trying on second checklist.
 
-#     return recipient
+    return recipient
 
-def create_recipient(checklist_id, user_full_name, email, password) :
+def create_recipient(user_full_name, email, password) :
     """Create and return a new user."""
 
+    
     user = User(user_full_name=user_full_name, email=email, password=password)
-    checklist_id=checklist_id
+   
     db.session.add(user)
     db.session.commit()
 
     return user
 
 
-# 2.0 Kanban functionality for preparer
+# 2.0 Kanban functionality for preparer & reviewer
 
 # Lists
 
 # Item response based on what the creator coded when the question was set-up.
-# mail to integrated for send to reviewer
 
-# Integrated
+# Scorecard Elements: Counts & Percentages 
 
-# # Scorecard Elements: Counts & Percentages 
-
-# # Counts   
-
-# def preparer_to_do_count():
-#     # preparer answer set to no count.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="n":
-#             print (f"To do (count): \n", (count(checklist_item.no_text))
-
-# def preparer_not_applicable_count():
-#     # preparer answer set to not applicable count.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="na":
-#             print (f"Not applicable (count): \n", count(checklist_item.not_applicable_text))
+# Preparer Counts  
+ # all
+ # count_answers=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).count()
+ # not same as total questions
 
 # def prepaper_blanks_count():
-#     # preparer left answer at default, skipped count.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="":
-#             print (f"To answer (count): \n", (count(checklist_item.question))
+# """preparer skipped count."""
+# This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
+# blanks_per_preparer_counts=
+
+# def preparer_to_do_count():
+# """preparer answered not applicable count."""
+# to_do_per_preparer_counts=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()
+
+# def preparer_not_applicable_count():
+# """preparer answered not applicable count."""
+# not_applicable_per_preparer_counts=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()
 
 # def preparer_done_count():
-#     # preparer answered yes count.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="y":
-#             print (f"Done (count): \n", count((yes_text))
+# """preparer answered yes count."""
+# done_per_preparer_counts=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()
 
-# # Percentages
+# Reviewer Counts   
 
-# def preparer_to_do_percentage():
-#     # preparer answer set to no count divided by total questions in checklist, rounded to the nearest two decimal points.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="n":
-#             print (f"To do (percent): \n", (count(checklist_item.no_text)/count(checklist_item.question))
+# def reviewer_blanks_count():
+# """reviewer skipped count."""
+# This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
+# blanks_per_reviewer_counts=
 
-# def preparer_not_applicable_percentage():
-#     # preparer answer set to not applicable count divided by total questions in checklist, rounded to the nearest two decimal points.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="na":
-#             print (f"Not applicable (count): \n", count(checklist_item.not_applicable_text)/count(checklist_item.question))
+# def reviewer_to_do_count():
+# """reviewer answered corrections required count."""
+# to_do_per_reviewer_count=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='c').count()
+
+# def reviewer_not_applicable_count():
+# """reviewer answered not applicable count."""
+# not_applicable_per_reviewer_count=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='na').count()
+
+# def reviewer_done_count():
+# """reviewer answered ready count."""
+# done_per_preparer_count=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='r').count()
+
+# Preparer Percentages
 
 # def preparer_blanks_percentage():
-#     # preparer left answer at default, skipped count divided by total questions in checklist, rounded to the nearest two decimal points.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="":
-#             print (f"To answer (count): \n", (count(checklist_item.question)/count(checklist_item.question))
+# """preparer left answer at default, skipped count divided by total questions in checklist, rounded to the nearest two decimal points.""""
+# This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
+# blanks_per_preparer_as_percentage=
+
+# def preparer_to_do_percentage():
+# """preparer answer set to no count divided by total questions in checklist, rounded to the nearest two decimal points.""""
+# to_do_per_preparer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
+
+# def preparer_not_applicable_percentage():
+# """preparer answer set to not applicable count divided by total questions in checklist, rounded to the nearest two decimal points.""""
+# not_applicable_per_preparer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
 
 # def preparer_done_percentage():
-#     # preparer answered yes count divided by total questions in checklist, rounded to the nearest two decimal points.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if preparer_answer.lower()=="y":
-#             print (f"Done (count): \n", count((yes_text)/count(checklist_item.question))
+# """preparer answered yes count divided by total questions in checklist, rounded to the nearest two decimal points.""""
+# done_per_preparer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
 
-# # Functions for cloning checklist template for reviewer, returning a list of all available
-# # checklists by reviewer and returning a specific checklist by id for the reviewer.
+# Reviewer Percentages
+# blanks_per_reviewer_as_percentage=
 
-# # Functions for reviewer - saving curent status, minutes and comments. Return to preparer. Send to recipient.
+# def reviewer_blanks_percentage():
+#  """reviewer left unanswered divided by total questions in checklist, rounded to the nearest two decimal points."""
+# This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
+
+# def reviewer_to_do_percentage():
+#  """reviewer answer set to return count divided by total questions in checklist, rounded to the nearest two decimal points.""""
+# done_per_reviewer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='c').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
+
+# def reviewer_not_applicable_percentage():
+#  """reviewer answer set to not applicable count divided by total questions in checklist, rounded to the nearest two decimal points."""    
+# done_per_reviewer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='na').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
+
+# def reviewer_done_percentage(): 
+#  """reviewer answer set to ready for recipient count divided by total questions in checklist, rounded to the nearest two decimal points."""    
+# done_per_reviewer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='r').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
 
 # def reviewer_save_current_answers():
 
 #  anything marked return for corrections to be saved to separate database with date
-
-
-
-# # Kanban functionality for reviewer
-
-# # Lists
-# Integrated return for corrections and notify recipient.
-# # Item response based on what the creator coded when the question was set-up.
-
-# def reviewer_to_do_list():
-#     # reviewer answer set to return.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="c":
-#             print (f"Return for corrections:\n")
-#             print(no_text)
-
-# def reviewer_blanks_list():
-#     # reviewer left unanswered.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="":
-#             print (f"Revisit - blank response:\n")
-#             print(question)
-
-# def reviewer_not_applicable_list():
-#     # reviewer answer set to not applicable.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="na":
-#             print (f"Not applicable:\n")
-#             print(not_applicable_text)
-
-# def reviewer_done_list():
-#     # reviewer answer set to ready for recipient.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="r":
-#             print (f"Ready for delivery:\n")
-#             print(yes_text)
-
-# # Scorecard Elements: Counts & Percentages 
-
-# # Counts   
-
-# def reviewer_to_do_count():
-#     # reviewer answer set to return count.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="c":
-#             print (f"Return for corrections (count):\n", (no_text))
-
-# def reviewer_not_applicable_count():
-#     # reviewer answer set to not applicable count.
-#         for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="na":
-#             print (f"Not applicable (count):\n", count(not_applicable_text))
-
-# def reviewer_blanks_count():
-#     # reviewer left unanswered divided by total questions in checklist.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="na":
-#             print (f"Not applicable (count):\n", count(not_applicable_text))
-
-# def reviewer_done_count():
-#     # reviewer answer set to ready for recipient count divided by total questions.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="r":
-#             print (f"Ready for delivery (count):\n", count((yes_text))
-# # Percentages
-
-# def reviewer_to_do_percentage():
-#     # reviewer answer set to return count divided by total questions in checklist, rounded to the nearest two decimal points.
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="c":
-#             print (f"Return for corrections (count):\n", (no_text)/count(checklist_item.question))
-
-# def reviewer_not_applicable_percentage():
-#     # reviewer answer set to not applicable count divided by total questions in checklist, rounded to the nearest two decimal points.    
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="na":
-#             print (f"Not applicable (count):\n", count(not_applicable_text)/count(checklist_item.question))
-
-# def reviewer_blanks_percentage():
-#     # reviewer left unanswered divided by total questions in checklist, rounded to the nearest two decimal points.    
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="na":
-#             print (f"Not applicable (count):\n", count(not_applicable_text)/count(checklist_item.question))
-
-# def reviewer_done_percentage(): 
-#     # reviewer answer set to ready for recipient count divided by total questions in checklist, rounded to the nearest two decimal points.    
-#     for clone_checklist_id_item in clone_checklist_id_items:
-#         if review_answer.lower()=="r":
-#             print (f"Ready for delivery (count):\n", count((yes_text)/count(checklist_item.question))
-
-# # Queries - separate file once confirm above working and seed data ready. Call it query.py
-
 
 if __name__ == '__main__':
     from server import app
