@@ -72,28 +72,28 @@
   <th>Preparer</th> 
 
   <th>Reviewer</th>
+    
+  <th>Recipient</th>
 
   <th>Sent to Review</th>
 
   <th>Review Complete</th>
    
 
-
-
   <tr> 
 
     <td> {{ checklist.time_frame }} </td> 
 
-    <td> {{ checklist.preparer.user_full_name }}, {{ checklist.preparer.email }}</td>
+    <td> {% if checklist.preparer %} {{ checklist.preparer.user_full_name }}, {{ checklist.preparer.email }} {% endif %} </td>
 
-    <td> {{ checklist.reviewer.user_full_name }}, {{ checklist.reviewer.email }} </td> 
+    <td> {% if checklist.reviewer %} {{ checklist.reviewer.user_full_name }}, {{ checklist.reviewer.email }} {% endif %} </td> 
+
+    <td> {% if checklist.recipient %} {{ checklist.recipient.user_full_name }}, {{ checklist.recipient.email }} {% endif %} </td> 
 
     <td> {{ checklist.date_sent_to_review }} </td>
 
     <td> {{ checklist.date_review_completed }}  </td>
     
-
-
    </tr>
 
  </table>
@@ -136,11 +136,14 @@
             <td>{{ template_question.category}}</td>
 
       </ol>
+
     </tr>
+
     {% endfor %}
+
   </table>
 
-<h1>Answers</h1>
+<h1>Preparer Answers</h1>
 
 <table class="table table-hover table-striped">
 
@@ -155,12 +158,6 @@
     <th>Preparer Time <i class="far fa-clock"></i></th>
 
     <th>Preparer Comment <i class="far fa-comment"></i></th> 
-
-    <th>Reviewer Answer <i class="fas fa-traffic-light"></i></th> 
-
-    <th>Reviewer Time <i class="far fa-clock"></i></th>
-
-    <th>Reviewer Comment <i class="far fa-comment"></i></th>
 
   </thead>
 
@@ -180,12 +177,6 @@
 
      <td> {{ answer.preparer_comment }} </td>
 
-     <td> {{ answer.reviewer_ready }} </td>
-
-     <td> {{ answer.reviewer_time }} </td>
-
-     <td> {{ answer.reviewer_comment }} </td>
-
   </ol>
 
 </tr>
@@ -193,6 +184,7 @@
 {% endfor %}
 
 </table>
+
 
 <h1>Preparer Kanban</h1>
 
@@ -352,14 +344,86 @@
 
 </form>
 
+<h1>Add/Update Preparer Answers</h1>
 
+
+
+<form action="/updateprepareranswer" method="POST">
+
+<table>
+
+    <tr>
+
+      <td>
+
+        <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
+
+      </td>
+
+    </tr>
+
+<tr>
+
+  <td>
+  
+    <label for="question_id">Enter question id*:</label></td>
+  
+  <td>
+  
+    <input type="number" id="question_id" name="question_id" min=1 required>
+  
+  </td>
+
+</tr>
+
+<tr>
+
+  <td><label for="preparer_answer">Enter preparer answer:</label></td>
+
+  <td><select id="preparer_answer" name="preparer_answer">
+
+    <option value="">Skipped</option>
+
+    <option value="y">Yes</option>
+
+    <option value="n">No</option>
+
+    <option value="na">Not Applicable</option>  
+
+  </td>
+
+</tr>
+
+<tr>
+
+  <td><label for="preparer_time">Enter preparer minutes*:</label></td>
+
+  <td><input type="number" id="preparer_time" name="preparer_time" min=1></td>
+
+</tr>
+
+<tr>
+
+  <td><label for="preparer_comment">Enter preparer comments?</label></td>
+
+  <td><textarea id="preparer_comment" name="preparer_comment" rows="5" cols="70" ></textarea> </td>
+
+</tr>
+
+</table>
+
+<button type="submit" class="btn btn-primary btns">Update Preparer Answer</button> 
+
+</form>
+
+</div>
 <script>
 function myFunction() {
   document.getElementById("myBtn").disabled = true;
 }
 </script>
 
-<h2>Notification</h2>
+<h2>Notification - Ready for Review</h2>
 
 
 <table class="table table-hover table-striped">
@@ -398,7 +462,7 @@ function myFunction() {
 <button type="submit" class="btn btn-primary btns">Register Date Sent to Review</button> 
 <h2>Notify Reviewer</h2>
 
- <a href="mailto:{{ checklist.reviewer.email }}?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
+ <a href="mailto:{% if checklist.reviewer %} {{ checklist.reviewer.email }} {% endif %}?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
 
 </form>
 
@@ -412,15 +476,60 @@ function myFunction() {
  
 
  
+<h1>Reviewer Answers</h1>
+
+<table class="table table-hover table-striped">
+
+  <thead>
+
+    <th>Question ID <i class="far fa-question-circle"></i></th>
+
+    <th>Question <i class="far fa-question-circle"></i></th>
+
+    <th>Reviewer Answer <i class="fas fa-traffic-light"></i></th> 
+
+    <th>Reviewer Time <i class="far fa-clock"></i></th>
+
+    <th>Reviewer Comment <i class="far fa-comment"></i></th>
+
+  </thead>
+
+{% for answer in checklist.answers %}
+
+ <tr>
+
+  <ol>
+
+     <td> {{ answer.question_id }} </td>
+
+     <td> {{ answer.template_question.question}} </td>
+
+     <td> {{ answer.reviewer_ready }} </td>
+
+     <td> {{ answer.reviewer_time }} </td>
+
+     <td> {{ answer.reviewer_comment }} </td>
+
+  </ol>
+
+</tr>
+
+{% endfor %}
+
+</table>
 
 
 <div>
+
+
 <!-- Reviewer Answers -->
-<h1>Reviewer Answers</h1>
+
+<!-- Update with Reviewer Answers -->
+<h1>Update with Reviewer Answers</h1>
 
 
 
-<form action="/creatreviewereanswer" method="POST">
+<form action="/updaterevieweranswer" method="POST">
 
 <table>
 
@@ -484,7 +593,7 @@ function myFunction() {
 
 </table>
 
-<button type="submit" class="btn btn-primary btns">Add Reviewer Answer</button> 
+<button type="submit" class="btn btn-primary btns">Update Reviewer Answer</button> 
 
 </form>
 
@@ -610,14 +719,34 @@ function myFunction() {
  <h2>Notifications</h2>
 
 
-<a href="mailto:{{ checklist.preparer.email }}?subject={{ checklist.who_for }} corrections required&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Return for Corrections</a></p>
+<a href="mailto:{% if checklist.preparer %} {{ checklist.preparer.email }} {% endif %}?subject={{ checklist.who_for }} corrections required&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Return for Corrections</a></p>
 
 
 
 
 <h3>Notify Recipient</h3> 
 
-<h3>>Choose a recipient</h3>
+<h3>>Choose a recipient and enter ID below:</h3>
+
+<table>
+
+
+  <td>
+    
+  <select id="recipient_id" required>
+
+  {% for user in users %}
+
+  <option value= "">{{ user.user_full_name }} Enter ID {{ user.user_id }}</option>
+
+  {% endfor %}
+
+  </select>
+
+  </td>
+
+</tr> 
+</table>
 
 <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
 
@@ -630,27 +759,13 @@ function myFunction() {
     <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
   </tr>
   </td>
-
-  <td>
-    
-    <td><label for="recipient_id">Choose a recipient:</label></td>
-    <select id="recipient_id" required>
-
-  {% for user in users %}
-
-  <option value={{ user.user_id }} >{{ user.user_full_name }}</option>
-
-  {% endfor %}
-
-  </select>
-
-  </td>
-
-</tr> 
-
+  <tr>   
+    <td><label for="recipient_id">Enter recipient id if different from listed: {% if checklist.recipient %} {{ checklist.recipient.user_full_name }}, ID: {{checklist.recipient_id}} {% endif %}</label></td>
+    <td><input type="number" id="recipient_id" name="recipient_id" min=1></td>
+</tr>
 </table>
 
-<button type="submit" class="btn btn-primary btns">Choose Recipient</button> 
+<button type="submit" class="btn btn-primary btns">Attach Recipient</button> 
 
 </form>
 
@@ -705,7 +820,7 @@ function myFunction() {
 
 </div>
 
-<a href="mailto:recipient name field?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
+<a href="mailto:{% if checklist.recipient %} {{ checklist.recipient.email }} {% endif %}?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
 
 <h3>Mark Complete</h3> 
 
@@ -735,7 +850,7 @@ function myFunction() {
 
 </table>
 
-<button type="submit" class="btn btn-primary btns">Mark Complete - Working</button> 
+<button type="submit" class="btn btn-primary btns">Mark Complete</button> 
 
 </form>
 

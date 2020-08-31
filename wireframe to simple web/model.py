@@ -88,7 +88,7 @@ class TemplateQuestion(db.Model):
     not_applicable_text = db.Column(db.Text)
     # when an answer is skipped the question will be reprinted for the preparer in Sprint 2
     category = db.Column(db.String)
-    primary_driver = db. Column(db.Boolean, default=False) # when a preparer enters NA for this any item with the same category will be switched to NA
+    primary_driver = db. Column(db.String) # when a preparer enters NA for this any item with the same category will be switched to NA
     resource_url = db.Column(db.String) # input category will be URL. Name resource allows linking of video or any web-resource.
     help_text = db.Column(db.Text)
 

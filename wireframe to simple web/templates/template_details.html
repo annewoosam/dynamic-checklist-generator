@@ -63,7 +63,7 @@
 
       <td> {{ template.created_on.strftime('%m-%d-%Y') }} </td>
       <td>Created  by user:</td>
-      <td> {{ template.created_by }} </td>
+      <td> {{ template.created_by }}  </td>
     </tr>
   <!-- .strftime('%m-%d-%Y')  -->
    
@@ -192,10 +192,15 @@
 
       <tr>
 
-        <td><label for="primary_driver">Primary Driver?:</label></td>
-  
-        <td><input type="boolean" name="primary_driver" disabled></td>
+        <td><label for="primary_driver">Primary Driver for other answers in category?</label></td>
 
+        <td><select id="primary_driver" name="primary_driver">
+
+          <option value="yes">yes</option>
+
+          <option value="no">no</option>
+
+        </td>
 
       </tr>
 
@@ -240,16 +245,17 @@
 
 </tr>
 
-<tr>
+  <tr>
 
-  <td><label for="preparer_id">Choose a preparer:</label></td>
+    <td>Check IDs for reviewers/preparers</td>
 
   <td>
-    <select id="preparer_id" required>
+    
+  <select id="checkid">
 
   {% for user in users %}
 
-  <option value={{ user.user_id }} >{{ user.user_full_name }}</option>
+  <option value= "">{{ user.user_full_name }} Enter ID {{ user.user_id }}</option>
 
   {% endfor %}
 
@@ -259,19 +265,20 @@
 
 </tr> 
 
+
 <tr>
 
-<td><label for="reviewer_id">Choose a reviewer</label></td>
+    <td><label for="preparer_id">Choose a preparer:</label></td>
+    <td><label for="preparer_id">Enter preparer id:</label></td>
+    <td><input type="number" id="preparer_id" name="preparer_id" min=1></td>
 
-<td><select id="reviewer_id" required>
+</tr> 
 
-  {% for user in users %}
+<tr>
 
-  <option value={{ user.user_id}} >{{ user.user_full_name }}</option>
-
-  {% endfor %}
-
-</select>
+    <td><label for="reviewer_id">Choose a reviewer:</label></td>
+    <td><label for="reviewer_id">Enter reviewer id:</label></td>
+    <td><input type="number" id="reviewer_id" name="reviewer_id" min=1></td>
 
 </td>
 

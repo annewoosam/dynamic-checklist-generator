@@ -2,58 +2,9 @@
 {% extends 'base.html' %}
 
 {% block title %}Current Templates{% endblock %}
-<head>
-	  <!-- Load Bootstrap 4 -->
-  <!-- CSS only -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-  <!-- Load Font Awesome -->
-  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
-  <!-- Load our stylesheet -->
-  <style>
-    h1 {font-weight: bold;}
-    .row > div > div {
-          text-align: center;
-          font-size: 100%;
-    }
-    .rowform > div > div {
-          text-align: left;
-          font-size: 100%;
-    }
-    .override {
-      background-color: rgb(45,110,104);
-      font-color: black;
-    }
-    a:link {
-      color: white;
-    }
-    a:hover {
-      color: white;
-    }
-    a:active {
-      color: white;
-    }
-    a:visited {
-      color: white;
-    }
-    .img {
-      padding-top: 2em;
-      padding-bottom: 2em;
-
-    }
-    .btns {
-      margin-top: 2em;
-      margin-bottom: 2em;
-      background-color: rgb(45,110,104);
-    }
-  </style>
-</head>
 
 {% block body %}
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Creator Dashboard</title>
 
   <!-- Load Bootstrap 4 -->
@@ -63,43 +14,9 @@
   <!-- Load Font Awesome -->
   <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
   <!-- Load our stylesheet -->
-  <style>
-    h1 {font-weight: bold;}
-    .row > div > div {
-          text-align: center;
-          font-size: 100%;
-    }
-    .rowform > div > div {
-          text-align: left;
-          font-size: 100%;
-    }
-    .override {
-      background-color: rgb(45,110,104);
-      font-color: black;
-    }
-    a:link {
-      color: black;
-    }
-    a:hover {
-      color: black;
-    }
-    a:active {
-      color: black;
-    }
-    a:visited {
-      color: black;
-    }
-    .img {
-      padding-top: 2em;
-      padding-bottom: 2em;
+  <style> </style>
+    <link rel="stylesheet" type="text/css" HREF="../css/styles.css">
 
-    }
-    .btns {
-      margin-top: 2em;
-      margin-bottom: 2em;
-      background-color: rgb(45,110,104);
-    }
-  </style>
 </head>
 
 <body>
@@ -112,9 +29,6 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
-
-
-
 
     <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
        <div class="row"><img src="/static/img/pexels-breakingpic-3243.jpg" class="img"></div>
@@ -142,29 +56,45 @@
 		<td><label for="template_name">Enter a unique template name:</label></td>
 		<td><input type="text" id="template name" name="template_name"></td>
 	</tr>
-	<tr>
-		<td><label for="created_by">Choose who will be listed as the template's creator:</label></td>
-		<td> <select id="created_by" required>
-			{% for user in users %}
-			<option value= {{ user.user_id }} > {{ user.user_full_name }} </option>
-			{% endfor %}
-		</select>
-		</td>
-	</tr>
 
 	<tr>
 		<td><label for="created_on">Enter date created:</label></td>
 		<td><input type="date" id="created_on" name="created_on"></td>	
 	</tr>
+  <tr>
 
+    <td>Check IDs for creator</td>
 
+  <td>
+    
+  <select id="creator_id">
 
-</table>
+  {% for user in users %}
 
-<button type="submit" class="btn btn-primary btns">Create template</button>
+  <option value= "">{{ user.user_full_name }} Enter ID {{ user.user_id }}</option>
+
+  {% endfor %}
+
+  </select>
+
+  </td>
+
+</tr>
+  <tr>   
+    <td><label for="created_by">Enter creator id:</label></td>
+    <td><input type="number" id="created_by" name="created_by" min=1></td>
+    <td><button type="submit" class="btn btn-primary btns">Create template</button></td>
+  </tr>
+
 
 </form>
+
+
 </p></div>
+
+<table>
+ 
+</table>
 <!-- You need this in order to use JS-based components. Leave this at the bottom and code above it. -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

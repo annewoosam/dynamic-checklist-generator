@@ -31,13 +31,12 @@ def register_user():
     email = request.form.get('email')
     password = request.form.get('password')
 
+
     user = crud.get_user_by_email(email)
     passwd = crud.get_user_by_password(password)
     
 
-
     if user:
-        
         if passwd:
             ('Log-in successful...')
             # session['user-id']=user_id
@@ -52,7 +51,7 @@ def register_user():
         # session['user-id']=user_id
         # user_id=session['user_id']
         return render_template('/login.html')
-        
+            
 # app route for all templates
 @app.route('/templates')
 def all_templates():
@@ -73,7 +72,7 @@ def show_template(template_id):
     return render_template('template_details.html', template=template, users=users)
 
 @app.route('/createtemplate', methods=['POST'])
-def createtemplate():
+def create_template():
     """Create new template."""
 
     template_name = request.form.get('template_name')
@@ -87,7 +86,7 @@ def createtemplate():
     return render_template('/all_templates.html', templates=templates, users=users)
 
 @app.route('/createquestion', methods=['POST'])
-def createquestion():
+def create_question():
     """Create new question."""
 
     template_id = request.form.get('template_id')
@@ -143,7 +142,7 @@ def show_checklist(checklist_id):
     return render_template('checklist_details.html', checklist=checklist, users=users, answers=answers)
 
 @app.route('/createchecklist', methods=['POST'])
-def createchecklist():
+def create_checklist():
     """Create new checklist."""
     template_id = request.form.get('template_id')
     who_for = request.form.get('who_for')
@@ -151,7 +150,7 @@ def createchecklist():
     preparer_id = request.form.get('preparer_id')
     reviewer_id = request.form.get('reviewer_id')
 
-    crud.create_checklist(template_id,  who_for, time_frame, preparer_id, reviewer_id)
+    crud.create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)
     flash('Checklist created!')
     
     checklists = crud.get_checklists()
@@ -175,7 +174,7 @@ def show_answer(answer_id):
 
 @app.route('/createprepareranswer', methods=['POST'])
 
-def createprepareranswer():
+def create_preparer_answer():
     """Create new preparer answer."""
 
     checklist_id = request.form.get('checklist_id')
@@ -189,9 +188,25 @@ def createprepareranswer():
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
 
-@app.route('/creatreviewereanswer', methods=['POST'])
+@app.route('/updateprepareranswer', methods=['POST'])
 
-def createrevieweranswer():
+def update_preparer_answer():
+    """Create new reviewer answer."""
+
+    checklist_id = request.form.get('checklist_id')
+    question_id = request.form.get('question_id')
+    preparer_answer = request.form.get('preparer_answer')
+    preparer_time = request.form.get('preparer_time')
+    preparer_comment = request.form.get('preparer_comment')
+    
+    crud.update_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment)
+    flash('Preparer answer updated! Select checklist.')
+    checklists = crud.get_checklists()
+    return render_template('all_checklists.html', checklists=checklists)
+
+@app.route('/createrevieweranswer', methods=['POST'])
+
+def create_reviewer_answer():
     """Create new reviewer answer."""
 
     checklist_id = request.form.get('checklist_id')
@@ -205,9 +220,25 @@ def createrevieweranswer():
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
 
+@app.route('/updaterevieweranswer', methods=['POST'])
+
+def update_reviewer_answer():
+    """Create new reviewer answer."""
+
+    checklist_id = request.form.get('checklist_id')
+    question_id = request.form.get('question_id')
+    reviewer_ready = request.form.get('reviewer_ready')
+    reviewer_time = request.form.get('reviewer_time')
+    reviewer_comment = request.form.get('reviewer_comment')
+    
+    crud.update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment)
+    flash('Reviewer answer posted! Select checklist.')
+    checklists = crud.get_checklists()
+    return render_template('all_checklists.html', checklists=checklists)
+
 @app.route('/chooserecipient', methods=['POST'])
 
-def chooserecipient():
+def choose_recipient():
     """Choose pre-existing recipient."""
 
     checklist_id = request.form.get('checklist_id')
@@ -239,7 +270,7 @@ def register_recipient():
 
 @app.route('/markcomplete', methods=['POST'])
 
-def markcomplete():
+def mark_complete():
     """Mark checklist complete."""
 
     checklist_id = request.form.get('checklist_id')
@@ -252,7 +283,7 @@ def markcomplete():
 
 @app.route('/markdatesenttoreview', methods=['POST'])
 
-def markdatesenttoreview():
+def mark_date_sent_to_review():
     """Mark date sent to review."""
 
     checklist_id = request.form.get('checklist_id')
@@ -265,7 +296,7 @@ def markdatesenttoreview():
 
 @app.route('/markdatereviewcompleted', methods=['POST'])
 
-def markdatereviewcompleted():
+def mark_date_review_completed():
     """Mark date review completed."""
 
     checklist_id = request.form.get('checklist_id')

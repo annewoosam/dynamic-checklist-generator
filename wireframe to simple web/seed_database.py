@@ -24,12 +24,13 @@ model.db.create_all()
 # Create 6 users
 # docs on generating random users at https://faker.readthedocs.io/en/master/
 # can fake addresses, internet providers, text and localize so names appear to be from certain country
-# note that Faker separately randomizes the emails and names so this can appear a little mismatched.
+# note that Faker separately randomizes the emails and names so this can appear a little mismatched which might bother user. So concatenated email used instead.
 
 for n in range(6):
-    email = fake.email()  # Voila! A unique email!
-    password = 'test'
     user_full_name = fake.name()
+    email = f'compliance{n+1}@fakeemail.com'
+    password = 'test'
+
 
     user = crud.create_user(email, password, user_full_name)
 
@@ -99,7 +100,7 @@ for checklist in checklist_data:
                                    checklist['preparer_id'],
                                    checklist['reviewer_id'])
 
-    db_checklist = crud.create_checklist(template_id,
+    db_checklist = crud.create_checklist_seed(template_id,
                                  who_for,
                                  time_frame,
                                  preparer_id,

@@ -7,7 +7,7 @@
 		"no_text":"1. Census missing. Plan is/will be placed on hold.",
 		"not_applicable_text":"1. A census must be provided. Not applicable is not an appropriate response.",
 		"category":"CENSUS",
-		"primary_driver":false,
+		"primary_driver":"yes",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"If the census is missing, e-mail the relationship manager immediately prepare the folders and pull any reporting such as trust statements and start the trust reconciliation. Once you have gotten as far as possible, place the plan on hold."
 	},
@@ -19,7 +19,7 @@
 		"no_text":"2. Questionnaire not received. Request. If the client appears to answer the same way each year move forward and ask the client to send a Questionnaire, confirm results.",
 		"not_applicable_text":"2. A Questionnaire should be provided. If the client appears to answer the same way each year move forward and ask the client to send a Questionnaire, confirm results.",
 		"category":"QUESTIONNAIRE",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"If the questionnaire is missing, prepare as much of the testing as possible based on assumptions inherited from the prior year, using either the system. E-mail the relationship manager: I am proceeding based on last year's questionnaire. That said I cannot release the results until I have received the questionnaire for the current year."
 	},
@@ -31,7 +31,7 @@
 		"no_text":"3. Census must be formatted before it can be loaded.",
 		"not_applicable_text":"3. An invalid response for whether the census was formatted correctly was entered. Choose either Y or N.",
 		"category":"CENSUS",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"If the census has critical errors that prevent you from loading it into the system, let the relationship manager know. Some sample language: The census does not have social security numbers. The census is missing compensation for some employees. The census is missing compensation for all employees. The census is missing hours for some employees and the plan requires hours to calculate eligibility/allocate a contribution."
 	},
@@ -43,7 +43,7 @@
 		"no_text":"4. Census needs to be loaded.",
 		"not_applicable_text":"4. An invalid response for whether the census was loaded was entered.  Choose either Y or N.",
 		"category":"CENSUS",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"Make sure to load the census into the system and perform all necessary data checks within the system and forward all questions to the relationship manager. Review against the Eligibility Proof."
 	},
@@ -55,7 +55,7 @@
 		"no_text":"5. Eligibility Proof employee classifications need to be made.",
 		"not_applicable_text":"5. An invalid response for the Eligibility Proof employee classification step was entered. Choose either Y or N.",
 		"category":"ELIGIBILITYPROOF",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"Use the template for the eligibility proof to estimate the test results. Formulas are included in the proof."
 	},
@@ -67,7 +67,7 @@
 		"no_text":"1. Fix headers.",
 		"not_applicable_text":"1. We assumed headers don't apply to your file. It is a custom file. This will likely slow down processing because the file will need to be manually formatted instead fo automatically processed.",
 		"category":"HEADERS",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"Not providing a file which is correctly arranged can result in delays and errors in your testing."
 	},
@@ -79,7 +79,7 @@
 		"no_text":"2. Fix social security numbers.",
 		"not_applicable_text":"2. You answered N/A. We can use employee ID numbers to load a file when social security numbers are not available. All employees must have employee IDs in order to link their information from year to year and avoid confusion when employees have similar names.",
 		"category":"SSN",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"Social security numbers or another unique identifier such as an employee id are needed to match data for employees from year to year. You can transmit your files securely."
 	},
@@ -91,7 +91,7 @@
 		"no_text":"3. Fix Dates of Birth.",
 		"not_applicable_text":"3. Warning! All files should have dates of birth.",
 		"category":"BIRTH",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"Dates of birth are used to determine eligibility and entry for a plan. Unless the plan has no age requirement and is a Safe Harbor or has no HCE contributions it is expected that these will be provided so that test results can be accurately calculated."
 	},
@@ -103,7 +103,7 @@
 		"no_text":"4. Fix dates of birth for employees that make them younger than they are.",
 		"not_applicable_text":"4. No employees are under 18.",
 		"category":"BIRTH",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"Sometimes persons under 18, expecially owners children may be hired as teenagers and flagged in the system for extra scrutiny. Other times they may be indicators of a typing error."
 	},
@@ -115,7 +115,7 @@
 		"no_text":"5. Fix dates of birth for retiree hires.",
 		"not_applicable_text":"5. There are no retiree age hires.",
 		"category":"BIRTH",
-		"primary_driver":false,
+		"primary_driver":"no",
 		"resource_url":"https://www.youtube.com",
 		"help_text":"Some testing systems will flag anyone over retirement age for review. Please ensure these persons birthdates are correct."
 	}

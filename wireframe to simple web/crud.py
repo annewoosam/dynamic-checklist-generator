@@ -19,6 +19,11 @@ def create_user(email, password, user_full_name):
 
 # return user by filter for e-mail
 
+def get_user_by_name(user_full_name):
+    """Return a user by email."""
+
+    return User.query.filter(User.user_full_name == user_full_name).first()
+
 def get_user_by_email(email):
     """Return a user by email."""
 
@@ -109,6 +114,7 @@ def get_question_by_id(question_id):
 
 def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)  :
 
+
     checklist_id=db.session.query(db.func.max(Checklist.checklist_id)).first()
     
     if checklist_id:
@@ -119,7 +125,21 @@ def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)
 
       checklist_id=1 
 
+
     checklist = Checklist(checklist_id=checklist_id,template_id=template_id,
+                  who_for=who_for,
+                  time_frame=time_frame,
+                  preparer_id=preparer_id,
+                  reviewer_id=reviewer_id)
+    
+    db.session.add(checklist)
+    db.session.commit()
+
+    return checklist
+
+def create_checklist_seed(template_id, who_for, time_frame, preparer_id, reviewer_id)  :
+
+    checklist = Checklist(template_id=template_id,
                   who_for=who_for,
                   time_frame=time_frame,
                   preparer_id=preparer_id,
@@ -155,6 +175,23 @@ def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_t
 
     return prepareranswer
 
+def update_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
+    updateprepareranswer = Answer(checklist_id=checklist_id,
+                  question_id=question_id,
+                  preparer_answer=preparer_answer,
+                  preparer_time=preparer_time,
+                  preparer_comment=preparer_comment)
+
+    updateprepareranswer=db.session.query(Answer.checklist_id).filter(Answer.question_id==question_id).update({Answer.preparer_answer:preparer_answer})
+
+    updateprepareranswertime=db.session.query(Answer.checklist_id).filter(Answer.question_id==question_id).update({Answer.preparer_time:preparer_time})
+
+    updateprepareranswercomment=db.session.query(Answer.checklist_id).filter(Answer.question_id==question_id).update({Answer.preparer_comment:preparer_comment})
+
+    db.session.commit()
+
+    return updateprepareranswer, updateprepareranswertime, updateprepareranswercomment
+
 def create_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment):
     revieweranswer = Answer(checklist_id=checklist_id,
                   question_id=question_id,
@@ -166,6 +203,23 @@ def create_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_ti
     db.session.commit()
 
     return revieweranswer
+
+def update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment):
+    updaterevieweranswer = Answer(checklist_id=checklist_id,
+                  question_id=question_id,
+                  reviewer_ready=reviewer_ready,
+                  reviewer_time=reviewer_time,
+                  reviewer_comment=reviewer_comment)
+
+    updaterevieweranswer=db.session.query(Answer.checklist_id).filter(Answer.question_id==question_id).update({Answer.reviewer_ready:reviewer_ready})
+
+    updaterevieweranswercomment=db.session.query(Answer.checklist_id).filter(Answer.question_id==question_id).update({Answer.reviewer_comment:reviewer_comment})
+
+    updaterevieweranswertime=db.session.query(Answer.checklist_id).filter(Answer.question_id==question_id).update({Answer.reviewer_time:reviewer_time})
+
+    db.session.commit()
+
+    return updaterevieweranswer, updaterevieweranswercomment,updaterevieweranswertime
 
 def get_answers():
     """Return all checklists."""
