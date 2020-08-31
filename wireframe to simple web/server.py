@@ -2,9 +2,10 @@
 
 # increased flask
 from flask import Flask, render_template, request, flash, session, jsonify, redirect
-
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 # created import allowing connection to database
-from model import connect_to_db, Template
+from model import connect_to_db, Template, TemplateQuestion, Checklist, Answer, db
 
 # imported module to allow to create,read,update and delete database
 import crud
@@ -139,7 +140,29 @@ def show_checklist(checklist_id):
     checklist = crud.get_checklist_by_id(checklist_id)
     users=crud.get_users()
     answers=crud.get_answers()
-    return render_template('checklist_details.html', checklist=checklist, users=users, answers=answers)
+    questions = crud.get_questions()
+
+    to_do_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()
+    done_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()
+    not_applicable_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()
+    not_answered_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='').count()
+
+    to_do_percent=round(to_do_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    done_percent=round(done_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    not_applicable_percent=round(not_applicable_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    not_answered_percent=round(not_answered_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+
+    to_do_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='c').count()
+    done_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='r').count()
+    not_applicable_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='na').count()
+    not_answered_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='').count()
+
+    to_do_percent_reviewer=round(to_do_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    done_percent_reviewer=round(done_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    not_applicable_percent_reviewer=round(not_applicable_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    not_answered_percent_reviewer=round(not_answered_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+
+    return render_template('checklist_details.html', checklist=checklist, users=users, answers=answers, questions=questions, done_count=done_count, done_percent=done_percent, to_do_count=to_do_count, to_do_percent=to_do_percent, not_applicable_count=not_applicable_count, not_applicable_percent=not_applicable_percent, not_answered_count=not_answered_count, not_answered_percent=not_answered_percent, done_count_reviewer=done_count_reviewer, done_percent_reviewer=done_percent_reviewer, to_do_count_reviewer=to_do_count_reviewer, to_do_percent_reviewer=to_do_percent_reviewer, not_applicable_count_reviewer=not_applicable_count_reviewer, not_applicable_percent_reviewer=not_applicable_percent_reviewer, not_answered_count_reviewer=not_answered_count_reviewer, not_answered_percent_reviewer=not_answered_percent_reviewer)
 
 @app.route('/createchecklist', methods=['POST'])
 def create_checklist():

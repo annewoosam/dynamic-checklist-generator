@@ -190,34 +190,33 @@
 
  <table class="table table-hover table-striped">
 
-  <th>Done</th> 
+  <th>Done: {{ done_count }} | {{ done_percent }}% .</td> </th> 
 
-  <th>To-Do</th> 
+  <th>To-Do: {{ to_do_count }} | {{ to_do_percent }}%.</th> 
 
-  <th>Not Applicable</th>
-
-  <th>Not Answered</th>
-
+  <th>Not Answered: {{ not_answered_count }} | {{ not_answered_percent }}%.</th>
+  
+  <th>Not Applicable: {{ not_applicable_count }} | {{ not_applicable_percent }}%.</th>
 
   <tr> 
 
-    <td>     {% for answer in checklist.answers %}
+    <td>    
 
-      
+      {% for answer in checklist.answers %} 
 
         {% if answer.preparer_answer == 'y' %}
  
-          <li> {{ answer.template_question.yes_text}} </li>
+          <li> {{ answer.template_question.yes_text }} </li>
 
-      
+      {% endif %}
 
-    {% endif %}
-
-    {% endfor %}
+      {% endfor %}
 
      </td> 
 
-    <td>     {% for answer in checklist.answers %}
+    <td>     
+
+      {% for answer in checklist.answers %}
 
      
 
@@ -227,48 +226,43 @@
           <li> {{ answer.template_question.no_text}}</li>
 
       
-    {% endif %}
+        {% endif %}
 
-    {% endfor %}
-
-     </td>
-
-
-     <td>     {% for answer in checklist.answers %}
-
-    
-
-        {% if answer.preparer_answer == 'na' %}
- 
-          <li> {{ answer.template_question.not_applicable_text}} </li>
-
-   
-
-    {% endif %}
-
-    {% endfor %} 
+      {% endfor %}
 
     </td>
-           
-    <td>     {% for answer in checklist.answers %}
 
-      
+    <td>     
+
+      {% for answer in checklist.answers %}
 
         {% if answer.preparer_answer == '' %}
  
           <li> {{ answer.template_question.question}} </li>
 
-      
+        {% endif %}
 
-    {% endif %}
+      {% endfor %}
+    
+    </td>
 
-    {% endfor %} </td>
+   <td>     
+
+      {% for answer in checklist.answers %}
+
+        {% if answer.preparer_answer == 'na' %}
+ 
+          <li> {{ answer.template_question.not_applicable_text}} </li>
+
+        {% endif %}
+
+      {% endfor %} 
+
+    </td>
 
    </tr>
 
  </table>
-
-
 
 
 <h1>Add answers to Checklist ID.</h1>
@@ -605,13 +599,15 @@ function myFunction() {
 
  <table class="table table-hover table-striped">
 
-  <th>Done</th> 
+  <th>Done: {{ done_count_reviewer }} | {{ done_percent_reviewer }}% .</td> </th> 
 
-  <th>To-Do</th> 
+  <th>To-Do: {{ to_do_count_reviewer }} | {{ to_do_percent_reviewer }}%.</th> 
+    
+  <th>Not Answered: {{ not_answered_count_reviewer }} | {{ not_answered_percent_reviewer }}%.</th>
 
-  <th>Not Applicable</th>
+  <th>Not Applicable: {{ not_applicable_count_reviewer }} | {{ not_applicable_percent_reviewer }}%.</th>
 
-  <th>Not Answered</th>
+
 
 
   <tr> 
@@ -648,36 +644,35 @@ function myFunction() {
 
      </td>
 
+  <td>
 
-     <td>     {% for answer in checklist.answers %}
+       {% for answer in checklist.answers %}
 
-    
-
-        {% if answer.reviewer_ready == 'na' %}
+          {% if answer.reviewer_ready == '' %}
  
-          <li> {{ answer.template_question.not_applicable_text}} </li>
+            <li> {{ answer.template_question.question}} </li>
 
-   
+          {% endif %}
+
+        {% endfor %}
+
+    </td>
+
+    <td>     
+
+      {% for answer in checklist.answers %}
+
+  
+      {% if answer.reviewer_ready == 'na' %}
+ 
+      <li> {{ answer.template_question.not_applicable_text}} </li>
 
     {% endif %}
 
     {% endfor %} 
 
     </td>
-           
-    <td>     {% for answer in checklist.answers %}
-
-      
-
-        {% if answer.reviewer_ready == '' %}
- 
-          <li> {{ answer.template_question.question}} </li>
-
-      
-
-    {% endif %}
-
-    {% endfor %} </td>
+   
    </tr>
 
  </table>

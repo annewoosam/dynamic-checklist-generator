@@ -287,6 +287,8 @@ def create_recipient(user_full_name, email, password) :
 
 
 # 2.0 Kanban functionality for preparer & reviewer
+# After theitems below were used to confirm calculations, slight adjustments were made to server.py and the htmlpages using jinja. Some additional modules and models were imported and variables with the queries were
+# added then passed through to the html page. The closest parallel is passing shared variables using subreports to a main report for use later in Crystal Reports.
 
 # Lists
 
@@ -385,26 +387,42 @@ def create_recipient(user_full_name, email, password) :
 # test case # round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()*100,2)
 # Received expected response
 
-#Revisit 
+# Revisited & Updated in server.py 
 
 # def reviewer_blanks_percentage():
 #  """reviewer left unanswered divided by total questions in checklist, rounded to the nearest two decimal points."""
 # blanks_per_reviewer_as_percentage
 # test case # round(db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='c').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='na').count()))/(db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)))
-# Received expected response from first half. Check last, round and ().
+# Resolved in server.py.
 
 # def preparer_blanks_percentage():
 # """preparer left answer at default, skipped count divided by total questions in checklist, rounded to the nearest two decimal points.""""
 # This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
 # blanks_per_preparer_as_percentage=
 # test case # db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='c').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='na').count())
-# Received expected response
+# Resolved in server.py.
 
 # Visit
 
-# def reviewer_save_current_answers():
 
-#  anything marked return for corrections to be saved to separate database with date
+# Make sure template_id in server.py is made dynamic for counts/percents.
+
+# Make sure template_question link works correctly.
+
+# Items requiring user to make no mistakes - utopian syndrome.
+
+#    Navigation back to master template page.
+
+#    Prevent repost. AJAX? JSON?
+
+#    Deleting a duplicated row. -> Ask Tejaswi to work through with.
+
+#    Prevent adding duplicate users.
+
+# Using knowledge from adding counts and percents try draw charts dynamically for current data. 
+
+# Anything marked return for corrections to be saved to separate database with date then try create last 3 charts.
+
 
 if __name__ == '__main__':
     from server import app
