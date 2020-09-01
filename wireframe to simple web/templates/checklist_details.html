@@ -12,7 +12,14 @@
 <head>
   <meta name="viewport" content="width=de/Users/gsanda/src/project planning/projects/dynamic-checklists/wireframe to simple web/templates/template_details.htmlvice-width, initial-scale=1">
 
-  <title>Preparer Dashboard</title>
+      <div class="col-xs-12 col-md-6 offset-md-1 col-lg-6 offset-lg-1">
+ 
+    <ul>
+      <li><a href="/templates">View all templates</a></li>
+      <li><a href="/checklists">View all checklists</a></li>
+    </ul></div>
+
+    <title>Preparer Dashboard</title>
 
   <!-- Load Bootstrap 4 -->
   
@@ -55,16 +62,16 @@
 
     <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
     
-    <div class="row">
+   
     
     <img src="/static/img/pexels-breakingpic-3243.jpg" class="img">
     
     </div>
 
-<h1>{{ checklist.who_for }} Checklist</h1>
+  
 
-
-
+ <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+<h1> {{ checklist.who_for }} Checklist</h1>
  <table class="table table-hover table-striped">
 
   <th>For the period</th> 
@@ -105,7 +112,11 @@
 
     <thead>
 
+      <th>Template ID<i class="far fa-question-circle"></i></th> 
+
       <th>Question Number<i class="far fa-question-circle"></i></th>
+      
+      <th>Question ID<i class="far fa-question-circle"></i></th>
 
       <th>Question <i class="far fa-question-circle"></i></th>
 
@@ -123,7 +134,11 @@
 <tr>
       <ol>
 
+            <td>{{ template_question.template_id}}</td>
+
             <td>{{ template_question.question_number}}</td>
+
+            <td>{{ template_question.question_id}}</td>
 
             <td>{{ template_question.question}}</td>
 
@@ -148,11 +163,12 @@
 <table class="table table-hover table-striped">
 
   <thead>
+    <th>Template ID <i class="far fa-question-circle"></i></th>
 
-    <th>Question ID <i class="far fa-question-circle"></i></th>
+    <th>Question Number <i class="far fa-question-circle"></i></th>
 
     <th>Question <i class="far fa-question-circle"></i></th>
-
+    
     <th>Preparer Answer <i class="fas fa-traffic-light"></i></th>
 
     <th>Preparer Time <i class="far fa-clock"></i></th>
@@ -167,7 +183,9 @@
 
   <ol>
 
-     <td> {{ answer.question_id }} </td>
+     <td> {{ answer.template_question.template_id }} </td>
+
+     <td> {{ answer.template_question.question_number }} </td>
 
      <td> {{ answer.template_question.question}} </td>
 
@@ -201,6 +219,8 @@
   <tr> 
 
     <td>    
+   
+
 
       {% for answer in checklist.answers %} 
 
@@ -211,6 +231,7 @@
       {% endif %}
 
       {% endfor %}
+
 
      </td> 
 
@@ -281,7 +302,7 @@
     <tr>
       
       <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-
+      <input type="hidden" id="template_id" name="template_id" value = {{checklist.template_id}} >
     </tr>
 
 <tr>
@@ -289,7 +310,7 @@
   <td>
   
     <label for="question_id">Enter question id*:</label></td>
-  
+ 
   <td>
   
     <input type="number" id="question_id" name="question_id" min=1 required>
@@ -320,7 +341,7 @@
 
   <td><label for="preparer_time">Enter preparer minutes*:</label></td>
 
-  <td><input type="number" id="preparer_time" name="preparer_time" min=1></td>
+  <td><input type="number" id="preparer_time" name="preparer_time" min=0></td>
 
 </tr>
 
@@ -360,11 +381,11 @@
 
   <td>
   
-    <label for="question_id">Enter question id*:</label></td>
+    <label for="question_number">Enter question id*:</label></td>
   
   <td>
   
-    <input type="number" id="question_id" name="question_id" min=1 required>
+    <input type="number" id="question_number" name="question_number" min=1 required>
   
   </td>
 
@@ -392,13 +413,13 @@
 
   <td><label for="preparer_time">Enter preparer minutes*:</label></td>
 
-  <td><input type="number" id="preparer_time" name="preparer_time" min=1></td>
+  <td><input type="number" id="preparer_time" name="preparer_time" min=0></td>
 
 </tr>
 
 <tr>
 
-  <td><label for="preparer_comment">Enter preparer comments?</label></td>
+  <td><label for="preparer_comment">Enter preparer comments:</label></td>
 
   <td><textarea id="preparer_comment" name="preparer_comment" rows="5" cols="70" ></textarea> </td>
 
@@ -513,7 +534,7 @@ function myFunction() {
 </table>
 
 
-<div>
+
 
 
 <!-- Reviewer Answers -->
@@ -573,7 +594,7 @@ function myFunction() {
 
   <td><label for="reviewer_time">Enter reviewer minutes*:</label></td>
 
-  <td><input type="number" id="reviewer_time" name="reviewer_time" min=1></td>
+  <td><input type="number" id="reviewer_time" name="reviewer_time" min=0></td>
 
 </tr>
 
@@ -591,9 +612,6 @@ function myFunction() {
 
 </form>
 
-</div>
-
-<div>
 
 <h1>Reviewer Kanban</h1>
 
@@ -676,8 +694,9 @@ function myFunction() {
    </tr>
 
  </table>
-</div>
-  <div>
+
+
+
   <h3>Review Complete</h3>   
 
   <p> Date completed: {{ checklist.date_review_completed }}</p>
@@ -743,7 +762,7 @@ function myFunction() {
 </tr> 
 </table>
 
-<div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+
 
   <form action="/chooserecipient" method="POST"><table>
 
@@ -765,17 +784,11 @@ function myFunction() {
 </form>
 
 </p>
-</div>
+
 
 <h3>>Add a recipient</h3>
 
-<div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
-     
-    </div>
-  </div>
 
-
-  <div>
     <form action="/registerrecipient" method="POST">
 
       <input type="hidden" id="checklist_id"  name="checklist_id" value = "test">
@@ -813,14 +826,14 @@ function myFunction() {
 
   </form>
 
-</div>
+
 
 <a href="mailto:{% if checklist.recipient %} {{ checklist.recipient.email }} {% endif %}?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
 
 <h3>Mark Complete</h3> 
 
 <p> Date completed: {{ checklist.date_complete }}</p>
-<div>
+
 
 <form action="/markcomplete" method="POST">
 
@@ -849,7 +862,7 @@ function myFunction() {
 
 </form>
 
-</div>   
+
 
 <table class="table table-hover table-striped">
  

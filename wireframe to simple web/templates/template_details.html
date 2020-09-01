@@ -23,7 +23,6 @@
   <!-- Load Font Awesome -->
 
   <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
-
   <!-- Load our stylesheet -->
 
   <style></style>
@@ -32,6 +31,7 @@
 
   <link rel="stylesheet" type="text/css" HREF="../css/styles.css">
 
+
 </head>
 
 <body>
@@ -39,13 +39,28 @@
 <!-- Code goes here. -->
 <!-- NAV BAR CODE -->
 <nav class="navbar navbar-expand-lg override a:link">
-  <div><a class="nav-link" href=""></a></div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</nav>
 
+  <div>
+
+    <li><a href="/templates">View all templates</a></li></a>
+
+    <li><a href="/checklists">View all checklists</a></li>
+
+    </div>
+
+    <div><a class="nav-link" href=""></a></div>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  
+    <span class="navbar-toggler-icon"></span>
+
+  </button>
+
+</nav>
+      
+  
     <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+
        <div class="row"><img src="/static/img/pexels-breakingpic-3243.jpg" class="img"></div>
        
        <div><h1>Let's Create!</div></h1>
@@ -59,11 +74,16 @@
   <table>
 
     <tr>
+
       <td>Created on:</td>
 
       <td> {{ template.created_on.strftime('%m-%d-%Y') }} </td>
+
+
       <td>Created  by user:</td>
+
       <td> {{ template.created_by }}  </td>
+
     </tr>
   <!-- .strftime('%m-%d-%Y')  -->
    
@@ -103,7 +123,6 @@
 
       <th>Category <i class="fas fa-link"></i></th>
       
-
     </thead>
 
        {% for template_question in template.template_questions %} 
@@ -221,8 +240,11 @@
       </tr>
 
     </table>
+
 {% if template.created_by %}
+
   <button type="submit" class="btn btn-primary btns" >Add question</button> 
+
 {% endif %}
 
 </form>
@@ -269,7 +291,9 @@
 <tr>
 
     <td><label for="preparer_id">Choose a preparer:</label></td>
+
     <td><label for="preparer_id">Enter preparer id:</label></td>
+
     <td><input type="number" id="preparer_id" name="preparer_id" min=1></td>
 
 </tr> 
@@ -277,7 +301,9 @@
 <tr>
 
     <td><label for="reviewer_id">Choose a reviewer:</label></td>
+
     <td><label for="reviewer_id">Enter reviewer id:</label></td>
+    
     <td><input type="number" id="reviewer_id" name="reviewer_id" min=1></td>
 
 </td>

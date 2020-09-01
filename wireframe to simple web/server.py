@@ -141,6 +141,8 @@ def show_checklist(checklist_id):
     users=crud.get_users()
     answers=crud.get_answers()
     questions = crud.get_questions()
+    template_id = request.form.get('template_id')
+
 
     to_do_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()
     done_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()
@@ -201,6 +203,7 @@ def create_preparer_answer():
     """Create new preparer answer."""
 
     checklist_id = request.form.get('checklist_id')
+    template_id = request.form.get('template_id')
     question_id = request.form.get('question_id')
     preparer_answer = request.form.get('preparer_answer')
     preparer_time = request.form.get('preparer_time')
@@ -329,6 +332,14 @@ def mark_date_review_completed():
     flash('Date review completed registered! Select checklist desired.')
     checklists = crud.get_checklists()
     return render_template('all_checklists.html', checklists=checklists)
+
+@app.route('/reportdata')
+
+def show_stats():
+
+    checklist_count = Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(Checklists.date_complete.isnot(None)).count()
+    checklists = crud.get_checklists()
+    return render_template('report.html', checklists=checklists, checklist_count=checklist_count)
 
 if __name__ == '__main__':
 # added connection to database
