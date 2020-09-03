@@ -295,7 +295,7 @@ def create_recipient(user_full_name, email, password) :
 
     return user
 
-# Visit
+# Visit Nice to Haves
 
 # Using knowledge from adding counts and percents try draw charts dynamically for current data. 
 

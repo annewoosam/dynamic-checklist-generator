@@ -135,18 +135,41 @@ def all_checklists():
 
     # Chart stats check - initial
 
-    # sent_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None))).count()
-    # reviewed_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.isnot(None),Checklist.date_sent_to_review.isnot(None))).count()
-    # in_review_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.isnot(None))).count()
-    # started_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.is(None))).count()
-    # for render template (sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
-    # for html jinja {{ sent_count }} {{ reviewed_count }} {{ in_review_count }} {{ started_count }}
-    # when working get reports.html to receive and use count in list of numbers to chart
+    sent_count=Checklist.query.filter(Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None)).count()
+    reviewed_count=Checklist.query.filter(Checklist.date_complete.is_(None),Checklist.date_review_completed.isnot(None),Checklist.date_sent_to_review.isnot(None)).count()
+    in_review_count=Checklist.query.filter(Checklist.date_complete.is_(None),Checklist.date_review_completed.is_(None),Checklist.date_sent_to_review.isnot(None)).count()
+    started_count=Checklist.query.filter(Checklist.date_complete.is_(None),Checklist.date_review_completed.is_(None),Checklist.date_sent_to_review.is_(None)).count()
+
+    # 3.0 after grad version 
+    # requires another model
     # go back and apply to questions with corrections grouped by question
     # go back and apply to group by preparer sorted by most to least
     # go back and apply to group by preparer sorted by least to most
 
-    return render_template('all_checklists.html',checklists=checklists, users=users)
+    return render_template('all_checklists.html', checklists=checklists, users=users, sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
+
+# app route for all checklists stats
+@app.route('/checklistsstats')
+def all_checklistsstats():
+    """View all checklists stats."""
+    
+    checklists = crud.get_checklists()
+    users=crud.get_users()
+
+    # Chart stats check - initial
+
+    sent_count=Checklist.query.filter(Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None)).count()
+    reviewed_count=Checklist.query.filter(Checklist.date_complete.is_(None),Checklist.date_review_completed.isnot(None),Checklist.date_sent_to_review.isnot(None)).count()
+    in_review_count=Checklist.query.filter(Checklist.date_complete.is_(None),Checklist.date_review_completed.is_(None),Checklist.date_sent_to_review.isnot(None)).count()
+    started_count=Checklist.query.filter(Checklist.date_complete.is_(None),Checklist.date_review_completed.is_(None),Checklist.date_sent_to_review.is_(None)).count()
+
+    # 3.0 after grad version 
+    # requires another model
+    # go back and apply to questions with corrections grouped by question
+    # go back and apply to group by preparer sorted by most to least
+    # go back and apply to group by preparer sorted by least to most
+
+    return render_template('all_checklistsstats.html', checklists=checklists, users=users, sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
 
 
 @app.route('/checklists/<checklist_id>')
@@ -345,31 +368,6 @@ def show_stats():
     checklist_count = Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(Checklists.date_complete.isnot(None)).count()
     checklists = crud.get_checklists()
     return render_template('report.html', checklists=checklists, checklist_count=checklist_count)
-
-
-# app route for all checklists
-@app.route('/answersmaster')
-def report_answers():
-    """View reports for all answers."""
-    # start reporting on answers - basic first.
-    answers = crud.get_answers()
-    users=crud.get_users()
-
-    # Chart stats check - initial
-
-    # sent_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None))).count()
-    # reviewed_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.isnot(None),Checklist.date_sent_to_review.isnot(None))).count()
-    # in_review_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.isnot(None))).count()
-    # started_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.is(None))).count()
-    # for render template (sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
-    # for html jinja {{ sent_count }} {{ reviewed_count }} {{ in_review_count }} {{ started_count }}
-    # when working get reports.html to receive and use count in list of numbers to chart
-    # add a model
-    # go back and apply to questions with corrections grouped by question
-    # go back and apply to group by preparer sorted by most to least
-    # go back and apply to group by preparer sorted by least to most
-
-    return render_template('all_answers.html',answers=answers, users=users)
 
 @app.route('/answers')
 def all_answers():
