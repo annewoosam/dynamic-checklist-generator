@@ -162,7 +162,16 @@
   </table>
 
 <h1>Preparer Answers</h1>
+<table>
+  
+  <tr>
+    
+    <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
+    <input type="hidden" id="template_id" name="template_id" value = {{checklist.template_id}} >
+</tr>
+</form>
 
+<table>
 <table class="table table-hover table-striped">
 
   <thead>
@@ -179,6 +188,8 @@
     <th>Preparer Comment <i class="far fa-comment"></i></th> 
 
   </thead>
+
+  <form action="/checklists/checklist_id" method="POST">
 
 {% for answer in checklist.answers %}
 
@@ -223,7 +234,6 @@
 
     <td>    
    
-
 
       {% for answer in checklist.answers %} 
 

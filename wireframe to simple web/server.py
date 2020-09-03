@@ -129,42 +129,63 @@ def show_question(question_id):
 @app.route('/checklists')
 def all_checklists():
     """View all checklists."""
-
+    
     checklists = crud.get_checklists()
     users=crud.get_users()
-    return render_template('all_checklists.html', checklists=checklists, users=users)
+
+    # Chart stats check - initial
+
+    # sent_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None))).count()
+    # reviewed_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.isnot(None),Checklist.date_sent_to_review.isnot(None))).count()
+    # in_review_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.isnot(None))).count()
+    # started_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.is(None))).count()
+    # for render template (sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
+    # for html jinja {{ sent_count }} {{ reviewed_count }} {{ in_review_count }} {{ started_count }}
+    # when working get reports.html to receive and use count in list of numbers to chart
+    # go back and apply to questions with corrections grouped by question
+    # go back and apply to group by preparer sorted by most to least
+    # go back and apply to group by preparer sorted by least to most
+
+    return render_template('all_checklists.html',checklists=checklists, users=users)
+
 
 @app.route('/checklists/<checklist_id>')
 def show_checklist(checklist_id):
-  #Show details on a particular template.
+  # Show details on a particular template.
     checklist = crud.get_checklist_by_id(checklist_id)
     users=crud.get_users()
     answers=crud.get_answers()
     questions = crud.get_questions()
-    template_id = request.form.get('template_id')
 
+    # preparer_count=crud.get_preparer_count() # create a helper function to declutter code in server.py
 
     to_do_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()
     done_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()
     not_applicable_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()
     not_answered_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='').count()
 
-    to_do_percent=round(to_do_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
-    done_percent=round(done_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
-    not_applicable_percent=round(not_applicable_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
-    not_answered_percent=round(not_answered_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    # preparer_percent=crud.get_preparer_percent() # create a helper function.
+
+    to_do_percent=round(to_do_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
+    done_percent=round(done_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
+    not_applicable_percent=round(not_applicable_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
+    not_answered_percent=round(not_answered_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
+ 
+    # reviewer_count=crud.get_reviewer_count() # create a helper function.
 
     to_do_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='c').count()
     done_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='r').count()
     not_applicable_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='na').count()
     not_answered_count_reviewer=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='').count()
+    
+    # reviewer_percent=crud.get_reviewer_percent() # create a helper function.
 
-    to_do_percent_reviewer=round(to_do_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
-    done_percent_reviewer=round(done_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
-    not_applicable_percent_reviewer=round(not_applicable_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
-    not_answered_percent_reviewer=round(not_answered_count/TemplateQuestion.query.filter(TemplateQuestion.template_id==1).count()*100,2)
+    to_do_percent_reviewer=round(to_do_count_reviewer/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
+    done_percent_reviewer=round(done_count_reviewer/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
+    not_applicable_percent_reviewer=round(not_applicable_count_reviewer/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
+    not_answered_percent_reviewer=round(not_answered_count_reviewer/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
 
-    return render_template('checklist_details.html', checklist=checklist, users=users, answers=answers, questions=questions, done_count=done_count, done_percent=done_percent, to_do_count=to_do_count, to_do_percent=to_do_percent, not_applicable_count=not_applicable_count, not_applicable_percent=not_applicable_percent, not_answered_count=not_answered_count, not_answered_percent=not_answered_percent, done_count_reviewer=done_count_reviewer, done_percent_reviewer=done_percent_reviewer, to_do_count_reviewer=to_do_count_reviewer, to_do_percent_reviewer=to_do_percent_reviewer, not_applicable_count_reviewer=not_applicable_count_reviewer, not_applicable_percent_reviewer=not_applicable_percent_reviewer, not_answered_count_reviewer=not_answered_count_reviewer, not_answered_percent_reviewer=not_answered_percent_reviewer)
+    return render_template('checklist_details.html', checklist=checklist, users=users, answers=answers, questions=questions, to_do_count=to_do_count_reviewer, done_count=done_count, not_applicable_count=not_applicable_count, not_answered_count=not_answered_count, done_percent=done_percent, to_do_percent=to_do_percent, not_applicable_percent=not_applicable_percent, not_answered_percent=not_answered_percent, done_count_reviewer=done_count_reviewer, done_percent_reviewer=done_percent_reviewer, to_do_count_reviewer=to_do_count_reviewer, to_do_percent_reviewer=to_do_percent_reviewer, not_applicable_count_reviewer=not_applicable_count_reviewer, not_applicable_percent_reviewer=not_applicable_percent_reviewer, not_answered_count_reviewer=not_answered_count_reviewer, not_answered_percent_reviewer=not_answered_percent_reviewer)
 
 @app.route('/createchecklist', methods=['POST'])
 def create_checklist():
@@ -182,23 +203,7 @@ def create_checklist():
     users=crud.get_users()
     return render_template('/all_checklists.html', checklists=checklists, users=users)
 
-@app.route('/answers')
-def all_answers():
-    """View all answers."""
-
-    answers = crud.get_answers()
-
-    return render_template('all_answers.html', answers=answers)
-
-@app.route('/answers/<answer_id>')
-def show_answer(answer_id):
-  # Show details on a particular answer.
-    answer = crud.get_answer_by_id(answer_id)
-
-    return render_template('answer_details.html', answer=answer)
-
 @app.route('/createprepareranswer', methods=['POST'])
-
 def create_preparer_answer():
     """Create new preparer answer."""
 
@@ -340,6 +345,48 @@ def show_stats():
     checklist_count = Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(Checklists.date_complete.isnot(None)).count()
     checklists = crud.get_checklists()
     return render_template('report.html', checklists=checklists, checklist_count=checklist_count)
+
+
+# app route for all checklists
+@app.route('/answersmaster')
+def report_answers():
+    """View reports for all answers."""
+    # start reporting on answers - basic first.
+    answers = crud.get_answers()
+    users=crud.get_users()
+
+    # Chart stats check - initial
+
+    # sent_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None),Checklist.date_complete.isnot(None))).count()
+    # reviewed_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.isnot(None),Checklist.date_sent_to_review.isnot(None))).count()
+    # in_review_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.isnot(None))).count()
+    # started_count=Checklist.query.filter(Checklist.checklist_id==checklist_id).filter(and_(Checklist.date_complete.is(None),Checklist.date_review_completed.is(None),Checklist.date_sent_to_review.is(None))).count()
+    # for render template (sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
+    # for html jinja {{ sent_count }} {{ reviewed_count }} {{ in_review_count }} {{ started_count }}
+    # when working get reports.html to receive and use count in list of numbers to chart
+    # add a model
+    # go back and apply to questions with corrections grouped by question
+    # go back and apply to group by preparer sorted by most to least
+    # go back and apply to group by preparer sorted by least to most
+
+    return render_template('all_answers.html',answers=answers, users=users)
+
+@app.route('/answers')
+def all_answers():
+    """View all answers."""
+
+    answers = crud.get_answers()
+
+    return render_template('all_answers.html', answers=answers)
+
+@app.route('/answers/<answer_id>')
+def show_answer(answer_id):
+  # Show details on a particular answer.
+    answer = crud.get_answer_by_id(answer_id)
+
+    return render_template('answer_details.html', answer=answer)
+
+
 
 if __name__ == '__main__':
 # added connection to database

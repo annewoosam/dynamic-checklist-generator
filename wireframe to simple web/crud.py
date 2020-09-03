@@ -221,6 +221,16 @@ def update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_ti
 
     return updaterevieweranswer, updaterevieweranswercomment,updaterevieweranswertime
 
+def get_preparer_count():
+    """Return counts for preparer Kanban"""
+
+    to_do_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()
+    done_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()
+    not_applicable_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()
+    not_answered_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='').count()
+
+    return to_do_count, done_count, not_applicable_count, not_answered_count
+
 def get_answers():
     """Return all checklists."""
 
@@ -285,139 +295,7 @@ def create_recipient(user_full_name, email, password) :
 
     return user
 
-
-# 2.0 Kanban functionality for preparer & reviewer
-# After theitems below were used to confirm calculations, slight adjustments were made to server.py and the htmlpages using jinja. Some additional modules and models were imported and variables with the queries were
-# added then passed through to the html page. The closest parallel is passing shared variables using subreports to a main report for use later in Crystal Reports.
-
-# Lists
-
-# Item response based on what the creator coded when the question was set-up.
-
-# Scorecard Elements: Counts & Percentages 
-
-# Preparer Counts  
-
-# def preparer_to_do_count():
-# """preparer answered not applicable count."""
-# to_do_per_preparer_counts=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()
-# test case # db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='n').count()
-# Received expected response
-
-# def preparer_not_applicable_count():
-# """preparer answered not applicable count."""
-# not_applicable_per_preparer_counts=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()
-# test case # db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='na').count()
-# Received expected response
-
-# def preparer_done_count():
-# """preparer answered yes count."""
-# done_per_preparer_counts=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()
-# test case # db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='y').count()
-# Received expected response
-
-# def prepaper_blanks_count():
-# """preparer skipped count."""
-# This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
-# blanks_per_preparer_counts=
-# test case # db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='y').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='n').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='na').count())
-# Received expected response
-
-# Reviewer Counts   
-
-# def reviewer_to_do_count():
-# """reviewer answered corrections required count."""
-# test case # to_do_per_reviewer_count=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='c').count()
-# Received expected response
-
-# def reviewer_not_applicable_count():
-# """reviewer answered not applicable count."""
-# test case # not_applicable_per_reviewer_count=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='na').count()
-# Received expected response
-
-# def reviewer_done_count():
-# """reviewer answered ready count."""
-# test case # done_per_preparer_count=db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count()
-# Received expected response
-
-# def reviewer_blanks_count():
-# """reviewer skipped count."""
-# This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
-# blanks_per_reviewer_counts=
-# test case # db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='c').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='na').count())
-# Received expected response
-
-# Preparer Percentages
-
-# def preparer_to_do_percentage():
-# """preparer answer set to no count divided by total questions in checklist, rounded to the nearest two decimal points.""""
-# to_do_per_preparer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
-# test case # round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='n').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()*100,2)
-# Received expected response
-
-# def preparer_not_applicable_percentage():
-# """preparer answer set to not applicable count divided by total questions in checklist, rounded to the nearest two decimal points.""""
-# not_applicable_per_preparer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
-# test case # round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='na').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()*100,2)
-# Received expected response
-
-# def preparer_done_percentage():
-# """preparer answered yes count divided by total questions in checklist, rounded to the nearest two decimal points.""""
-# done_per_preparer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
-# test case # round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.preparer_answer=='y').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()*100,2)
-# Received expected response
-
-# Reviewer Percentages
-
-# def reviewer_to_do_percentage():
-#  """reviewer answer set to return count divided by total questions in checklist, rounded to the nearest two decimal points.""""
-# done_per_reviewer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='c').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
-# test case # round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='c').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()*100,2)
-# Received expected response
-
-# def reviewer_not_applicable_percentage():
-#  """reviewer answer set to not applicable count divided by total questions in checklist, rounded to the nearest two decimal points."""    
-# done_per_reviewer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='na').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
-# test case # round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='na').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()*100,2)
-# Received expected response
-
-# def reviewer_done_percentage(): 
-#  """reviewer answer set to ready for recipient count divided by total questions in checklist, rounded to the nearest two decimal points."""    
-# done_per_reviewer_as_percentage=round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==checklist_id).filter(Answer.reviewer_ready=='r').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)
-# test case # round(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count()/db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()*100,2)
-# Received expected response
-
-# Revisited & Updated in server.py 
-
-# def reviewer_blanks_percentage():
-#  """reviewer left unanswered divided by total questions in checklist, rounded to the nearest two decimal points."""
-# blanks_per_reviewer_as_percentage
-# test case # round(db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='c').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='na').count()))/(db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==template_id).count()*100,2)))
-# Resolved in server.py.
-
-# def preparer_blanks_percentage():
-# """preparer left answer at default, skipped count divided by total questions in checklist, rounded to the nearest two decimal points.""""
-# This is a little more complex- it needs to be backed into by taking the total questions and adding up all answers then dividing the difference by the total questions
-# blanks_per_preparer_as_percentage=
-# test case # db.session.query(TemplateQuestion.question_id).group_by("question_id").filter(TemplateQuestion.template_id==1).count()-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='c').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='r').count())-(db.session.query(Answer.checklist_id).group_by("checklist_id").filter(Answer.checklist_id==1).filter(Answer.reviewer_ready=='na').count())
-# Resolved in server.py.
-
 # Visit
-
-
-# Make sure template_id in server.py is made dynamic for counts/percents.
-
-# Make sure template_question link works correctly.
-
-# Items requiring user to make no mistakes - utopian syndrome.
-
-#    Navigation back to master template page.
-
-#    Prevent repost. AJAX? JSON?
-
-#    Deleting a duplicated row. -> Ask Tejaswi to work through with.
-
-#    Prevent adding duplicate users.
 
 # Using knowledge from adding counts and percents try draw charts dynamically for current data. 
 
