@@ -1,6 +1,7 @@
 """CRUD operations."""
 
-from model import db, User, Template, TemplateQuestion, Checklist, Answer, connect_to_db 
+from model import db, User, Template, TemplateQuestion, Checklist, Answer, connect_to_db
+
 import datetime
 
 def create_user(email, password, user_full_name):
@@ -9,6 +10,7 @@ def create_user(email, password, user_full_name):
     user = User(email=email, password=password, user_full_name=user_full_name)
 
     db.session.add(user)
+    
     db.session.commit()
 
     return user
@@ -55,6 +57,7 @@ def create_template(template_name, created_by, created_on):
                   created_on=created_on)
 
     db.session.add(template)
+
     db.session.commit()
 
     return template
@@ -95,6 +98,7 @@ def create_question(template_id, question, yes_text, no_text, not_applicable_tex
                   help_text=help_text)
 
     db.session.add(template_question)
+
     db.session.commit()
 
     return template_question
@@ -133,6 +137,7 @@ def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)
                   reviewer_id=reviewer_id)
     
     db.session.add(checklist)
+
     db.session.commit()
 
     return checklist
@@ -146,6 +151,7 @@ def create_checklist_seed(template_id, who_for, time_frame, preparer_id, reviewe
                   reviewer_id=reviewer_id)
     
     db.session.add(checklist)
+
     db.session.commit()
 
     return checklist
@@ -164,6 +170,7 @@ def get_checklist_by_id(checklist_id):
 # returning a specific answers by id.
 
 def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
+
     prepareranswer = Answer(checklist_id=checklist_id,
                   question_id=question_id,
                   preparer_answer=preparer_answer,
@@ -171,11 +178,13 @@ def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_t
                   preparer_time=preparer_time)
 
     db.session.add(prepareranswer)
+
     db.session.commit()
 
     return prepareranswer
 
 def update_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
+
     updateprepareranswer = Answer(checklist_id=checklist_id,
                   question_id=question_id,
                   preparer_answer=preparer_answer,
@@ -193,6 +202,7 @@ def update_prepareranswer(checklist_id, question_id, preparer_answer, preparer_t
     return updateprepareranswer, updateprepareranswertime, updateprepareranswercomment
 
 def create_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment):
+
     revieweranswer = Answer(checklist_id=checklist_id,
                   question_id=question_id,
                   reviewer_ready=reviewer_ready,
@@ -200,11 +210,13 @@ def create_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_ti
                   reviewer_comment=reviewer_comment)
 
     db.session.add(revieweranswer)
+
     db.session.commit()
 
     return revieweranswer
 
 def update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment):
+
     updaterevieweranswer = Answer(checklist_id=checklist_id,
                   question_id=question_id,
                   reviewer_ready=reviewer_ready,
@@ -222,26 +234,33 @@ def update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_ti
     return updaterevieweranswer, updaterevieweranswercomment,updaterevieweranswertime
 
 def get_preparer_count():
+
     """Return counts for preparer Kanban"""
 
     to_do_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='n').count()
+
     done_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='y').count()
+
     not_applicable_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='na').count()
+
     not_answered_count=Answer.query.filter(Answer.checklist_id==checklist_id).filter(Answer.preparer_answer=='').count()
 
     return to_do_count, done_count, not_applicable_count, not_answered_count
 
 def get_answers():
+
     """Return all checklists."""
 
     return Answer.query.all()
 
 def get_answer_by_id(answer_id):
+
     """Return answer by id."""
 
     return Answer.query.get(answer_id)
 
 def mark_datesenttoreview(checklist_id, date_sent_to_review):
+
     readyforreview = Checklist(checklist_id=checklist_id,
                    date_sent_to_review=date_sent_to_review)
     
@@ -253,6 +272,7 @@ def mark_datesenttoreview(checklist_id, date_sent_to_review):
     return readyforreview
 
 def mark_datereviewcompleted(checklist_id, date_review_completed):
+
     reviewcomplete = Checklist(checklist_id=checklist_id,
                    date_review_completed=date_review_completed)
 
@@ -262,29 +282,29 @@ def mark_datereviewcompleted(checklist_id, date_review_completed):
 
     return reviewcomplete
 
-def mark_complete(checklist_id, date_complete)  :
+def mark_complete(checklist_id, date_complete):
+
     complete = Checklist(checklist_id=checklist_id,
                   date_complete=date_complete)
     
     date_complete=db.session.query(Checklist.checklist_id).filter(Checklist.checklist_id==checklist_id).update({Checklist.date_complete:date_complete})
-    # print(mark_complete)
 
     db.session.commit()
 
     return complete
 
 def choose_recipient(checklist_id, recipient_id):
+
     recipient = Checklist(checklist_id=checklist_id,
                   recipient_id=recipient_id)
     
     recipient=db.session.query(Checklist.checklist_id).filter(Checklist.checklist_id==checklist_id).update({Checklist.recipient_id:recipient_id})
     db.session.commit()
-    # update confirmed in sqlalchemy/psql. not causing error on save via web. causing error when trying to pull into table. Clearing cache and reloading worked when fed through 
-    # backend. Trying on second checklist.
 
     return recipient
 
-def create_recipient(user_full_name, email, password) :
+def create_recipient(user_full_name, email, password):
+
     """Create and return a new user."""
 
     
@@ -294,13 +314,6 @@ def create_recipient(user_full_name, email, password) :
     db.session.commit()
 
     return user
-
-# Visit Nice to Haves
-
-# Using knowledge from adding counts and percents try draw charts dynamically for current data. 
-
-# Anything marked return for corrections to be saved to separate database with date then try create last 3 charts.
-
 
 if __name__ == '__main__':
     from server import app

@@ -66,7 +66,7 @@
 {% for checklist in checklists %}
   <li>
     <a href="/checklists/{{ checklist.checklist_id }}">
-       {{ checklist.who_for }}, Period: {{ checklist.time_frame}}, Checklist ID: {{ checklist.checklist_id }}
+       {{ checklist.who_for }}, Period: {{ checklist.time_frame}}, Checklist ID: {{ checklist.checklist_id }}, Date complete: {{ checklist.date_complete }} 
     </a>
   </li>
 {% endfor %}
