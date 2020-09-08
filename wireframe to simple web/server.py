@@ -165,13 +165,13 @@ def all_checklistsstats():
     
     corrections_by_question_count=[q[0] for q in db.session.query(db.func.count(Answer.answer_id)).filter(Answer.reviewer_ready=='c').group_by(Answer.answer_id).all()] 
 
-     
+    questions_requiring_training=[r.question for r in db.session.query(TemplateQuestion).outerjoin(Answer, Answer.question_id==TemplateQuestion.question_id).filter(Answer.reviewer_ready=='c').all()]
     # 3.0 after grad version 
 
     # go back and apply to group by preparer sorted by most to least
 
   
-    return render_template('all_checklistsstats.html', checklists=checklists, users=users, answer=answer, questions=questions, questions_with_corrections=questions_with_corrections, corrections_by_question_count=corrections_by_question_count, sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
+    return render_template('all_checklistsstats.html', checklists=checklists, users=users, answer=answer, questions=questions, questions_with_corrections=questions_with_corrections, corrections_by_question_count=corrections_by_question_count, questions_requiring_training=questions_requiring_training, sent_count=sent_count, reviewed_count=reviewed_count, in_review_count=in_review_count, started_count=started_count)
 
 
 @app.route('/checklists/<checklist_id>')
@@ -227,8 +227,8 @@ def show_checklist(checklist_id):
     not_applicable_percent_reviewer=round(not_applicable_count_reviewer/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
 
     not_answered_percent_reviewer=round(not_answered_count_reviewer/TemplateQuestion.query.filter(TemplateQuestion.template_id==checklist.template_id).count()*100,2)
-
-    return render_template('checklist_details.html', checklist=checklist, users=users, answers=answers, questions=questions, to_do_count=to_do_count_reviewer, done_count=done_count, not_applicable_count=not_applicable_count, not_answered_count=not_answered_count, done_percent=done_percent, to_do_percent=to_do_percent, not_applicable_percent=not_applicable_percent, not_answered_percent=not_answered_percent, done_count_reviewer=done_count_reviewer, done_percent_reviewer=done_percent_reviewer, to_do_count_reviewer=to_do_count_reviewer, to_do_percent_reviewer=to_do_percent_reviewer, not_applicable_count_reviewer=not_applicable_count_reviewer, not_applicable_percent_reviewer=not_applicable_percent_reviewer, not_answered_count_reviewer=not_answered_count_reviewer, not_answered_percent_reviewer=not_answered_percent_reviewer)
+    sortparams = { 'sortby': 'question_id', 'sortdir': 'asc' }
+    return render_template('checklist_details.html', sortparams=sortparams, checklist=checklist, users=users, answers=answers, questions=questions, to_do_count=to_do_count_reviewer, done_count=done_count, not_applicable_count=not_applicable_count, not_answered_count=not_answered_count, done_percent=done_percent, to_do_percent=to_do_percent, not_applicable_percent=not_applicable_percent, not_answered_percent=not_answered_percent, done_count_reviewer=done_count_reviewer, done_percent_reviewer=done_percent_reviewer, to_do_count_reviewer=to_do_count_reviewer, to_do_percent_reviewer=to_do_percent_reviewer, not_applicable_count_reviewer=not_applicable_count_reviewer, not_applicable_percent_reviewer=not_applicable_percent_reviewer, not_answered_count_reviewer=not_answered_count_reviewer, not_answered_percent_reviewer=not_answered_percent_reviewer)
 
 @app.route('/createchecklist', methods=['POST'])
 
@@ -274,7 +274,7 @@ def create_preparer_answer():
     
     preparer_comment = request.form.get('preparer_comment')
     
-    crud.create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment)
+    crud.create_prepareranswer(checklist_id, template_id, question_id, preparer_answer, preparer_time, preparer_comment)
     
     flash('Preparer answer posted! Select checklist.')
     
@@ -289,7 +289,7 @@ def update_preparer_answer():
 
     checklist_id = request.form.get('checklist_id')
 
-    question_id = request.form.get('question_id')
+    answer_id = request.form.get('answer_id')
     
     preparer_answer = request.form.get('preparer_answer')
     
@@ -297,33 +297,9 @@ def update_preparer_answer():
     
     preparer_comment = request.form.get('preparer_comment')
     
-    crud.update_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment)
+    crud.update_prepareranswer(checklist_id, answer_id, preparer_answer, preparer_time, preparer_comment)
     
     flash('Preparer answer updated! Select checklist.')
-    
-    checklists = crud.get_checklists()
-    
-    return render_template('all_checklists.html', checklists=checklists)
-
-@app.route('/createrevieweranswer', methods=['POST'])
-
-def create_reviewer_answer():
-
-    """Create new reviewer answer."""
-
-    checklist_id = request.form.get('checklist_id')
-    
-    question_id = request.form.get('question_id')
-    
-    reviewer_ready = request.form.get('reviewer_ready')
-    
-    reviewer_time = request.form.get('reviewer_time')
-    
-    reviewer_comment = request.form.get('reviewer_comment')
-    
-    crud.create_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment)
-    
-    flash('Reviewer answer posted! Select checklist.')
     
     checklists = crud.get_checklists()
     
@@ -337,7 +313,7 @@ def update_reviewer_answer():
 
     checklist_id = request.form.get('checklist_id')
     
-    question_id = request.form.get('question_id')
+    answer_id = request.form.get('answer_id')
     
     reviewer_ready = request.form.get('reviewer_ready')
     
@@ -345,7 +321,7 @@ def update_reviewer_answer():
     
     reviewer_comment = request.form.get('reviewer_comment')
     
-    crud.update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment)
+    crud.update_revieweranswer(checklist_id, answer_id, reviewer_ready, reviewer_time, reviewer_comment)
     
     flash('Reviewer answer posted! Select checklist.')
     

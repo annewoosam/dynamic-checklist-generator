@@ -45,7 +45,7 @@
     <li><a href="/templates">View all templates</a></li></a>
 
     <li><a href="/checklists">View all checklists</a></li>
-
+    <li><a href="/checklistsstats">View reporting</a></li>
     </div>
 
     <div><a class="nav-link" href=""></a></div>
@@ -82,7 +82,7 @@
 
       <td>Created  by user:</td>
 
-      <td> {{ template.created_by }}  </td>
+      <td> {% if template.creator %} {{ template.creator.user_full_name }}, {{ template.creator.email }} {% endif %} </td> </td>
 
     </tr>
   <!-- .strftime('%m-%d-%Y')  -->
