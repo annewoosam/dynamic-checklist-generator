@@ -256,35 +256,26 @@ def create_checklist():
 
     return render_template('/all_checklists.html', checklists=checklists, users=users)
 
-@app.route('/createprepareranswer', methods=['POST'])
+@app.route('/createprepareranswer', methods=['GET','POST'])
 
-def create_preparer_answer():
-    
-    """Create new preparer answer."""
+def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
 
-    checklist_id = request.form.get('checklist_id')
-    
-    template_id = request.form.get('template_id')
-    
-    question_id = request.form.get('question_id')
-    
-    preparer_answer = request.form.get('preparer_answer')
-    
-    preparer_time = request.form.get('preparer_time')
-    
-    preparer_comment = request.form.get('preparer_comment')
-    
-    crud.create_prepareranswer(checklist_id, template_id, question_id, preparer_answer, preparer_time, preparer_comment)
-    
-    flash('Preparer answer posted! Select checklist.')
-    
-    checklists = crud.get_checklists()
-    
-    return render_template('all_checklists.html', checklists=checklists)
+    prepareranswer = Answer(checklist_id=checklist_id,
+                  question_id=question_id,
+                  preparer_answer=preparer_answer,
+                  preparer_comment=preparer_comment,
+                  preparer_time=preparer_time)
 
-@app.route('/updateprepareranswer', methods=['POST'])
+    db.session.add(prepareranswer)
+
+    db.session.commit()
+
+    return prepareranswer
+
+@app.route('/updateprepareranswer', methods=['GET','POST'])
 
 def update_preparer_answer():
+
     """Create new reviewer answer."""
 
     checklist_id = request.form.get('checklist_id')

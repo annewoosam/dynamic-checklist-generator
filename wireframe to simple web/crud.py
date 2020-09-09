@@ -170,19 +170,8 @@ def get_checklist_by_id(checklist_id):
 # returning a specific answers by id.
 
 def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
-    
-    answer_id=db.session.query(db.func.max(Answer.answer_id)).group_by("answer_id").filter(Answer.answer_id==answer_id).first()
-    
-    if answer_id:
-
-        answer_id=answer_id[0]+1
-
-    else:
-
-        answer_id=1 
 
     prepareranswer = Answer(checklist_id=checklist_id,
-                  answer_id=answer_id,
                   question_id=question_id,
                   preparer_answer=preparer_answer,
                   preparer_comment=preparer_comment,

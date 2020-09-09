@@ -260,14 +260,14 @@
 
     <td>     
 
-      {% for answer in checklist.answers %}
+      {% for answer in checklist.answers|sort(attribute='question_id') %}
 
      
 
         {% if answer.preparer_answer == 'n' %}
 
  
-          <li> {{ answer.template_question.no_text}}</li>
+          <li> {{ answer.template_question.no_text }}</li>
 
       
         {% endif %}
@@ -278,7 +278,7 @@
 
     <td>     
 
-      {% for answer in checklist.answers %}
+      {% for answer in checklist.answers|sort(attribute='question_id') %}
 
         {% if answer.preparer_answer == '' %}
  
@@ -292,7 +292,7 @@
 
    <td>     
 
-      {% for answer in checklist.answers %}
+      {% for answer in checklist.answers|sort(attribute='question_id') %}
 
         {% if answer.preparer_answer == 'na' %}
  
@@ -317,8 +317,8 @@
 
 <!-- Preparer Answers -->
 <h1>Preparer Answers</h1>
-
-<form action="/createprepareranswer" method="POST">
+{{checklist.checklist_id}} 
+<form action="/createprepareranswer" method="GET">
 
   <table>
 
@@ -383,8 +383,6 @@
 </form>
 
 <h1>Update Preparer Answers</h1>
-
-
 
 <form action="/updateprepareranswer" method="POST">
 
@@ -587,9 +585,12 @@ function myFunction() {
 <tr>
 
   <td>
+
+
+    <label for="answer_id">Enter answer id*:</label>
   
-    <label for="answer_id">Enter answer id*:</label></td>
-  
+  </td>
+
   <td>
   
     <input type="number" id="answer_id" name="answer_id" min=1 required>
