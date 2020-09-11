@@ -36,32 +36,31 @@
 
 <body>
 
-<!-- Code goes here. -->
-<!-- NAV BAR CODE -->
-<nav class="navbar navbar-expand-lg override a:link">
+<!-- Code. -->
 
-  <div>
-
-    <li><a href="/templates">View all templates</a></li></a>
-
-    <li><a href="/checklists">View all checklists</a></li>
-    <li><a href="/checklistsstats">View reporting</a></li>
+<div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+    
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navfont">
+    <a class="navbar-brand" href="#"><h1>Template Details</h1></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" background-color="blue">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" background-color="blue" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/templates">Templates</a>
+        <a class="nav-item nav-link" href="/checklists">Checklists</a>
+        <a class="nav-item nav-link" href="/checklistsstats">Reporting</a>
+      </div>
     </div>
+  </nav>
 
-    <div><a class="nav-link" href=""></a></div>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  
-    <span class="navbar-toggler-icon"></span>
+<img src="/static/img/pexels-breakingpic-3243.jpg" class="img">
 
-  </button>
+</div>
 
 </nav>
-      
-  
     <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
-
-       <div class="row"><img src="/static/img/pexels-breakingpic-3243.jpg" class="img"></div>
        
        <div><h1>Let's Create!</div></h1>
 
@@ -338,8 +337,41 @@
 </p>
 </div>
 
-<!-- You need this in order to use JS-based components in the 
-further study. Leave this at the bottom and code above it. -->
+
+<table class="table table-hover table-striped">
+ 
+  <thead>
+ 
+    <tr>
+
+      <th><i class="fas fa-trophy"> </i> You're Amazing</th>
+
+      <th><i class="fas fa-hands-helping"></i> We're here to Help</th>
+
+      <th><i class="fas fa-leaf"></i> Let's make this Sustainable</th>
+
+      <th><i class="fas fa-spa"></i> Mindfulness is Awesome</th>
+    
+    </tr>
+  
+  </thead>
+    
+    <tr>
+      <td>You know it!</td>
+
+      <td>That's right!</td>  
+
+      <td>Leave comments to improve the process.</td> 
+
+      <td>Track your time to plan and live better.</td>
+
+    </tr>
+
+</table>
+
+</div>
+
+<!-- JS-based components. -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

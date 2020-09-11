@@ -116,7 +116,7 @@ def get_question_by_id(question_id):
 # Functions for creating checklists, returning a list of all available checklists and
 # returning a specific checklist by id.
 
-def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)  :
+def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id):
 
 
     checklist_id=db.session.query(db.func.max(Checklist.checklist_id)).first()
@@ -142,7 +142,7 @@ def create_checklist(template_id, who_for, time_frame, preparer_id, reviewer_id)
 
     return checklist
 
-def create_checklist_seed(template_id, who_for, time_frame, preparer_id, reviewer_id)  :
+def create_checklist_seed(template_id, who_for, time_frame, preparer_id, reviewer_id):
 
     checklist = Checklist(template_id=template_id,
                   who_for=who_for,
@@ -183,37 +183,38 @@ def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_t
 
     return prepareranswer
 
-def update_prepareranswer(checklist_id, answer_id, preparer_answer, preparer_time, preparer_comment):
+
+def update_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
 
     updateprepareranswer = Answer(checklist_id=checklist_id,
-                  answer_id=answer_id,
+                  question_id=question_id,
                   preparer_answer=preparer_answer,
                   preparer_time=preparer_time,
                   preparer_comment=preparer_comment)
 
-    updateprepareranswer=db.session.query(Answer.answer_id).filter(Answer.answer_id==answer_id).update({Answer.preparer_answer:preparer_answer})
+    updateprepareranswer=db.session.query(Answer.question_id).filter(Answer.question_id==question_id).update({Answer.preparer_answer:preparer_answer})
 
-    updateprepareranswertime=db.session.query(Answer.answer_id).filter(Answer.answer_id==answer_id).update({Answer.preparer_time:preparer_time})
+    updateprepareranswertime=db.session.query(Answer.question_id).filter(Answer.question_id==question_id).update({Answer.preparer_time:preparer_time})
 
-    updateprepareranswercomment=db.session.query(Answer.answer_id).filter(Answer.answer_id==answer_id).update({Answer.preparer_comment:preparer_comment})
+    updateprepareranswercomment=db.session.query(Answer.question_id).filter(Answer.question_id==question_id).update({Answer.preparer_comment:preparer_comment})
 
     db.session.commit()
 
     return updateprepareranswer, updateprepareranswertime, updateprepareranswercomment
 
-def update_revieweranswer(checklist_id, answer_id, reviewer_ready, reviewer_time, reviewer_comment):
+def update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment):
 
     updaterevieweranswer = Answer(checklist_id=checklist_id,
-                  answer_id=answer_id,
+                  question_id=question_id,
                   reviewer_ready=reviewer_ready,
                   reviewer_time=reviewer_time,
                   reviewer_comment=reviewer_comment)
 
-    updaterevieweranswer=db.session.query(Answer.answer_id).filter(Answer.answer_id==answer_id).update({Answer.reviewer_ready:reviewer_ready})
+    updaterevieweranswer=db.session.query(Answer.question_id).filter(Answer.answer_id==question_id).update({Answer.reviewer_ready:reviewer_ready})
 
-    updaterevieweranswercomment=db.session.query(Answer.answer_id).filter(Answer.answer_id==answer_id).update({Answer.reviewer_comment:reviewer_comment})
+    updaterevieweranswercomment=db.session.query(Answer.question_id).filter(Answer.question_id==question_id).update({Answer.reviewer_comment:reviewer_comment})
 
-    updaterevieweranswertime=db.session.query(Answer.answer_id).filter(Answer.answer_id==answer_id).update({Answer.reviewer_time:reviewer_time})
+    updaterevieweranswertime=db.session.query(Answer.question_id).filter(Answer.question_id==question_id).update({Answer.reviewer_time:reviewer_time})
 
     db.session.commit()
 

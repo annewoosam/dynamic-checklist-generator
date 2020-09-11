@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reporting Dashboard</title>
+
+  <!-- Load Bootstrap 4 -->
+  <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- Load Chart JS -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+  <!-- Load Font Awesome -->
+  <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
+
+  <!-- Load our stylesheet -->
+
+  <style></style>
+
+  <!-- CSS only -->
+
+  <link rel="stylesheet" type="text/css" HREF="../css/styles.css">
+</head>
+
+<body>
+
+<!-- Code. -->
+
+<div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+    
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navfont">
+
+    <a class="navbar-brand" href="#"><h1>Reporting</h1></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <div class="navbar-nav">
+
+        <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+
+        <a class="nav-item nav-link" href="/templates">Templates</a>
+
+        <a class="nav-item nav-link" href="/checklists">Checklists</a>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+       <div><img src="/static/img/pexels-fauxels-3184360.jpg" class=img>
+       <div><h1>Let's Analyze!</h1></div>
+  
+  <table>
+
+    <thead>
+
+    <tr><b>
+      <th> </th>
+    </tr></b>
+    </thead>
+
+      <td>Current Progress:</td><td><canvas id="inprogress" width="500" height="400"></canvas></td>
+
+      <td>Question IDs with Corrections</td><td><canvas id="returned" width="500" height="400"></canvas></td>
+
+      <td><canvas id="mostissues" width="135" height="150"></canvas></td>
+
+      <td><canvas id="mosttrainingneeded" width="135" height="150"></canvas></td>
+
+      <td><canvas id="mostabletohelp" width="135" height="150"></canvas></td>
+
+  </table>
+
+<script>
+ 
+            // bar chart data
+
+            var barData = {
+                labels : ["Started","In Review", "Reviewed", "Delivered"],
+                datasets : [
+                    {
+                        fillColor : "#48A497",
+                        strokeColor : "#48A4D1",
+                        data : [ {{started_count }}, {{ in_review_count }}, {{ reviewed_count }}, {{ sent_count }}]
+                    }
+                ]
+            }
+
+            // get bar chart canvas
+
+            var inprogress = document.getElementById("inprogress").getContext("2d");
+
+            // draw bar chart
+
+            new Chart(inprogress).Bar(barData);
+
+            // bar chart data
+
+            var barData2 = {
+                labels : {{ questions_with_corrections }},
+                datasets : [
+                    {
+                        fillColor : "#48A497",
+                        strokeColor : "#48A4D1",
+                        data : {{ corrections_by_question_count }}
+                    }
+                ]
+            }
+            // get bar chart canvas
+            
+            var returned = document.getElementById("returned").getContext("2d");
+            
+            // draw bar chart
+           
+            new Chart(returned).Bar(barData2);
+
+        </script>
+
+  <h1>Questions to Train On</h1>   
+
+{% for question in questions_requiring_training %}
+
+ <p> {{ question }}</p>
+
+{% endfor %}
+
+<table class="table table-hover table-striped">
+ 
+  <thead>
+ 
+    <tr>
+
+      <th><i class="fas fa-trophy"> </i> You're Amazing</th>
+
+      <th><i class="fas fa-hands-helping"></i> We're here to Help</th>
+
+      <th><i class="fas fa-leaf"></i> Let's make this Sustainable</th>
+
+      <th><i class="fas fa-spa"></i> Mindfulness is Awesome</th>
+    
+    </tr>
+  
+  </thead>
+    
+    <tr>
+      <td>You know it!</td>
+
+      <td>That's right!</td>  
+
+      <td>Leave comments to improve the process.</td> 
+
+      <td>Track your time to plan and live better.</td>
+
+    </tr>
+
+</table>
+
+</div>
+
+<!-- JS-based components. -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

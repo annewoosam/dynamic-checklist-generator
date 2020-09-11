@@ -256,23 +256,29 @@ def create_checklist():
 
     return render_template('/all_checklists.html', checklists=checklists, users=users)
 
-@app.route('/createprepareranswer', methods=['GET','POST'])
+@app.route('/createanswer', methods=['GET', 'POST'])
 
-def create_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment):
+def create_answer():
 
-    prepareranswer = Answer(checklist_id=checklist_id,
-                  question_id=question_id,
-                  preparer_answer=preparer_answer,
-                  preparer_comment=preparer_comment,
-                  preparer_time=preparer_time)
+    checklist_id=request.form.get('checklist_id'),
 
-    db.session.add(prepareranswer)
+    question_id=request.form.get('question_id'),
 
-    db.session.commit()
+    preparer_answer=request.form.get('preparer_answer'),
 
-    return prepareranswer
+    preparer_comment=request.form.get('preparer_comment'),
 
-@app.route('/updateprepareranswer', methods=['GET','POST'])
+    preparer_time=request.form.get('preparer_time')
+
+    crud.create_answer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment)
+    
+    flash('Preparer answer added! Select checklist.')
+
+    checklists = crud.get_checklists()
+
+    return render_template('all_checklists.html')
+
+@app.route('/updateprepareranswer', methods=['POST'])
 
 def update_preparer_answer():
 
@@ -280,7 +286,7 @@ def update_preparer_answer():
 
     checklist_id = request.form.get('checklist_id')
 
-    answer_id = request.form.get('answer_id')
+    question_id = request.form.get('question_id')
     
     preparer_answer = request.form.get('preparer_answer')
     
@@ -288,7 +294,7 @@ def update_preparer_answer():
     
     preparer_comment = request.form.get('preparer_comment')
     
-    crud.update_prepareranswer(checklist_id, answer_id, preparer_answer, preparer_time, preparer_comment)
+    crud.update_prepareranswer(checklist_id, question_id, preparer_answer, preparer_time, preparer_comment)
     
     flash('Preparer answer updated! Select checklist.')
     
@@ -304,7 +310,7 @@ def update_reviewer_answer():
 
     checklist_id = request.form.get('checklist_id')
     
-    answer_id = request.form.get('answer_id')
+    question_id = request.form.get('question_id')
     
     reviewer_ready = request.form.get('reviewer_ready')
     
@@ -312,7 +318,7 @@ def update_reviewer_answer():
     
     reviewer_comment = request.form.get('reviewer_comment')
     
-    crud.update_revieweranswer(checklist_id, answer_id, reviewer_ready, reviewer_time, reviewer_comment)
+    crud.update_revieweranswer(checklist_id, question_id, reviewer_ready, reviewer_time, reviewer_comment)
     
     flash('Reviewer answer posted! Select checklist.')
     

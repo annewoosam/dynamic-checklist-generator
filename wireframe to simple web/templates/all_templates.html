@@ -1,4 +1,5 @@
 <!-- all_templates.html template; block body for looping through templates passed to page, with endblock followed by body. Note way html tags for unordered list, list items and link placed.-->
+
 {% extends 'base.html' %}
 
 {% block title %}Current Templates{% endblock %}
@@ -7,18 +8,19 @@
 
   <title>Creator Dashboard</title>
 
-  <!-- Load Bootstrap 4 -->
-  <!-- CSS only -->
+<!-- Load Bootstrap 4 -->
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-  <!-- Load Font Awesome -->
+<!-- Load Font Awesome -->
+
   <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
   
-  <!-- Load our stylesheet -->
+<!-- Load our stylesheet -->
 
   <style></style>
 
-  <!-- CSS only -->
+<!-- CSS only -->
 
   <link rel="stylesheet" type="text/css" HREF="../css/styles.css">
 
@@ -26,54 +28,90 @@
 
 <body>
 
-<!-- Code goes here. -->
-<!-- NAV BAR CODE -->
+<!-- Code. -->
+  
 
-<nav class="navbar navbar-expand-lg override a:link">
-  <div><a class="nav-link" href="#"></a></div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</nav>
-<div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
- 
-  <ul>
-    <li><a href="/checklists">View all checklists</a></li>
-    <li><a href="/checklistsstats">View reporting</a></li>
-  </ul>
-  </div>
+  <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
 
-    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
-       <div class="row"><img src="/static/img/pexels-breakingpic-3243.jpg" class="img"></div>
+    <nav class="navbar navbar-expand-lg navbar-light background-color:blue navfont">
+
+      <a class="navbar-brand" href="#"><h1>Templates</h1></a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    
+        <span class="navbar-toggler-icon"></span>
+    
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    
+        <div class="navbar-nav">
+    
+          <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+    
+          <a class="nav-item nav-link" href="/checklists">Checklists</a>
+    
+          <a class="nav-item nav-link" href="/checklistsstats">Reporting</a>
+    
+        </div>
+      
+      </div>
+    
+    </nav>
+
+
+    <div><img src="/static/img/pexels-breakingpic-3243.jpg" class="img"></div>
+
        <div><h1>Let's Create!</div></h1>
+
        <div>Fill out this form and submit it to create your checklist.</div>
 
   <div>
 
-	<h1>Current Templates</h1>
+  <h1>Current Templates</h1>
+  
  <ul>
+
 {% for template in templates %}
+
   <li>
+
     <a href="/templates/{{ template.template_id }}">
+
       {{ template.template_name }}
+
     </a>
+
   </li>
+
 {% endfor %}
+
   </ul>
 
  <h1>Create a new template</h1>
+
  <div>
+
 <form action="createtemplate" method="POST">
+
 <table>
+
 	<tr>
-		<td><label for="template_name">Enter a unique template name:</label></td>
-		<td><input type="text" id="template name" name="template_name"></td>
+
+    <td><label for="template_name">Enter a unique template name:</label></td>
+    
+    <td><input type="text" id="template name" name="template_name"></td>
+    
 	</tr>
 
 	<tr>
-		<td><label for="created_on">Enter date created:</label></td>
-		<td><input type="date" id="created_on" name="created_on"></td>	
-	</tr>
+
+    <td><label for="created_on">Enter date created:</label></td>
+    
+    <td><input type="date" id="created_on" name="created_on"></td>	
+    
+  </tr>
+  
   <tr>
 
     <td>Check IDs for creator</td>
@@ -93,30 +131,67 @@
   </td>
 
 </tr>
-  <tr>   
-    <td><label for="created_by">Enter creator id:</label></td>
-    <td><input type="number" id="created_by" name="created_by" min=1></td>
-    <td><button type="submit" class="btn btn-primary btns">Create template</button></td>
-  </tr>
 
+  <tr>  
+
+    <td><label for="created_by">Enter creator id:</label></td>
+
+    <td><input type="number" id="created_by" name="created_by" min=1></td>
+
+    <td><button type="submit" class="btn btn-primary btns">Create template</button></td>
+
+  </tr>
 
 </form>
 
+</p>
 
-</p></div>
+</div>
 
 <table>
  
 </table>
-<!-- You need this in order to use JS-based components. Leave this at the bottom and code above it. -->
+
+
+<table class="table table-hover table-striped">
+ 
+  <thead>
+ 
+    <tr>
+
+      <th><i class="fas fa-trophy"> </i> You're Amazing</th>
+
+      <th><i class="fas fa-hands-helping"></i> We're here to Help</th>
+
+      <th><i class="fas fa-leaf"></i> Let's make this Sustainable</th>
+
+      <th><i class="fas fa-spa"></i> Mindfulness is Awesome</th>
+    
+    </tr>
+  
+  </thead>
+    
+    <tr>
+      <td>You know it!</td>
+
+      <td>That's right!</td>  
+
+      <td>Leave comments to improve the process.</td> 
+
+      <td>Track your time to plan and live better.</td>
+
+    </tr>
+
+</table>
+
+</div>
+
+<!-- JS-based components scripts. -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- The scripts below are from the current official site, commented out for now. -->
-<!-- JS, Popper.js, and jQuery -->
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
- -->
+
 {% endblock body%}

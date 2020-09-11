@@ -12,13 +12,7 @@
 <head>
   <meta name="viewport" content="width=de/Users/gsanda/src/project planning/projects/dynamic-checklists/wireframe to simple web/templates/template_details.htmlvice-width, initial-scale=1">
 
-      <div class="col-xs-12 col-md-6 offset-md-1 col-lg-6 offset-lg-1">
- 
-    <ul>
-      <li><a href="/templates">View all templates</a></li>
-      <li><a href="/checklists">View all checklists</a></li>
-      <li><a href="/checklistsstats">View reporting</a></li>
-    </ul></div>
+
 
     <title>Preparer Dashboard</title>
 
@@ -42,28 +36,37 @@
 </head>
 
 <body>
-<!-- Code goes here. -->
-
-<!-- NAV BAR CODE -->
-
-<nav class="navbar navbar-expand-lg override a:link">
-
-  <div><a class="nav-link" href="/question_details"></a></div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-
-    <span class="navbar-toggler-icon"></span>
-
-  </button>
-
-</nav>
-
-
-
+<!-- Code. -->
 
     <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
     
-   
+      <nav class="navbar navbar-expand-lg navbar-light bg-light navfont">
+
+        <a class="navbar-brand" href="#"><h1>Checklist Details</h1></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+          <div class="navbar-nav">
+
+            <a class="nav-item nav-link active" href="/"><h1>Home</h1><span class="sr-only">(current)</span></a>
+
+            <a class="nav-item nav-link" href="/templates"><h1>Templates</h1></a>
+
+            <a class="nav-item nav-link" href="/checklists"><h1>Checklists</h1></a>
+
+            <a class="nav-item nav-link" href="/checklistsstats"><h1>Reporting</h1></a>
+
+          </div>
+
+        </div>
+
+      </nav>
     
     <img src="/static/img/pexels-breakingpic-3243.jpg" class="img">
     
@@ -72,7 +75,9 @@
   
 
  <div class="col-xs-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+
 <h1> {{ checklist.who_for }} Checklist</h1>
+
  <table class="table table-hover table-striped">
 
   <th>For the period</th> 
@@ -117,8 +122,6 @@
     <thead>
 
       <th>Template ID<i class="far fa-question-circle"></i></th> 
-
-      <th>Question Number<i class="far fa-question-circle"></i></th>
       
       <th>Question ID<i class="far fa-question-circle"></i></th>
 
@@ -139,8 +142,6 @@
       <ol>
 
             <td>{{ template_question.template_id}}</td>
-
-            <td>{{ template_question.question_number}}</td>
 
             <td>{{ template_question.question_id}}</td>
 
@@ -163,27 +164,26 @@
   </table>
 
 <h1>Preparer Answers</h1>
+
 <table>
   
   <tr>
     
     <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
     
-    <input type="hidden" id="template_id" name="template_id" value = {{checklist.template_id}} >
 </tr>
+
 </form>
 
 <table>
+
 <table class="table table-hover table-striped">
 
   <thead>
+
     <th>Template ID <i class="far fa-question-circle"></i></th>
 
-    <th>Question Number <i class="far fa-question-circle"></i></th>
-
     <th>Question ID <i class="far fa-question-circle"></i></th>
-
-    <th>Answer ID <i class="far fa-question-circle"></i></th>
 
     <th>Question <i class="far fa-question-circle"></i></th>
     
@@ -205,11 +205,7 @@
 
      <td> {{ answer.template_question.template_id }} </td>
 
-     <td> {{ answer.template_question.question_number }} </td>
-
      <td> {{ answer.template_question.question_id }} </td>
-
-     <td> {{ answer.answer_id }} </td>
 
      <td> {{ answer.template_question.question}} </td>
 
@@ -227,7 +223,6 @@
 
 </table>
 
-
 <h1>Preparer Kanban</h1>
 
  <table class="table table-hover table-striped">
@@ -244,7 +239,6 @@
 
     <td>    
    
-
       {% for answer in checklist.answers|sort(attribute='question_id')  %} 
 
         {% if answer.preparer_answer == 'y' %}
@@ -255,21 +249,16 @@
 
       {% endfor %}
 
-
      </td> 
 
     <td>     
 
       {% for answer in checklist.answers|sort(attribute='question_id') %}
 
-     
-
         {% if answer.preparer_answer == 'n' %}
 
- 
           <li> {{ answer.template_question.no_text }}</li>
 
-      
         {% endif %}
 
       {% endfor %}
@@ -308,105 +297,31 @@
 
  </table>
 
+  <div>
+  
+  <!-- Preparer Answers -->
+  
+<form>
+    
+  </form>
 
-<h1>Add answers to Checklist ID.</h1>
+<h1>Update Preparer Answers</h1>
 
-<!-- create checklist form -->
+<form action="/updateprepareranswer" method="POST">
 
-<div>
+<input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} min={{checklist.checklist_id}} max={{checklist.checklist_id}}>
 
-<!-- Preparer Answers -->
-<h1>Preparer Answers</h1>
-{{checklist.checklist_id}} 
-<form action="/createprepareranswer" method="GET">
-
-  <table>
-
-    <tr>
-      
-      <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-      <input type="hidden" id="template_id" name="template_id" value = {{checklist.template_id}} >
-    </tr>
+<table>
 
 <tr>
 
   <td>
   
     <label for="question_id">Enter question id*:</label></td>
- 
+  
   <td>
   
     <input type="number" id="question_id" name="question_id" min=1 required>
-  
-  </td>
-
-</tr>
-
-<tr>
-
-  <td><label for="preparer_answer">Enter preparer answer:</label></td>
-
-  <td><select id="preparer_answer" name="preparer_answer">
-
-    <option value="">Skipped</option>
-
-    <option value="y">Yes</option>
-
-    <option value="n">No</option>
-
-    <option value="na">Not applicable</option>
-
-  </td>
-
-</tr>
-
-<tr>
-
-  <td><label for="preparer_time">Enter preparer minutes*:</label></td>
-
-  <td><input type="number" id="preparer_time" name="preparer_time" min=0></td>
-
-</tr>
-
-<tr>
-
-  <td><label for="preparer_comment">Enter preparer comments:</label></td>
-
-  <td><textarea id="preparer_comment" name="preparer_comment" rows="5" cols="70"></textarea></td>
-
-</tr>
-
-</table>
-
-<button type="submit" class="btn btn-primary btns" id="myBtn">Add Preparer Answer</button> 
-
-</form>
-
-<h1>Update Preparer Answers</h1>
-
-<form action="/updateprepareranswer" method="POST">
-
-<table>
-
-    <tr>
-
-      <td>
-
-        <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-
-      </td>
-
-    </tr>
-
-<tr>
-
-  <td>
-  
-    <label for="answer_id">Enter answer id*:</label></td>
-  
-  <td>
-  
-    <input type="number" id="answer_id" name="answer_id" min=1 required>
   
   </td>
 
@@ -453,14 +368,8 @@
 </form>
 
 </div>
-<script>
-function myFunction() {
-  document.getElementById("myBtn").disabled = true;
-}
-</script>
 
 <h2>Notification - Ready for Review</h2>
-
 
 <table class="table table-hover table-striped">
   
@@ -469,8 +378,6 @@ function myFunction() {
   </tr>
 
   <tr>
-
-
 
 <form action="/markdatesenttoreview" method="POST">
 
@@ -495,29 +402,21 @@ function myFunction() {
 
 </table>
 
-<button type="submit" class="btn btn-primary btns">Register Date Sent to Review</button> 
+<button type="submit" class="btn btn-primary btns">Register Date Sent to Review</button>
+ 
+</form>
+
+</table> 
+
 <h2>Notify Reviewer</h2>
 
  <a href="mailto:{% if checklist.reviewer %} {{ checklist.reviewer.email }} {% endif %}?subject={{ checklist.who_for }} ready for review&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Review</a></p>
 
-</form>
-
-
-  </tr>
-  <tr>
-  <td>
-
-  </td></tr>
-  </table> 
- 
- 
 <h1>Reviewer Answers</h1>
 
 <table class="table table-hover table-striped">
 
   <thead>
-
-    <th>Answer ID <i class="far fa-question-circle"></i></th>
 
     <th>Question ID <i class="far fa-question-circle"></i></th>
 
@@ -537,8 +436,6 @@ function myFunction() {
 
   <ol>
 
-     <td> {{ answer.answer_id }} </td>
-
      <td> {{ answer.question_id }} </td>
 
      <td> {{ answer.template_question.question}} </td>
@@ -557,43 +454,28 @@ function myFunction() {
 
 </table>
 
-
-
-
-
 <!-- Reviewer Answers -->
 
 <!-- Update with Reviewer Answers -->
 <h1>Update with Reviewer Answers</h1>
 
-
-
 <form action="/updaterevieweranswer" method="POST">
 
+ <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} min={{checklist.checklist_id}} max={{checklist.checklist_id}}>
+
 <table>
-
-    <tr>
-
-      <td>
-
-        <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-
-      </td>
-
-    </tr>
 
 <tr>
 
   <td>
 
-
-    <label for="answer_id">Enter answer id*:</label>
+    <label for="question_id">Enter question id*:</label>
   
   </td>
 
   <td>
   
-    <input type="number" id="answer_id" name="answer_id" min=1 required>
+    <input type="number" id="question_id" name="question_id" min=1 required>
   
   </td>
 
@@ -639,7 +521,6 @@ function myFunction() {
 
 </form>
 
-
 <h1>Reviewer Kanban</h1>
 
  <table class="table table-hover table-striped">
@@ -652,20 +533,13 @@ function myFunction() {
 
   <th>Not Applicable: {{ not_applicable_count_reviewer }} | {{ not_applicable_percent_reviewer }}%.</th>
 
-
-
-
   <tr> 
 
     <td>     {% for answer in checklist.answers|sort(attribute='question_id') %}
 
-      
-
         {% if answer.reviewer_ready == 'r' %}
  
-          <li> {{ answer.template_question.yes_text}} </li>
-
-      
+          <li> {{ answer.template_question.yes_text}} </li>  
 
     {% endif %}
 
@@ -675,13 +549,9 @@ function myFunction() {
 
     <td>     {% for answer in checklist.answers|sort(attribute='question_id') %}
 
-     
-
         {% if answer.reviewer_ready == 'c' %}
 
- 
           <li> {{ answer.template_question.no_text}}</li>
-
       
     {% endif %}
 
@@ -722,13 +592,9 @@ function myFunction() {
 
  </table>
 
-
-
   <h3>Review Complete</h3>   
 
   <p> Date completed: {{ checklist.date_review_completed }}</p>
-  
-
   
   <form action="/markdatereviewcompleted" method="POST">
   
@@ -743,6 +609,7 @@ function myFunction() {
       </td>
   
     </tr>
+
   <tr>
   
     <td> <label for="date_review_completed">Enter date review completed:</label></td></td>
@@ -756,21 +623,17 @@ function myFunction() {
   <button type="submit" class="btn btn-primary btns">Register Date Review Completed</button> 
   
   </form>
- </tr>
+
  <h2>Notifications</h2>
 
 
 <a href="mailto:{% if checklist.preparer %} {{ checklist.preparer.email }} {% endif %}?subject={{ checklist.who_for }} corrections required&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Return for Corrections</a></p>
-
-
-
 
 <h3>Notify Recipient</h3> 
 
 <h3>>Choose a recipient and enter ID below:</h3>
 
 <table>
-
 
   <td>
     
@@ -787,23 +650,31 @@ function myFunction() {
   </td>
 
 </tr> 
+
 </table>
-
-
 
   <form action="/chooserecipient" method="POST"><table>
 
-
 <tr>
+
   <td>
+
     <tr>
+
     <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-  </tr>
+  
+    </tr>
+
   </td>
-  <tr>   
+
+  <tr>  
+
     <td><label for="recipient_id">Enter recipient id if different from listed: {% if checklist.recipient %} {{ checklist.recipient.user_full_name }}, ID: {{checklist.recipient_id}} {% endif %}</label></td>
+    
     <td><input type="number" id="recipient_id" name="recipient_id" min=1 required></td>
-</tr>
+
+  </tr>
+
 </table>
 
 <button type="submit" class="btn btn-primary btns">Attach Recipient</button> 
@@ -812,18 +683,15 @@ function myFunction() {
 
 </p>
 
-
 <h3>>Add a recipient</h3>
 
-
     <form action="/registerrecipient" method="POST">
-
-      <input type="hidden" id="checklist_id"  name="checklist_id" value = "test">
 
     <div class="form-group">
 
       <input type="hidden" id="checklist_id" name="checklist_id" value = {{checklist.checklist_id}} >
-        <label>Enter Recipient's Full Name
+    
+      <label>Enter Recipient's Full Name
 
         <input type="text"
 
@@ -853,14 +721,11 @@ function myFunction() {
 
   </form>
 
-
-
 <a href="mailto:{% if checklist.recipient %} {{ checklist.recipient.email }} {% endif %}?subject={{ checklist.who_for }} ready for delivery&bcc=compliancetrainers@gmail.com"> {{ checklist.who_for }} Ready for Delivery</a></p>
 
 <h3>Mark Complete</h3> 
 
 <p> Date completed: {{ checklist.date_complete }}</p>
-
 
 <form action="/markcomplete" method="POST">
 
@@ -875,21 +740,20 @@ function myFunction() {
     </td>
 
   </tr>
-<tr>
 
-  <td> <label for="date_complete">Enter date complete:</label></td>
+  <tr>
 
-  <td><input type="date" id="date_complete" name="date_complete"></td>
+    <td> <label for="date_complete">Enter date complete:</label></td>
 
-</tr>
+    <td><input type="date" id="date_complete" name="date_complete"></td>
+
+  </tr>
 
 </table>
 
 <button type="submit" class="btn btn-primary btns">Mark Complete</button> 
 
 </form>
-
-
 
 <table class="table table-hover table-striped">
  
@@ -924,9 +788,12 @@ function myFunction() {
 
 </div>
 
-<!-- You need this in order to use JS-based components. Leave this at the bottom and code above it. -->
+<!-- JS-based components -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 {% endblock %}

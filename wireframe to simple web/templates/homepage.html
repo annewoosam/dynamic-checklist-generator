@@ -1,19 +1,24 @@
 {% extends 'base.html' %}
+
 {% block title %}Welcome{% endblock %}
 
 {% block body %}
+
 <head>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Welcome</title>
 
   <!-- Load Bootstrap 4 -->
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
   <!-- Load Font Awesome -->
+
   <script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg></script>
 
-   <!-- Load our stylesheet -->
+  <!-- Load our stylesheet -->
 
   <style></style>
 
@@ -25,25 +30,36 @@
 
 <body>
 
-<!-- Code goes here. -->
-<!-- NAV BAR CODE -->
+<!-- Code -->
+
 <nav class="navbar navbar-expand-lg override a:link">
+
   <div><a class="nav-link" href="#"></a></div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    
     <span class="navbar-toggler-icon"></span>
-  </button>
+
+    </button>
+
 </nav>
 
+    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3"> 
 
-    <div class="col-xs-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
       <h1>Welcome!</h1>
+
     <div class="row"><img src="/static/img/boats.jpg" class="img"> </div>
+
       <h2>Navigation</h2>
  
     <ul>
+
       <li><a href="/templates">View all templates</a></li>
+
       <li><a href="/checklists">View all checklists</a></li>
+
       <li><a href="/checklistsstats">View reporting</a></li>
+      
     </ul>
 
 {% endblock %}
