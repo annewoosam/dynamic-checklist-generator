@@ -456,4 +456,8 @@ def show_answer(answer_id):
 if __name__ == '__main__':
 # added connection to database
     connect_to_db(app)
-    app.run(host='0.0.0.0', debug=True)
+# during development
+#   app.run(host='0.0.0.0', debug=True)
+#in production
+    app.run()
+    
